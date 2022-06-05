@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_05_185655) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_05_193827) do
+  create_table "requests", force: :cascade do |t|
+    t.string "requester_name"
+    t.string "requester_extension"
+    t.string "requester_phone"
+    t.string "requester_id"
+    t.string "requester_mail"
+    t.string "requester_type"
+    t.string "student_id"
+    t.string "student_assosiation"
+    t.string "work_location"
+    t.string "work_building"
+    t.string "work_type"
+    t.text "work_description"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

@@ -1,0 +1,29 @@
+<div class="container mt-5 mb-5 p-5 border border-2 rounded-3">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center">
+        Página de inicio
+      </h1>
+    </div>
+    <div class="col">
+      <div class="d-grid m-2 p-3 gap-3">
+        <div class="row">
+          <div class="col">
+            <%= link_to new_request_path, class:"btn btn-primary" do %>
+              <i class="bi bi-bookmark-plus"></i>
+              Crear una nueva solicitud
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= link_to "#", class:"btn btn-primary" do %>
+              <i class="bi bi-search"></i>
+              Ver el estado de una solicitud
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
