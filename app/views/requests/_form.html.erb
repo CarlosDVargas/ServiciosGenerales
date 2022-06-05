@@ -1,3 +1,4 @@
+
 <%= form_with(model: request) do |form| %>
   <% if request.errors.any? %>
     <div style="color: red">
@@ -110,4 +111,8 @@
       <%= form.submit "Crear solicitud", class:"btn btn-sm btn-primary" %>
     </div>
   </div>
+<% end %>
+
+<%= content_tag :div, nil, data: {controller: "hello"} do %>
+  <div class="btn btn-primary">Say Hello</div>
 <% end %>
