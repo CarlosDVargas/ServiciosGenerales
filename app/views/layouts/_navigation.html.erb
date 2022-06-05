@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to "Page Name", root_path, class: "navbar-brand", id: "logo", rel: "prev" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if current_user_account %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Solicitudes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Listar", "#", class: "dropdown-item" %>
+              <% if current_user_account.role == "admin" %>
+                <%= link_to "Reportes", "#", class: "dropdown-item" %>
+              <% end %>
+            </div>
+            <% if current_user_account.role == "admin" %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Empleados
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to "Agregar", "#", class: "dropdown-item" %>
+                  <%= link_to "Listar", "#", class: "dropdown-item" %>
+                </div>
+              </li>
+            <% end %>
+          </li>
+        <% end %>
+        <% if current_user_account %>
+          <li class="nav-item ms-3">
+            <%= link_to edit_user_account_registration_path, class:"btn btn-sm btn-primary" do %>
+              <i class="bi bi-person"></i>
+              Administrar cuenta
+            <% end %>
+          </li>
+          <li class="nav-item ms-3 me-3 position-fixed end-0">
+            <%= button_to destroy_user_account_session_path, class:"btn btn-sm btn-primary", method: :delete do %>
+              <i class="bi bi-box-arrow-left"></i>
+              Cerrar sesión
+            <% end %>
+          </li>
+        <% else %>
+          <li class="nav-item ms-3 me-3 position-fixed end-0">
+            <%= link_to new_user_account_session_path, class:"btn btn-sm btn-primary" do %>
+              <i class="bi bi-box-arrow-in-right"></i>
+              Iniciar sesión
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
