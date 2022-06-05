@@ -12,7 +12,7 @@
               Solicitudes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Listar", "#", class: "dropdown-item" %>
+              <%= link_to "Listar", requests_path, class: "dropdown-item" %>
               <% if current_user_account.role == "admin" %>
                 <%= link_to "Reportes", "#", class: "dropdown-item" %>
               <% end %>
@@ -37,14 +37,14 @@
               Administrar cuenta
             <% end %>
           </li>
-          <li class="nav-item ms-3 me-3 position-fixed end-0">
+          <li class="nav-item ms-3 me-3 position-absolute end-0">
             <%= button_to destroy_user_account_session_path, class:"btn btn-sm btn-primary", method: :delete do %>
               <i class="bi bi-box-arrow-left"></i>
               Cerrar sesión
             <% end %>
           </li>
         <% else %>
-          <li class="nav-item ms-3 me-3 position-fixed end-0">
+          <li class="nav-item ms-3 me-3 position-absolute end-0">
             <%= link_to new_user_account_session_path, class:"btn btn-sm btn-primary" do %>
               <i class="bi bi-box-arrow-in-right"></i>
               Iniciar sesión

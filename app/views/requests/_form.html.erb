@@ -2,7 +2,6 @@
   <% if request.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(request.errors.count, "error") %> prohibited this request from being saved:</h2>
-
       <ul>
         <% request.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,73 +9,105 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :requester_name, style: "display: block" %>
-    <%= form.text_field :requester_name %>
+  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
+    <h4 class="text-center">Información del solicitante</h4>
+    <div>
+      <p>
+        <%= form.label "Nombre completo", style: "display: block" %>
+        <%= form.text_field :requester_name, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Extensión telefónica", style: "display: block" %>
+        <%= form.text_field :requester_extension, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Número telefónico", style: "display: block" %>
+        <%= form.text_field :requester_phone, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Número de identificación", style: "display: block" %>
+        <%= form.text_field :requester_id, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Dirección de correo electrónico", style: "display: block" %>
+        <%= form.text_field :requester_mail, class: "form-control" %>
+      </p>
+    </div>
+    <div data-controller="select" data-select-hidden-class="hidden">
+      <div>
+        <p>
+          <%= form.label "Tipo de solicitante", style: "display: block" %>
+          <%= form.select :requester_type, options_for_select(@requests.requester_types.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+        </p>
+      </div>
+      <div data-select-target="hidden">
+        <div>
+          <p>
+            <%= form.label "Carnet de estudiante", style: "display: block" %>
+            <%= form.text_field :student_id, class: "form-control" %>
+          </p>
+        </div>
+        <div>
+          <p>
+            <%= form.label "Dependencia estudiantil", style: "display: block" %>
+            <%= form.select :student_assosiation, options_for_select(@requests.student_associations.invert().each()), {} , class: "form-select" %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :requester_extension, style: "display: block" %>
-    <%= form.text_field :requester_extension %>
+  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
+    <p>Información del trabajo a solicitud</p>
+    <div data-controller="select" data-select-hidden-class="hidden">
+      <p>
+        <%= form.label "Edificio", style: "display: block" %>
+        <div class="grid-container">
+          <div class="grid-item">
+            <%= form.select :work_building, options_for_select(@requests.work_buildings.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+          </div>
+          <div class="grid-item" id="work_building" data-select-target="hidden">
+            <%= form.text_field :work_building, id: "work-building-field", data: { select_target: "field" }, class: "form-control" %>
+          </div>
+        </div>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Lugar", style: "display: block" %>
+        <%= form.text_field :work_location, class: "form-control" %>
+      </p>
+    </div>
+    <div data-controller="select" data-select-hidden-class="hidden">
+      <p>
+        <%= form.label "Tipo de trabajo", style: "display: block" %>
+        <div class="grid-container">
+          <div class="grid-item">
+            <%= form.select :work_type, options_for_select(@requests.work_types.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+          </div>
+          <div class="grid-item" id="work_type" data-select-target="hidden">
+            <%= form.text_field :work_type, id: "work-type-field", data: { select_target: "field" }, class: "form-control" %>
+          </div>
+        </div>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Tipo de trabajo", style: "display: block" %>
+        <%= form.text_area :work_description, class: "form-control" %>
+      </p>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :requester_phone, style: "display: block" %>
-    <%= form.text_field :requester_phone %>
-  </div>
-
-  <div>
-    <%= form.label :requester_id, style: "display: block" %>
-    <%= form.text_field :requester_id %>
-  </div>
-
-  <div>
-    <%= form.label :requester_mail, style: "display: block" %>
-    <%= form.text_field :requester_mail %>
-  </div>
-
-  <div>
-    <%= form.label :requester_type, style: "display: block" %>
-    <%= form.text_field :requester_type %>
-  </div>
-
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
-  </div>
-
-  <div>
-    <%= form.label :student_assosiation, style: "display: block" %>
-    <%= form.text_field :student_assosiation %>
-  </div>
-
-  <div>
-    <%= form.label :work_location, style: "display: block" %>
-    <%= form.text_field :work_location %>
-  </div>
-
-  <div>
-    <%= form.label :work_building, style: "display: block" %>
-    <%= form.text_field :work_building %>
-  </div>
-
-  <div>
-    <%= form.label :work_type, style: "display: block" %>
-    <%= form.text_field :work_type %>
-  </div>
-
-  <div>
-    <%= form.label :work_description, style: "display: block" %>
-    <%= form.text_area :work_description %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="position-relative mt-3">
+    <div class="position-absolute start-50">
+      <%= form.submit "Crear solicitud", class:"btn btn-sm btn-primary" %>
+    </div>
   </div>
 <% end %>

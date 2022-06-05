@@ -13,6 +13,7 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
+    @requests = Request
   end
 
   # GET /requests/1/edit
