@@ -9,4 +9,10 @@ Rails.application.routes.draw do
                              sessions: "user_accounts/sessions",
                              registrations: "user_accounts/registrations",
                            }
+
+  resources :requests do
+    member do
+      get :change_status
+    end
+  end
 end

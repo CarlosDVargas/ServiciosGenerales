@@ -2,7 +2,7 @@
   <div class="row">
     <h3 class="text-center">
       <% case request.status
-     when "in_process" %> Solicitud en Proceso
+        when "in_process" %> Solicitud en Proceso
       <% when "completed" %> Solicitud Finalizada
       <% when "closed" %> Solicitud Cerrada
       <% when "denied" %> Solicitud Rechazada
@@ -11,12 +11,12 @@
   </h3>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="container p-3">
     <p>
       <strong>Dirección email del solicitante:</strong>
       <%= request.requester_mail %>
     </p>
-    <% if (request.status != "pending" && request.status != "denied") || current_user %>
+    <% if (request.status != "pending" && request.status != "denied") || current_user_account %>
       <p>
         <strong>Nombre del solicitante:</strong>
         <%= request.requester_name %>

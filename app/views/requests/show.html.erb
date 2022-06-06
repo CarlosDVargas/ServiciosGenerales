@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @request %>
-
-<div>
-  <%= link_to "Edit this request", edit_request_path(@request) %> |
-  <%= link_to "Back to requests", requests_path %>
-
-  <%= button_to "Destroy this request", @request, method: :delete %>
+<div class="container mt-3 mb-3 ">
+  <div class="position-relative mt-3">
+    <div class="position-absolute end-50">
+      <%= link_to requests_path, class: "btn btn-primary" do %>
+        <i class="bi bi-arrow-bar-left"></i>
+        Volver
+      <% end %>
+    </div>
+  </div>
 </div>
