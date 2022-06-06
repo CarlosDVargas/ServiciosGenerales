@@ -78,4 +78,6 @@ gem "devise", "~> 4.8"
 
 gem "byebug", "~> 11.1"
 
-gem "rufo", "~> 0.13.0"
+
+
+gem "ruby-lsp", "~> 0.0.3", :group => :development
