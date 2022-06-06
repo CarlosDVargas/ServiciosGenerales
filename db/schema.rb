@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_06_042648) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_163446) do
   create_table "employees", force: :cascade do |t|
     t.string "employee_id_card", null: false
     t.integer "employee_status", null: false
@@ -47,9 +47,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_042648) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "employee_id"
     t.index ["email"], name: "index_user_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
   add_foreign_key "employees", "user_accounts", column: "user_id"
+  add_foreign_key "user_accounts", "employees", on_delete: :cascade
 end
