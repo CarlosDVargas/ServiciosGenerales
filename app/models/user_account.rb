@@ -6,7 +6,7 @@ class UserAccount < ApplicationRecord
 
   enum role: [:employee, :assistant, :admin]
 
-  belongs_to :employee, optional: true
+  belongs_to :employee, optional: true, dependent: :destroy
 
   after_initialize :set_default_role, :if => :new_record?
 
