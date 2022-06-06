@@ -2,7 +2,6 @@
   <% if employee.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
-
       <ul>
         <% employee.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,23 +9,46 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :employee_id_card, style: "display: block" %>
-    <%= form.text_field :employee_id_card %>
-  </div>
-
-  <div>
-    <%= form.label :employee_status, style: "display: block" %>
-    <%= form.number_field :employee_status %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
+    <h4 class="text-center">Información del empleado</h4>
+    <div>
+      <p>
+        <%= form.label "Nombre completo", style: "display: block" %>
+        <%= form.text_field :employee_name, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Email", style: "display: block" %>
+        <%= form.text_field :employee_mail, class: "form-control" %>
+      </p>
+    <div>
+      <p>
+        <%= form.label "Número de cédula", style: "display: block" %>
+        <%= form.text_field :employee_id_card, class: "form-control" %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <%= form.label "Estado del empleado", style: "display: block" %>
+      </p>
+      <div class="container mb-3">
+        <div class="form-check">
+          <%= form.label :employee_status, "Activo", :value => 1 %>
+          <%= form.radio_button :employee_status, 1, class:"form-check-input", type:"radio" %>
+        </div>
+        <div class="form-check">
+          <%= form.label :employee_status, "Inactivo", :value => 0 %>
+          <%= form.radio_button :employee_status, 0, class:"form-check-input", type:"radio", :checked => true %>
+        </div>
+      </div>
+    </div>
+    <div class="d-none">
+      <%= form.label :user_id, style: "display: block" %>
+      <%= form.number_field :user_id %>
+    </div>
+    <div>
+      <%= form.submit "Añadir nuevo empleado", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

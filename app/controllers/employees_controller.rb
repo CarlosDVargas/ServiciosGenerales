@@ -22,9 +22,13 @@ class EmployeesController < ApplicationController
   # POST /employees or /employees.json
   def create
     @employee = Employee.new(employee_params)
-
+    byebug
+    create_user
+    if @user.save
+      @employee.user_id = @user.id
+    end
     respond_to do |format|
-      if @employee.save
+      if @user.valid? && @employee.save
         format.html { redirect_to employee_url(@employee), notice: "Employee was successfully created." }
         format.json { render :show, status: :created, location: @employee }
       else
@@ -61,10 +65,19 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = Employee.find(params[:id])
+      @account = UserAccount.find_by(id: @employee.user_id)
     end
 
     # Only allow a list of trusted parameters through.
     def employee_params
-      params.require(:employee).permit(:employee_id_card, :employee_status, :user_id)
+      params.require(:employee).permit(:employee_id_card, :employee_status, :user_id, :employee_mail, :employee_name)
+    end
+
+    def create_user
+      @user = UserAccount.new
+      @user.email = params[:employee][:employee_mail]
+      @user.password = "Contra" + @employee.employee_id_card
+      @user.name = params[:employee][:employee_name]
+      @user.role = "employee"
     end
 end
