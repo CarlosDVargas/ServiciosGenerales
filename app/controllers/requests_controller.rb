@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :set_dictionary, only: %i[new show edit update index create]
 
   # GET /requests or /requests.json
   def index
@@ -13,7 +14,6 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
-    @requests = Request
   end
 
   # GET /requests/1/edit
@@ -22,9 +22,8 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
-    @requests = Request
     @request = Request.new(request_params)
-
+    byebug
     respond_to do |format|
       if @request.save
         format.html { redirect_to request_url(@request), notice: "La solicitud fue creada correctamente." }
@@ -69,4 +68,9 @@ class RequestsController < ApplicationController
     def request_params
       params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status)
     end
+
+    # Initializes the dictionary with the default values
+  def set_dictionary
+    @dictionary = Dictionary.new()
+  end
 end

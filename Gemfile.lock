@@ -73,6 +73,7 @@ GEM
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    byebug (11.1.3)
     capybara (3.37.1)
       addressable
       matrix
@@ -181,6 +182,7 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    rufo (0.13.0)
     selenium-webdriver (4.2.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -229,6 +231,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  byebug (~> 11.1)
   capybara
   cssbundling-rails
   debug
@@ -237,6 +240,7 @@ DEPENDENCIES
   jsbundling-rails
   puma (~> 5.0)
   rails (~> 7.0.3)
+  rufo (~> 0.13.0)
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)

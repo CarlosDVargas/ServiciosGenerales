@@ -13,10 +13,5 @@ class Request < ApplicationRecord
   validates :work_type, presence: true
   validates :work_description, presence: true
 
-  enum student_association: { assosiation: "Asociación Estudiantil", feucr: "FEUCR" }
-  enum requester_type: { teacher: "Docente", administrator: "Administativo", student: "Estudiante" }
-  enum work_type: { repair: "Reparación", maintenance: "Mantenimiento", other_type: "Otro" }
-  enum work_building: { gym: "Gimnasio", sciencie_labs: "Laboratiorios Ciencias Generales", cafeteria: "Comedor", other_building: "Otro" }
-
-  attr_reader :requester_type, :work_type, :work_building, :student_association
+  
 end

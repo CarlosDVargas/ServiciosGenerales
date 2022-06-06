@@ -75,3 +75,7 @@ group :test do
 end
 
 gem "devise", "~> 4.8"
+
+gem "byebug", "~> 11.1"
+
+gem "rufo", "~> 0.13.0"

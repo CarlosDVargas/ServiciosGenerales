@@ -46,7 +46,7 @@
       <div>
         <p>
           <%= form.label "Tipo de solicitante", style: "display: block" %>
-          <%= form.select :requester_type, options_for_select(@requests.requester_types.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+          <%= form.select :requester_type, options_for_select(@dictionary.requesterTypes.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
         </p>
       </div>
       <div data-select-target="hidden">
@@ -59,7 +59,7 @@
         <div>
           <p>
             <%= form.label "Dependencia estudiantil", style: "display: block" %>
-            <%= form.select :student_assosiation, options_for_select(@requests.student_associations.invert().each()), {} , class: "form-select" %>
+            <%= form.select :student_assosiation, options_for_select(@dictionary.studentAssociations.invert().each()), {} , class: "form-select" %>
           </p>
         </div>
       </div>
@@ -72,7 +72,7 @@
         <%= form.label "Edificio", style: "display: block" %>
         <div class="grid-container">
           <div class="grid-item">
-            <%= form.select :work_building, options_for_select(@requests.work_buildings.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+            <%= form.select :work_building, options_for_select(@dictionary.workBuildings.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
           </div>
           <div class="grid-item" id="work_building" data-select-target="hidden">
             <%= form.text_field :work_building, id: "work-building-field", data: { select_target: "field" }, class: "form-control" %>
@@ -91,7 +91,7 @@
         <%= form.label "Tipo de trabajo", style: "display: block" %>
         <div class="grid-container">
           <div class="grid-item">
-            <%= form.select :work_type, options_for_select(@requests.work_types.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+            <%= form.select :work_type, options_for_select(@dictionary.workTypes.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
           </div>
           <div class="grid-item" id="work_type" data-select-target="hidden">
             <%= form.text_field :work_type, id: "work-type-field", data: { select_target: "field" }, class: "form-control" %>
@@ -111,8 +111,4 @@
       <%= form.submit "Crear solicitud", class:"btn btn-sm btn-primary" %>
     </div>
   </div>
-<% end %>
-
-<%= content_tag :div, nil, data: {controller: "hello"} do %>
-  <div class="btn btn-primary">Say Hello</div>
 <% end %>

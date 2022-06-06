@@ -11,7 +11,7 @@ export default class extends Controller {
         option.selected = true;
         option.disabled = true;
         this.selectTarget.add(option);
-        this.hiddenTarget.classList.add(this.hiddenClass);
+        this.hiddenTarget.hidden = true;
     }
 
     select() {
@@ -20,11 +20,11 @@ export default class extends Controller {
         let lastOptionIndex = optionsAmount - 1;
         let lastOptionValue = options.options[lastOptionIndex].value;
         if (options.selectedIndex == lastOptionIndex) {
-            this.hiddenTarget.classList.toggle(this.hiddenClass);
+            this.hiddenTarget.hidden = false;
         } else {
-            this.hiddenTarget.classList.add(this.hiddenClass);
+            this.hiddenTarget.hidden = false;
         }
-        if (lastOptionValue == 'other') {
+        if (lastOptionValue.includes('other')) {
             if (options.selectedIndex != lastOptionIndex) {
                 this.fieldTarget.value = options.value;
             } else {
