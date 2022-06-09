@@ -13,5 +13,6 @@ class Request < ApplicationRecord
   validates :work_type, presence: true
   validates :work_description, presence: true
 
-  
+  has_many :tasks
+  has_many :employees, through: :tasks
 end

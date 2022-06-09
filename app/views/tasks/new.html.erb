@@ -1,9 +1,14 @@
-<h1>New task</h1>
+<div class="container">
+  <h1>Asignar trabajadores:</h1>
+  <h4>Solicitud <%= @request.id%></h4>
+  <div id="add-employees">
+    <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>
+  </div>
+  
+  <br>
 
-<%= render "form", task: @task %>
-
-<br>
-
-<div>
-  <%= link_to "Back to tasks", tasks_path %>
+  <div>
+    <%= link_to "Volver a las solicitudes", requests_path %>
+  </div>
 </div>
+

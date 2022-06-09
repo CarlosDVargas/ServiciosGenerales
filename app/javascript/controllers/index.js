@@ -7,5 +7,8 @@ import { application } from "./application"
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import NestedFormController from "./nested_form_controller.js"
+application.register("nested-form", NestedFormController)
+
 import SelectController from "./select_controller.js"
 application.register("select", SelectController)

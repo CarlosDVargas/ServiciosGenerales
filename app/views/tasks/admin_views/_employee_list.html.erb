@@ -1,0 +1,43 @@
+<%= form_with(model: task) do |f| %>
+  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3" >
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">Cédula</th>
+          <th class="text-center" scope="col">Nombre Completo</th>
+          <% if list_type == "remove"%>
+            <th class="text-center" scope="col"> Trabajo finalizado </th>
+          <% end %>
+          <% if @request.status != "completed" && @request.status != "closed" %>
+            <th class="text-center" scope="col"><%= list_type == "add" ? "Asignar trabajador" : "Remover trabajador" %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @employees.each do |employee| %>
+          <% if list_type == "add" %>
+            <% if employee.employee_status == "Activo" && (!@request.employees.ids.include? employee.id) %>
+              <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
+            <% end %>
+          <% else %>
+            <% if (@request.employees.ids.include? employee.id) %>
+              <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @request.status != "completed" && @request.status != "closed" %>
+      <%= f.hidden_field :request_id, value: request.id %>
+      <%= button_tag(class: "btn btn-primary") do %>
+        <% if list_type == "add" %>
+          <i class="bi bi-person-plus"></i>
+          Asignar empleados
+        <% else %>
+          <i class="bi bi-person-dash"></i>
+          Remover empleados
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

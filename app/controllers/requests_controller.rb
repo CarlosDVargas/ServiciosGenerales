@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[ show edit update destroy  ]
+  before_action :set_request, only: %i[ show edit update destroy change_status ]
   before_action :set_dictionary, only: %i[new show edit update index create]
   before_action :set_status, only: %i[index show]
 
@@ -92,7 +92,7 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status)
+      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status, :task_id)
     end
 
     # Initializes the dictionary with the default values
@@ -141,5 +141,10 @@ class RequestsController < ApplicationController
   # Take the requests from given set: <b>set</b> depending the status: <b>status</b> of the request
   def find_requests(set, status)
     set.where(status: status)
+  end
+
+  # Takes the tasks from table <b>Task</b>
+  def set_task
+    @task = Task.find(params[:task_id])
   end
 end

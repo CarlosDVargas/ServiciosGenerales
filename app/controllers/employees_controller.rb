@@ -50,11 +50,15 @@ class EmployeesController < ApplicationController
 
   # DELETE /employees/1 or /employees/1.json
   def destroy
-    @employee.destroy
+    if @employee.tasks.empty?
+      @employee.destroy
 
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: "Employee was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to employees_url, notice: "Empleado eliminado correctamente." }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to "#", notice: "No se puede eliminar un trabajador que haya sido asignado a una solicitud"
     end
   end
 
