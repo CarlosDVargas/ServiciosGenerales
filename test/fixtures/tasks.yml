@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 1
+  request_id: 1
+  started_at: 2022-06-06 16:32:16
+  finished_at: 2022-06-06 16:32:16
+  status: MyString
+
+two:
+  employee_id: 1
+  request_id: 1
+  started_at: 2022-06-06 16:32:16
+  finished_at: 2022-06-06 16:32:16
+  status: MyString
