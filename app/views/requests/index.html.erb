@@ -44,7 +44,10 @@
                 <div class="container">
                   <div class="row">
                     <div class="col">
-                      <%= link_to "Ver solicitud", request, class: "btn btn-sm btn-primary" %>
+                      <%= link_to request, class: "btn btn-sm btn-primary" do %>
+                        <i class="bi bi-eye"></i>
+                        Ver
+                      <% end %>
                     </div>
                     <% if current_user_account.role == "admin" %>
                       <%= render "requests/admin_views/admin_request_actions", request: request %>

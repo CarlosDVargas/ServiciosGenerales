@@ -39,11 +39,12 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    byebug
     if current_user_account.role == "employee"
       set_task
       description = params[:task][:observations][:description]
       if description.length > 0
-        observation = Observation.create(task_id: @task.id, user_id: current_user_account.id, description: description)
+        observation = TaskObservation.create(task_id: @task.id, user_account: current_user_account, description: description)
       end
     else
       if !set_employees_for_destroy.nil?
@@ -83,12 +84,12 @@ class TasksController < ApplicationController
 
   # Take observations from Observation table depending the task_id and user_id
   def set_observations
-    @observations = Observation.where(task_id: @task.id, user_id: current_user_account.id)
+    @observations = TaskObservation.where(task_id: @task.id, user_account: current_user_account)
   end
 
   # Take the task from the Task table depending the request_id and employee_id
   def set_task
-    employee_id = Employee.where(user_id: current_user_account.id).first.id
+    employee_id = current_user_account.employee_id
     if @request.nil?
       @request = Request.find(params[:task][:request])
     end

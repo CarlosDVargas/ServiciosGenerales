@@ -1,10 +1,16 @@
 <% case request.status
    when "pending" %>
 <div class="col">
-  <%= link_to "Atender", change_status_request_path(request), class: "btn btn-sm btn-primary" %>
+  <%= link_to change_status_request_path(request), class: "btn btn-sm btn-primary" do %>
+    <i class="bi bi-pencil-square"></i>
+    Atender
+  <% end %>
 </div>
 <div class="col">
-  <%= link_to "Rechazar", edit_request_path(request), class: "btn btn-sm btn-primary" %>
+  <%= link_to edit_request_path(request), class: "btn btn-sm btn-primary" do %>
+    <i class="bi bi-x-square"></i>
+    Rechazar
+  <% end %>
 </div>
 <% when "in_process" %>
 <div class="col">

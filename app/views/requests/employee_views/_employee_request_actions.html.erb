@@ -1,9 +1,15 @@
 <% case request.status
    when "in_process" %>
-    <div class="grid-item"> 
-      <%= link_to "Atender", edit_task_path(request: request), class: "action-button" %>
-    </div>
-    <div class="grid-item"> 
-      <%= link_to "Finalizar", "#", class: "action-button" %>
-    </div>
+<div class="col">
+  <%= link_to edit_task_path(request: request), class: "btn btn-sm btn-primary" do %>
+    <i class="bi bi-pencil-square"></i>
+    Atender
+  <% end %>
+</div>
+<div class="col">
+  <%= link_to "#", class: "btn btn-sm btn-primary" do %>
+    <i class="bi bi-check-square"></i>
+    Finalizar
+  <% end %>
+</div>
 <% end %>

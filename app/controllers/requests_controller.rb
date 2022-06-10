@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-
+    @request = Request.new
   end
 
   # GET /requests/1/edit
@@ -74,7 +74,7 @@ class RequestsController < ApplicationController
     case status
     when "in_process"
       set_task
-      @task.update(completed?: true)
+      @task.update(status: "completed")
       if analyse_tasks
         @request.update(status: "completed")
       end
@@ -116,10 +116,10 @@ class RequestsController < ApplicationController
 
   # Set the requests depending the user role and the status of the request
   def set_requests
-
+    #byebug
     # Case for the employee
     if current_user_account.role == "employee"
-      employee = Employee.where(user_id: current_user).first
+      employee = Employee.find_by(user_account: current_user_account)
       employee_requests = employee.requests
       case @status
       when "completed"
@@ -170,5 +170,22 @@ class RequestsController < ApplicationController
     if params[:request]
       params[:request][:request_deny_reasons_attributes].values
     end
+  end
+
+  # Depending the value of the completed? attribute of the tasks of the current request,
+  # will return true if all the tasks are completed, or false if at least one task is not completed
+  def analyse_tasks
+    tasks = @request.tasks
+    tasks.each do |task|
+      if task.status == "pending"
+        return false
+      end
+    end
+    return true
+  end
+
+  # Reload the requests listing view, and informs the user that the request was successfully updated
+  def reload_index()
+    redirect_to requests_path, notice: "Se actualizó el estado de la solicitud"
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_142418) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_10_173931) do
   create_table "employees", force: :cascade do |t|
     t.string "employee_id_card", null: false
     t.integer "employee_status", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_142418) do
 
   create_table "task_observations", force: :cascade do |t|
     t.text "description", null: false
-    t.integer "user_id", null: false
+    t.integer "user_account_id", null: false
     t.integer "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,8 +79,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_142418) do
 
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
+  add_foreign_key "request_deny_reasons", "user_accounts"
   add_foreign_key "task_observations", "tasks"
-  add_foreign_key "task_observations", "user_accounts", column: "user_id"
+  add_foreign_key "task_observations", "user_accounts"
   add_foreign_key "tasks", "employees"
   add_foreign_key "tasks", "requests"
   add_foreign_key "user_accounts", "employees", on_delete: :cascade
