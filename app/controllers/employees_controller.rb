@@ -83,7 +83,6 @@ class EmployeesController < ApplicationController
 
   # Falta documentación
   def status_filter
-    byebug
     if params[:value][0] || (params[:value][1] && params[:value][2])
       @employees = Employee.all
       @status = "both"

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Task observations</h1>
+
+<div id="task_observations">
+  <% @task_observations.each do |task_observation| %>
+    <%= render task_observation %>
+    <p>
+      <%= link_to "Show this task observation", task_observation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New task observation", new_task_observation_path %>

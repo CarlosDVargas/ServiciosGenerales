@@ -8,6 +8,9 @@ class UserAccount < ApplicationRecord
 
   belongs_to :employee, optional: true, dependent: :destroy
 
+  has_many :task_observations, dependent: :destroy
+  has_many :tasks, through: :task_observations
+
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
