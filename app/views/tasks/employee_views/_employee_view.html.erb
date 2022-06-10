@@ -1,33 +1,38 @@
-<div class="container">
+<div>
   <div class="container">
     <%= render "/requests/request", request: @request %>
   </div>
   <br>
-  <h5>Observaciones:</h5>
-  <div class="container overflow-auto">
-    <% if @observations.length == 0 %>
-      <p>No se ha agregado ninguna observación</p>
-    <% else %>
-      <% @observations.each do |observation| %>
-        <p>[<%= observation.created_at.strftime("%d/%m/%Y") %>]: <%= observation.description %></p>
+  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+    <h5>Observaciones:</h5>
+    <div class="container overflow-auto">
+      <% if @observations.length == 0 %>
+        <p>No se ha agregado ninguna observación</p>
+      <% else %>
+        <% @observations.each do |observation| %>
+          <p>[<%= observation.created_at.strftime("%d/%m/%Y") %>]: <%= observation.description %></p>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-  <br>
-  <% if @request.status != "completed" %>
-    <div class="container">
-      <h5>Agregar observación:</h5>
-      <p>(Esta es una acción irreversible)</p>
+  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+    <% if @request.status != "completed" %>
+      <h5 class="text-center">Agregar observación:</h5>
+      <p class="text-center">(Esta es una acción irreversible)</p>
       <%= form_with(model: @task, local: true) do |f| %>
         <%= f.fields_for :observations do |observation| %>
           <%= observation.text_area :description %>
         <% end %>
         <%= f.hidden_field :request, value: @request.id %>
-        <br>
-        <%= f.submit "Agregar una observación", class: "btn btn-primary btn-sm" %>
+        <%= button_tag(class: "btn btn-primary") do %>
+          <i class="bi bi-plus-circle"></i>
+          Agregar observación
+        <% end %>
       <% end %>
-    </div>
-    <br>
-    <%= link_to "Finalizar trabajo", change_status_request_path(@request, :task_id => @task), class: "btn btn-primary" %>
-  <% end %>
+      <%= link_to  change_status_request_path(@request, :task_id => @task), class: "btn btn-primary" do %>
+        <i class="bi bi-check2-square"></i>
+        Finalizar trabajo
+      <% end %>
+    <% end %>
+  </div>
 </div>
