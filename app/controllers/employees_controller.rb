@@ -3,7 +3,26 @@ class EmployeesController < ApplicationController
 
   # GET /employees or /employees.json
   def index
-    @employees = Employee.all
+    if current_user_account && current_user_account.role = "admin"
+      if params[:status]
+        if params[:value][0] || (params[:value][1] && value[:status][2])
+          @employees = Employee.all
+          @status = "both"
+        elsif params[:value][1]
+          @employees = Employee.where(status: true)
+          @status = "active"
+        elsif params[:value][2]
+          @employees = Employee.where(status: false)
+          @status = "inactive"
+        else
+          @employees = Employee.all
+          @status = nil
+        end
+      else
+        @status = nil
+        @employees = Employee.all
+      end
+    end
   end
 
   # GET /employees/1 or /employees/1.json
@@ -60,6 +79,25 @@ class EmployeesController < ApplicationController
     else
       redirect_to "#", notice: "No se puede eliminar un trabajador que haya sido asignado a una solicitud"
     end
+  end
+
+  # Falta documentación
+  def status_filter
+    byebug
+    if params[:value][0] || (params[:value][1] && params[:value][2])
+      @employees = Employee.all
+      @status = "both"
+    elsif params[:value][1]
+      @employees = Employee.where(status: true)
+      @status = "active"
+    elsif params[:value][2]
+      @employees = Employee.where(status: false)
+      @status = "inactive"
+    else
+      @employees = Employee.all
+      @status = nil
+    end
+    render partial: "employees/employee_list", locals: { employees: @employees }
   end
 
   private

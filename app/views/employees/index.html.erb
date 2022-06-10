@@ -1,59 +1,14 @@
-<h1 class="text-center">Empleados</h1>
-<div id="employees">
-  <div class="row">
-    <div class="container mt-3 mb-3 p-5 border border-2 rounded-3"">
-      <% if @employees.first.nil? %>
-        <p  class="text-center">No hay empleados para mostrar</p>
-      <% else %>
-        <table class= "table table-hover table-sm">
-          <thead>
-            <tr>
-              <th class="table-header text-center" scope="col">Cédula</th>
-              <th class="table-header text-center" scope="col">Nombre</th>
-              <th class="table-header text-center" scope="col">Estado</th>
-              <th class="table-header text-center" scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if !@employees.empty? %>
-              <% @employees.each do |employee| %>
-                <tr>
-                  <td class="text-center" scope="row"><%= employee.employee_id_card %></td>
-                  <td class="text-center"><%= employee.user_account.name %></td>
-                  <td class="text-center"><%= employee.employee_status%></td>
-                  <td class="text-center">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col">
-                          <%= link_to employee, class: "btn btn-sm btn-primary" do %>
-                            <i class="bi bi-person"></i>
-                            Ver
-                          <% end %>
-                        </div>
-                        <div class="col">
-                          <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-primary" do %>
-                            <i class="bi bi-pencil-square"></i>
-                            Editar
-                          <% end %>
-                        </div>
-                        <div class="col">
-                          <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
-                            <i class="bi bi-trash"></i>
-                            Eliminar
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
+<div class="container">
+  <h1 class="text-center">Empleados</h1>
+  <%= render 'employees/employee_filter' %>
+  <div>
+    <div id="employees">
+      <div class="row">
+        <div class="container mt-3 mb-3 p-5 border border-2 rounded-3" data-table-filter-target="elements">
+          <%= render partial: 'employees/employee_list', locals: { employees: @employees} %>
+        </div>
+      </div>
     </div>
+    <%= link_to "New employee", new_employee_path %>
   </div>
 </div>
-
-
-<%= link_to "New employee", new_employee_path %>

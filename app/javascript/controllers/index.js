@@ -12,3 +12,6 @@ application.register("nested-form", NestedFormController)
 
 import SelectController from "./select_controller.js"
 application.register("select", SelectController)
+
+import TableFilterController from "./table_filter_controller.js"
+application.register("table-filter", TableFilterController)

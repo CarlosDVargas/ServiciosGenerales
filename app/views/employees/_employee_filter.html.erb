@@ -1,0 +1,23 @@
+<div class="container" data-controller="table-filter" data-table-filter-url="<%= status_filter_path %>">
+  <h6>Mostrar por:</h6>
+  <div class="form-group" id="filters">
+    <div class="row">
+      <div class="col">
+        <input name="status" value="both" type="checkbox" data-action="table-filter#change" class="form-check-input" checked>
+        <label class="form-check-label" for="flexCheckDefault">Todos</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input name="status" value="active" type="checkbox" data-action="table-filter#change" class="form-check-input">
+        <label class="form-check-label" for="flexCheckDefault">Activos</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input name="status" value="inactive" type="checkbox" data-action="table-filter#change" class="form-check-input">
+        <label class="form-check-label" for="flexCheckDefault">Inactivos</label>
+      </div>
+    </div>
+  </div>
+</div>

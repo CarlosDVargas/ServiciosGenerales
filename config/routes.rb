@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :tasks, except: [:show]
 
   resources :employees
+  post 'status_filter', action: :status_filter, controller: 'employees'
   resources :requests
 
 end
