@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_030227) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_10_142418) do
   create_table "employees", force: :cascade do |t|
     t.string "employee_id_card", null: false
     t.integer "employee_status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "request_deny_reasons", force: :cascade do |t|
+    t.string "reason", null: false
+    t.integer "user_account_id", null: false
+    t.integer "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,6 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_030227) do
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "request_deny_reasons", "requests"
+  add_foreign_key "request_deny_reasons", "user_accounts"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts", column: "user_id"
   add_foreign_key "tasks", "employees"

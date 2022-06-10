@@ -1,11 +1,19 @@
 <div class="nested-fields">
-    <div class='form-group'>
-        <%= f.hidden_field :_destroy %>
-        <% f.hidden_field :user_id, value: "1" %>
-        <% f.hidden_field :request_id, value: request.id %>
-        <%= f.text_field :description, placeholder: "Razón" %>
-        <small>
-            <%= link_to "Eliminar", "#", data: { action: "click->nested-form#remove_association" } %>
-        </small>
+  <div class="row">
+    <%= f.hidden_field :_destroy %>
+    <% f.hidden_field :user_id, value: "1" %>
+    <% f.hidden_field :request_id, value: request.id %>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.text_field :reason, placeholder: "Razón", class:"form-control" %>
     </div>
+    <div class="col">
+      <small>
+        <%= link_to  "#", data: { action: "click->nested-form#remove_association" }, class:"btn btn-sm btn-danger" do %>
+          <i class="bi bi-trash"></i>
+        <% end %>
+      </small>
+    </div>
+  </div>
 </div>

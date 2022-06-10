@@ -10,6 +10,9 @@ class RequestsController < ApplicationController
 
   # GET /requests/1 or /requests/1.json
   def show
+    if @request.status == "denied"
+      @reasons = RequestDenyReason.where(request_id: @request.id)
+    end
   end
 
   # GET /requests/new
@@ -38,13 +41,19 @@ class RequestsController < ApplicationController
 
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
+    byebug
     respond_to do |format|
-      if @request.update(request_params)
-        format.html { redirect_to request_url(@request), notice: 'La solicitud fue actualizada correctamente.' }
-        format.json { render :show, status: :ok, location: @request }
+      reasons_array = deny_reasons
+      if reasons_array
+        reasons_array.each { |reason|
+          RequestDenyReason.create(reason: reason[:reason], user_account: current_user_account, request: @request)
+        }
+        @request.update(status: "denied")
+        format.html { redirect_to requests_url, notice: "Se actualizó el estado de la solicitud" }
+        format.json { head :no_content }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+        format.html { render :edit }
+        format.json { render json: @request.errors }
       end
     end
   end
@@ -92,7 +101,7 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status, :task_id)
+      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status, :task_id, request_deny_reasons: [:_destroy, :description, :request_id, :user_id])
     end
 
     # Initializes the dictionary with the default values
@@ -110,16 +119,16 @@ class RequestsController < ApplicationController
 
     # Case for the employee
     if current_user_account.role == "employee"
-      #employee = Employee.where(user_id: current_user).first
-      #employee_requests = employee.requests
-      #case @status
-      #when "completed"
-      #  @requests = find_requests(employee_requests, "completed")
-      #when "closed"
-      #  @requests = find_requests(employee_requests, "closed")
-      #else
-      #  @requests = find_requests(employee_requests, "in_process")
-      #end
+      employee = Employee.where(user_id: current_user).first
+      employee_requests = employee.requests
+      case @status
+      when "completed"
+        @requests = find_requests(employee_requests, "completed")
+      when "closed"
+        @requests = find_requests(employee_requests, "closed")
+      else
+        @requests = find_requests(employee_requests, "in_process")
+      end
 
     # Case for the admin
     else
@@ -146,5 +155,20 @@ class RequestsController < ApplicationController
   # Takes the tasks from table <b>Task</b>
   def set_task
     @task = Task.find(params[:task_id])
+  end
+
+  # Sets the completed? attribute of the tasks of the request to false
+  def reset_tasks
+    tasks = @request.tasks
+    tasks.each do |task|
+      task.update(status: "pending")
+    end
+  end
+
+  # Return the deny reasons of a request
+  def deny_reasons
+    if params[:request]
+      params[:request][:request_deny_reasons_attributes].values
+    end
   end
 end
