@@ -10,10 +10,10 @@
   <li class="nav-item" role="presentation">
     <%= link_to "Finalizadas", requests_path(:status => "completed"), class:"nav-link", role:"tab" %>
   </li>
+  <li class="nav-item" role="presentation">
+    <%= link_to "Cerradas", requests_path(:status => "closed"), class:"nav-link", role:"tab" %>
+  </li>
   <% if current_user_account.role == "admin" %>
-    <li class="nav-item" role="presentation">
-      <%= link_to "Cerradas", requests_path(:status => "closed"), class:"nav-link", role:"tab" %>
-    </li>
     <li class="nav-item" role="presentation">
       <%= link_to "Rechazadas", requests_path(:status => "denied"), class:"nav-link", role:"tab" %>
     </li>

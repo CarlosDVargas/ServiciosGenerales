@@ -70,6 +70,7 @@ class RequestsController < ApplicationController
 
   # Encharged of updating the status of a request depending on the status obtained from the params
   def change_status
+    byebug
     status = @request.status
     case status
     when "in_process"
@@ -80,7 +81,7 @@ class RequestsController < ApplicationController
       end
       reload_index()
     when "completed"
-      if params[:action] == "close"
+      if params[:change_to] == "close"
         @request.update(status: "closed")
       else
         reset_tasks
@@ -101,7 +102,7 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status, :task_id, request_deny_reasons: [:_destroy, :description, :request_id, :user_id])
+      params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id, :requester_mail, :requester_type, :student_id, :student_assosiation, :work_location, :work_building, :work_type, :work_description, :status, :task_id, :change_to, request_deny_reasons: [:_destroy, :description, :request_id, :user_id])
     end
 
     # Initializes the dictionary with the default values
