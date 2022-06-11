@@ -83,14 +83,15 @@ class EmployeesController < ApplicationController
 
   # Falta documentación
   def status_filter
+
     if params[:value][0] || (params[:value][1] && params[:value][2])
       @employees = Employee.all
       @status = "both"
     elsif params[:value][1]
-      @employees = Employee.where(status: true)
+      @employees = Employee.where(employee_status: "Activo")
       @status = "active"
     elsif params[:value][2]
-      @employees = Employee.where(status: false)
+      @employees = Employee.where(employee_status: "Inactivo")
       @status = "inactive"
     else
       @employees = Employee.all
