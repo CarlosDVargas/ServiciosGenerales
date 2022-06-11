@@ -1,0 +1,54 @@
+<%= form_with(model: feedback) do |form| %>
+  <% if feedback.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+      <ul>
+        <% feedback.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
+    <div>
+      <%= form.label :observations, style: "display: block" %>
+      <%= form.text_area :observations, class:"form-control" %>
+    </div>
+    <div class="d-none">
+      <%= form.label :request_id, style: "display: block" %>
+      <%= form.hidden_field :request_id, value: @request.id , class:"form-control" %>
+    </div>
+    <div class="row">
+      <%= form.label :satisfaction, style: "display: block" %>
+      <div>
+        <div class="col">
+          <%= form.radio_button :satisfaction, 1, :name => "satisfaction"%>
+          <label>1</label>
+          <span>Muy negativa</span>
+        </div>
+        <div class="col">
+          <%= form.radio_button :satisfaction, 2, :name => "satisfaction"%>
+          <label>2</label>
+          <span>Negativa</span>
+        </div>
+        <div class="col">
+          <%= form.radio_button :satisfaction, 3, :name => "satisfaction"%>
+          <label>3</label>
+          <span>Neutral</span>
+        </div>
+        <div class="col">
+          <%= form.radio_button :satisfaction, 4, :name => "satisfaction"%>
+          <label>4</label>
+          <span>Positiva</span>
+        </div>
+        <div class="col">
+          <%= form.radio_button :satisfaction, 5, :name => "satisfaction"%>
+          <label>5</label>
+          <span>Muy positiva</span>
+        </div>
+      </div>
+      <div>
+        <%= form.submit %>
+      </div>
+    </div>
+<% end %>

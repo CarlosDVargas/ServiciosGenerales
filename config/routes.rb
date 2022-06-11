@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :feedbacks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
 
   resources :employees
   post 'status_filter', action: :status_filter, controller: 'employees'
+
   resources :requests
+  get 'ask_state', to: 'requests#ask_state'
+  post 'ask_state', to: 'requests#search_state'
 
 end
