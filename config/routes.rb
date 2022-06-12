@@ -10,11 +10,22 @@ Rails.application.routes.draw do
                              registrations: "user_accounts/registrations",
                            }
 
+
+  resources :requests do
+    collection do
+      match 'search' => 'requests#search', via: [:get, :post], as: :search
+    end
+  end
+  
   resources :requests do
     member do
       get :change_status
     end
   end
+
+  get 'reports', to: 'requests#reports'
+  get 'ask_state', to: 'requests#ask_state'
+  post 'ask_state', to: 'requests#search_state'
 
   get '/tasks/edit', to: 'tasks#edit', as: 'edit_task'
   post '/tasks/edit', to: 'tasks#update'
@@ -25,10 +36,5 @@ Rails.application.routes.draw do
       match 'search' => 'employees#search', via: [:get, :post], as: :search
     end
   end
-  
-
-  resources :requests
-  get 'ask_state', to: 'requests#ask_state'
-  post 'ask_state', to: 'requests#search_state'
 
 end

@@ -1,11 +1,21 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[ show edit update destroy change_status ]
-  before_action :set_dictionary, only: %i[new show edit update index create]
-  before_action :set_status, only: %i[index show]
+  before_action :set_request, only: %i[show edit update destroy change_status]
+  before_action :set_dictionary, only: %i[new show edit update index create search]
+  before_action :set_status, only: %i[show]
 
   # GET /requests or /requests.json
   def index
-    set_requests
+    @q = Request.ransack(params[:q])
+    @requests = @q.result
+    if !params[:q].present?
+      set_status
+      set_requests
+    end
+  end
+
+  def search
+    index
+    render :reports
   end
 
   # GET /requests/1 or /requests/1.json
@@ -70,7 +80,6 @@ class RequestsController < ApplicationController
 
   # Encharged of updating the status of a request depending on the status obtained from the params
   def change_status
-    byebug
     status = @request.status
     case status
     when "in_process"
@@ -205,5 +214,9 @@ class RequestsController < ApplicationController
   # Reload the requests listing view, and informs the user that the request was successfully updated
   def reload_index()
     redirect_to requests_path, notice: "Se actualizó el estado de la solicitud"
+  end
+
+  def reports
+    search
   end
 end
