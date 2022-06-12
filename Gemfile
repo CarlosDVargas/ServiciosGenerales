@@ -81,3 +81,5 @@ gem "byebug", "~> 11.1"
 
 
 gem "ruby-lsp", "~> 0.0.3", :group => :development
+
+gem "ransack", "~> 3.2"

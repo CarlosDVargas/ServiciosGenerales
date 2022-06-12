@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus";
+/*import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
     static targets = ["elements"];
@@ -51,4 +51,4 @@ export default class extends Controller {
 function getMetaValue(name) {
     const element = document.head.querySelector(`meta[name="${name}"]`);
     return element.getAttribute("content");
-}
+}*/

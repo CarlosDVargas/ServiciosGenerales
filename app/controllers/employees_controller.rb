@@ -3,26 +3,13 @@ class EmployeesController < ApplicationController
 
   # GET /employees or /employees.json
   def index
-    if current_user_account && current_user_account.role = "admin"
-      if params[:status]
-        if params[:value][0] || (params[:value][1] && value[:status][2])
-          @employees = Employee.all
-          @status = "both"
-        elsif params[:value][1]
-          @employees = Employee.where(status: true)
-          @status = "active"
-        elsif params[:value][2]
-          @employees = Employee.where(status: false)
-          @status = "inactive"
-        else
-          @employees = Employee.all
-          @status = nil
-        end
-      else
-        @status = nil
-        @employees = Employee.all
-      end
-    end
+    @q = Employee.ransack(params[:q])
+    @employees = @q.result
+  end
+
+  def search
+    index
+    render :index
   end
 
   # GET /employees/1 or /employees/1.json
@@ -84,20 +71,6 @@ class EmployeesController < ApplicationController
   # Falta documentación
   def status_filter
 
-    if params[:value][0] || (params[:value][1] && params[:value][2])
-      @employees = Employee.all
-      @status = "both"
-    elsif params[:value][1]
-      @employees = Employee.where(employee_status: "Activo")
-      @status = "active"
-    elsif params[:value][2]
-      @employees = Employee.where(employee_status: "Inactivo")
-      @status = "inactive"
-    else
-      @employees = Employee.all
-      @status = nil
-    end
-    render partial: "employees/employee_list", locals: { employees: @employees }
   end
 
   private

@@ -20,8 +20,12 @@ Rails.application.routes.draw do
   post '/tasks/edit', to: 'tasks#update'
   resources :tasks, except: [:show]
 
-  resources :employees
-  post 'status_filter', action: :status_filter, controller: 'employees'
+  resources :employees do
+    collection do
+      match 'search' => 'employees#search', via: [:get, :post], as: :search
+    end
+  end
+  
 
   resources :requests
   get 'ask_state', to: 'requests#ask_state'

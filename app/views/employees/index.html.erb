@@ -1,14 +1,29 @@
 <div class="container">
   <h1 class="text-center">Empleados</h1>
-  <%= render 'employees/employee_filter' %>
-  <div>
-    <div id="employees">
+  <%= search_form_for @q, url: search_employees_path, data: { turbo: false } do |f| %>
+    <div class="container mb-4 mt-4">
+      <h6>Filtro:</h5>
       <div class="row">
-        <div class="container mt-3 mb-3 p-5 border border-2 rounded-3" data-table-filter-target="elements">
-          <%= render partial: 'employees/employee_list', locals: { employees: @employees} %>
+        <div class="col">
+          <%= f.label :employee_status, 'Estado' %>
+          <%= f.select :employee_status_eq, options_for_select(Employee.all.employee_statuses), {include_blank: "Seleccione el estado a buscar"}, class: "form-select" %>
+        </div>
+        <div class="col">
+          <br>
+          <%= f.submit "Buscar", class: "btn btn-primary" %>
         </div>
       </div>
     </div>
-    <%= link_to "New employee", new_employee_path %>
+  <% end %>
+</div>
+<div class="container">
+  <div id="employees">
+    <div class="row">
+      <div class="container mt-3 mb-3 p-5 border border-2 rounded-3" >
+        <%= render partial: 'employees/employee_list', locals: { employees: @employees} %>
+      </div>
+    </div>
   </div>
+  <%= link_to "New employee", new_employee_path %>
+</div>
 </div>
