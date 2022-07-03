@@ -22,7 +22,7 @@ export default class extends Controller {
         if (options.selectedIndex == lastOptionIndex) {
             this.hiddenTarget.hidden = false;
         } else {
-            this.hiddenTarget.hidden = false;
+            this.hiddenTarget.hidden = true;
         }
         if (lastOptionValue.includes('other')) {
             if (options.selectedIndex != lastOptionIndex) {
@@ -33,4 +33,4 @@ export default class extends Controller {
         }
     }
 
-} 
+}
