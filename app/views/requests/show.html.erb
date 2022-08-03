@@ -1,11 +1,20 @@
 <%= render @request %>
 <div class="container mt-3 mb-3 ">
   <div class="position-relative mt-3">
+    <% if !current_user_account %>
     <div class="position-absolute end-50">
-      <%= link_to requests_path, class: "btn btn-primary" do %>
-        <i class="bi bi-arrow-bar-left"></i>
-        Volver
-      <% end %>
-    </div>
+        <%= link_to root_path, class: "btn btn-primary" do %>
+          <i class="bi bi-arrow-bar-left"></i>
+          Volver
+        <% end %>
+      </div>
+    <% else %>
+      <div class="position-absolute end-50">
+        <%= link_to requests_path, class: "btn btn-primary" do %>
+          <i class="bi bi-arrow-bar-left"></i>
+          Volver
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
