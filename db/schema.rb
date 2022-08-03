@@ -88,7 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_024844) do
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
-  add_foreign_key "request_deny_reasons", "user_accounts"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts"
   add_foreign_key "tasks", "employees"
