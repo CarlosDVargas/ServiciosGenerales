@@ -1,0 +1,19 @@
+<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Historial de cambios hechos sobre la solicitud</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+        <% @log_entries.each do |entry| %>
+          <div class="row">
+            <div class="col-12">
+              <p> <strong><%= entry.created_at.strftime("%Y-%m-%d")%></strong> - <%= entry.user_account.name%>: <%= entry.entry_message %> </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_11_024844) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
   create_table "employees", force: :cascade do |t|
     t.string "employee_id_card", null: false
     t.integer "employee_status", null: false
@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_024844) do
     t.text "observations", limit: 500
     t.integer "satisfaction"
     t.integer "request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "log_entries", force: :cascade do |t|
+    t.integer "user_account_id"
+    t.string "entry_message"
+    t.integer "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

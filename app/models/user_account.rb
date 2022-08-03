@@ -13,6 +13,8 @@ class UserAccount < ApplicationRecord
 
   has_many :request_deny_reasons
 
+  has_many :log_entries, dependent: :destroy
+
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
