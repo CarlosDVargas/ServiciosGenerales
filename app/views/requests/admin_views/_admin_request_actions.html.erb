@@ -1,23 +1,15 @@
 <% case request.status
    when "pending" %>
-<div class="col">
-  <%= link_to change_status_request_path(request), class: "btn btn-sm btn-primary" do %>
-    <i class="bi bi-pencil-square"></i>
-    Atender
-  <% end %>
-</div>
-<div class="col">
-  <%= link_to edit_request_path(request), class: "btn btn-sm btn-primary" do %>
-    <i class="bi bi-x-square"></i>
-    Rechazar
-  <% end %>
-</div>
+<%= link_to change_status_request_path(request), class: "btn btn-sm btn-primary" do %>
+  <i class="bi bi-pencil-square"></i>
+  Atender
+<% end %>
+<%= link_to edit_request_path(request), class: "btn btn-sm btn-primary" do %>
+  <i class="bi bi-x-square"></i>
+  Rechazar
+<% end %>
 <% when "in_process" %>
-<div class="col">
-  <%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
-</div>
+<%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
 <% when "completed"%>
-<div class="col">
-  <%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
-</div>
+<%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
 <% end %>

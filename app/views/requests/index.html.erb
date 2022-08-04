@@ -1,5 +1,4 @@
 <%= render 'requests/navigation'%>
-
 <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
   <div class="row">
     <h3 class="text-center">
@@ -42,20 +41,16 @@
               <td class="text-center"><%= request.work_location %></td>
               <td class="text-center"><%= request.requester_name %></td>
               <td class="text-center">
-                <div class="container">
-                  <div class="row">
-                    <div class="col">
-                      <%= link_to request, class: "btn btn-sm btn-primary" do %>
-                        <i class="bi bi-eye"></i>
-                        Ver
-                      <% end %>
-                    </div>
-                    <% if current_user_account.role == "admin" %>
-                      <%= render "requests/admin_views/admin_request_actions", request: request %>
-                    <% else %>
-                      <%= render "requests/employee_views/employee_request_actions", request: request %>
-                    <% end %>
-                  </div>
+                <div class="btn-group">
+                  <%= link_to request, class: "btn btn-sm btn-primary" do %>
+                    <i class="bi bi-eye"></i>
+                    Ver
+                  <% end %>
+                  <% if current_user_account.role == "admin" %>
+                    <%= render "requests/admin_views/admin_request_actions", request: request %>
+                  <% else %>
+                    <%= render "requests/employee_views/employee_request_actions", request: request %>
+                  <% end %>
                 </div>
               </td>
             </tr>

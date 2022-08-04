@@ -33,8 +33,11 @@ class TasksController < ApplicationController
     if !@employees.nil?
       @employees.each { |employee_id|
         Task.create(employee_id: employee_id, request_id: @request.id)
+        @employee = Employee.find(employee_id)
+        LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Asignó a #{@employee.user_account.name} a la solicitud")
       }
     end
+    redirect_to requests_path
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
@@ -53,6 +56,8 @@ class TasksController < ApplicationController
           @employees.each { |employee_id|
             task = Task.where(employee_id: Integer(employee_id), request_id: @request.id)
             task.destroy_all
+            @employee = Employee.find(employee_id)
+            LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Eliminó a #{@employee.user_account.name} de la solicitud")
           }
         end
       elsif !set_employees_for_create.nil?

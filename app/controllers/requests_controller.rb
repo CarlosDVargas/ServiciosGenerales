@@ -59,22 +59,13 @@ class RequestsController < ApplicationController
           RequestDenyReason.create(reason: reason[:reason], user_account: current_user_account, request: @request)
         }
         @request.update(status: "denied")
+        @log_entry = LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Denegó la solicitud")
         format.html { redirect_to requests_url, notice: "Se actualizó el estado de la solicitud" }
         format.json { head :no_content }
       else
         format.html { render :edit }
         format.json { render json: @request.errors }
       end
-    end
-  end
-
-  # DELETE /requests/1 or /requests/1.json
-  def destroy
-    @request.destroy
-
-    respond_to do |format|
-      format.html { redirect_to requests_url, notice: "La solicitud fue eliminada correctamente." }
-      format.json { head :no_content }
     end
   end
 
@@ -87,18 +78,22 @@ class RequestsController < ApplicationController
       @task.update(status: "completed")
       if analyse_tasks
         @request.update(status: "completed")
+        @log_entry = LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Cambió el estado de la solicitud a completada")
       end
       reload_index()
     when "completed"
       if params[:change_to] == "close"
         @request.update(status: "closed")
+        @log_entry = LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Cambió el estado de la solicitud a cerrada")
       else
         reset_tasks
         @request.update(status: "in_process")
+        @log_entry = LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Cambió el estado de la solicitud a en proceso")
       end
       reload_index()
     else
       @request.update(status: "in_process")
+      @log_entry = LogEntry.create(user_account: current_user_account, request: @request, entry_message: "Cambió el estado de la solicitud a en proceso")
       redirect_to new_task_path(:request => @request)
     end
   end
