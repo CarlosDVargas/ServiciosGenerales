@@ -15,27 +15,19 @@
           <td class="text-center"><%= employee.user_account.name %></td>
           <td class="text-center"><%= employee.employee_status%></td>
           <td class="text-center">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <%= link_to employee, class: "btn btn-sm btn-primary" do %>
-                    <i class="bi bi-person"></i>
-                    Ver
-                  <% end %>
-                </div>
-                <div class="col">
-                  <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-primary" do %>
-                    <i class="bi bi-pencil-square"></i>
-                    Editar
-                  <% end %>
-                </div>
-                <div class="col">
-                  <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
-                    <i class="bi bi-trash"></i>
-                    Eliminar
-                  <% end %>
-                </div>
-              </div>
+            <div class="btn-group">
+              <%= link_to employee, class: "btn btn-sm btn-primary" do %>
+                <i class="bi bi-person"></i>
+                Ver
+              <% end %>
+              <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-secondary" do %>
+                <i class="bi bi-pencil-square"></i>
+                Editar
+              <% end %>
+              <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
+                <i class="bi bi-trash"></i>
+                Eliminar
+              <% end %>
             </div>
           </td>
         </tr>
