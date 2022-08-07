@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    byebug
+    
     if current_user_account.role == "employee"
       set_task
       description = params[:task][:observations][:description]
@@ -64,7 +64,6 @@ class TasksController < ApplicationController
         create
       end
     end
-    redirect_to edit_task_path(request => @request)
   end
 
   # DELETE /tasks/1 or /tasks/1.json
