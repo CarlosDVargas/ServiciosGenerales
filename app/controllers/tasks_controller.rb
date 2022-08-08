@@ -49,6 +49,7 @@ class TasksController < ApplicationController
       if description.length > 0
         observation = TaskObservation.create(task_id: @task.id, user_account: current_user_account, description: description)
       end
+      redirect_to edit_task_path(request => @request)
     else
       if !set_employees_for_destroy.nil?
         @request = Request.find(params[:request_id])

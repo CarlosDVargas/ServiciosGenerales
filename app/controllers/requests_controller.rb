@@ -51,7 +51,6 @@ class RequestsController < ApplicationController
 
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
-    byebug
     respond_to do |format|
       reasons_array = deny_reasons
       if reasons_array

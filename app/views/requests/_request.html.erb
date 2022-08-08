@@ -90,7 +90,3 @@
     </div>
   </div>
 <% end %>
-<% if request.status == "closed" && request.feedbacks.nil? %>
-    <%= link_to "Enviar feedback", new_feedback_path(request_id: request), class: "btn btn-primary" %>
-<% end %>
-</div>

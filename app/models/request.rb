@@ -19,7 +19,7 @@ class Request < ApplicationRecord
   has_many :request_deny_reasons
   accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr| attr["description"].blank? }
 
-  has_many :feedbacks, dependent: :destroy
+  has_one :feedback, dependent: :destroy
 
   has_many :log_entries, dependent: :destroy
 end
