@@ -24,7 +24,6 @@ class FeedbacksController < ApplicationController
 
   # POST /feedbacks or /feedbacks.json
   def create
-    byebug
     @feedback = Feedback.new(observations: feedback_params.values[0], satisfaction: params[:satisfaction], request_id: feedback_params.values[1])
     @request = @feedback.request
     respond_to do |format|

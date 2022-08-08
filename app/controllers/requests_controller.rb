@@ -137,7 +137,6 @@ class RequestsController < ApplicationController
 
   # Set the requests depending the user role and the status of the request
   def set_requests
-    #byebug
     # Case for the employee
     if current_user_account.role == "employee"
       employee = Employee.find_by(user_account: current_user_account)
