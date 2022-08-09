@@ -1,10 +1,6 @@
-<h1>Editing employee</h1>
-
+<h1 class="text-center">Editar empleado</h1>
 <%= render "form", employee: @employee %>
-
 <br>
-
-<div>
-  <%= link_to "Show this employee", @employee %> |
-  <%= link_to "Back to employees", employees_path %>
+<div class="btn-group">
+  <%= link_to "Volver a la lista de empleados", employees_path %>
 </div>
