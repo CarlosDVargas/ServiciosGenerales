@@ -5,7 +5,7 @@
     </div>
     <%= search_form_for @q = Request.ransack(params[:q]), url: search_requests_path, data: { turbo: false }, remote: true do |f| %>
       <div class="container mb-4 mt-4 p-4">
-        <h6>Filtro:</h5>
+        <h5>Filtro:</h5>
         <div class="row">
           <div class="col">
             <% @dictionary = Dictionary.new %>

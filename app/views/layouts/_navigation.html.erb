@@ -17,33 +17,33 @@
                 <%= link_to "Reportes", reports_path, method: "search", class: "dropdown-item" %>
               <% end %>
             </div>
-            <% if current_user_account.role == "admin" %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Empleados
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <%= link_to "Agregar", new_employee_path, class: "dropdown-item" %>
-                  <%= link_to "Listar", employees_path, class: "dropdown-item" %>
-                </div>
-              </li>
-            <% end %>
           </li>
+          <% if current_user_account.role == "admin" %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Empleados
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Agregar", new_employee_path, class: "dropdown-item" %>
+                <%= link_to "Listar", employees_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <% if current_user_account %>
-        <div class= "btn-group">
-          <%= link_to edit_user_account_registration_path, class:"btn btn-sm btn-secondary" do %>
+        <div class="btn-group">
+          <%= link_to edit_user_account_registration_path, class: "btn btn-sm btn-secondary" do %>
             <i class="bi bi-person"></i>
             Administrar cuenta
           <% end %>
-          <%= button_to destroy_user_account_session_path, class:"btn btn-sm btn-primary", method: :delete do %>
+          <%= button_to destroy_user_account_session_path, class: "btn btn-sm btn-primary", method: :delete do %>
             <i class="bi bi-box-arrow-left"></i>
             Cerrar sesión
           <% end %>
         </div>
       <% else %>
-        <%= link_to new_user_account_session_path, class:"btn btn-sm btn-primary" do %>
+        <%= link_to new_user_account_session_path, class: "btn btn-sm btn-primary" do %>
           <i class="bi bi-box-arrow-in-right"></i>
           Iniciar sesión
         <% end %>
