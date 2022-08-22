@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center">Empleados</h1>
-  <%= search_form_for @q, url: search_employees_path, data: { turbo: false } do |f| %>
+  <%= search_form_for @query, url: search_employees_path, data: { turbo: false } do |f| %>
     <div class="container mb-4 mt-4">
       <h5>Filtro:</h5>
       <div class="row">

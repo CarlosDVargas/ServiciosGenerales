@@ -2,6 +2,7 @@
 
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[show edit update destroy]
+  before_action :set_user_account, only: %i[show edit update destroy]
 
   # GET /employees or /employees.json
   def index
@@ -20,6 +21,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    @employee.build_user_account
   end
 
   # GET /employees/1/edit
@@ -45,6 +47,8 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
+        @user = @employee.user_account
+        @user.update(employee_params[:user_account_attributes])
         format.html { redirect_to employee_url(@employee), notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
@@ -78,16 +82,21 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
   end
 
+  def set_user_account
+    @user_account = @employee.user_account
+  end
+
   # Only allow a list of trusted parameters through.
   def employee_params
-    params.require(:employee).permit(:employee_id_card, :employee_status, user_account: %i[name email])
+    params.require(:employee).permit(:employee_id_card, :employee_status, user_account_attributes: %i[id name email])
   end
 
   def create_user
+    byebug
     @user = UserAccount.new
-    @user.email = params[:employee][:user_accounts][:email]
+    @user.email = params[:employee][:user_account_attributes][:email]
     @user.password = "Contra#{@employee.employee_id_card}"
-    @user.name = params[:employee][:user_accounts][:name]
+    @user.name = params[:employee][:user_account_attributes][:name]
     @user.role = 'employee'
   end
 end
