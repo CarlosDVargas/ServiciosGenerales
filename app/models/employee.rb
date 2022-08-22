@@ -8,4 +8,6 @@ class Employee < ApplicationRecord
   has_many :requests, through: :tasks
 
   enum employee_status: { "Activo": 1, "Inactivo": 0 }
+
+
 end

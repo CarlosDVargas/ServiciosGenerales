@@ -1,17 +1,16 @@
+# frozen_string_literal: true
+
 class FeedbacksController < ApplicationController
-  before_action :set_feedback, only: %i[ show edit update destroy ]
-  before_action :set_request, only: %i[ new show create edit update destroy ]
+  before_action :set_feedback, only: %i[show edit update destroy]
+  before_action :set_request, only: %i[new show create edit update destroy]
 
   # GET /feedbacks or /feedbacks.json
   def index
-    if ask_for_user_logged_in
-      @feedbacks = Feedback.all
-    end
+    @feedbacks = Feedback.all if ask_for_user_logged_in
   end
 
   # GET /feedbacks/1 or /feedbacks/1.json
-  def show
-  end
+  def show; end
 
   # GET /feedbacks/new
   def new
@@ -19,16 +18,16 @@ class FeedbacksController < ApplicationController
   end
 
   # GET /feedbacks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /feedbacks or /feedbacks.json
   def create
-    @feedback = Feedback.new(observations: feedback_params.values[0], satisfaction: params[:satisfaction], request_id: feedback_params.values[1])
+    @feedback = Feedback.new(observations: feedback_params.values[0], satisfaction: params[:satisfaction],
+                             request_id: feedback_params.values[1])
     @request = @feedback.request
     respond_to do |format|
       if @feedback.save
-        format.html { redirect_to root_path, notice: "Feedback enviado." }
+        format.html { redirect_to root_path, notice: 'Feedback enviado.' }
         format.json { render :show, status: :created, location: @feedback }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,10 +38,12 @@ class FeedbacksController < ApplicationController
 
   # PATCH/PUT /feedbacks/1 or /feedbacks/1.json
   def update
-    newfeedback = ActionController::Parameters.new(observations: feedback_params.values[0], satisfaction: params[:satisfaction]).permit(:observations, :satisfaction)
+    newfeedback = ActionController::Parameters.new(observations: feedback_params.values[0], satisfaction: params[:satisfaction]).permit(
+      :observations, :satisfaction
+    )
     respond_to do |format|
       if @feedback.update(newfeedback)
-        format.html { redirect_to feedback_url(@feedback), notice: "Feedback actualizado." }
+        format.html { redirect_to feedback_url(@feedback), notice: 'Feedback actualizado.' }
         format.json { render :show, status: :ok, location: @feedback }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +57,7 @@ class FeedbacksController < ApplicationController
     @feedback.destroy
 
     respond_to do |format|
-      format.html { redirect_to feedbacks_url, notice: "Feedback eliminado." }
+      format.html { redirect_to feedbacks_url, notice: 'Feedback eliminado.' }
       format.json { head :no_content }
     end
   end

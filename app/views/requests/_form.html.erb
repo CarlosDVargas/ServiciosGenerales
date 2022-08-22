@@ -45,7 +45,7 @@
       <div>
         <p>
           <%= form.label "Tipo de solicitante", style: "display: block" %>
-          <%= form.select :requester_type, options_for_select(@dictionary.requesterTypes.invert().each()), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+          <%= form.select :requester_type, options_for_select(@dictionary.requesterTypes.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
         </p>
       </div>
       <div data-select-target="hidden">
@@ -58,7 +58,7 @@
         <div>
           <p>
             <%= form.label "Dependencia estudiantil", style: "display: block" %>
-            <%= form.select :student_assosiation, options_for_select(@dictionary.studentAssociations.invert().each()), {}, class: "form-select" %>
+            <%= form.select :student_association, options_for_select(@dictionary.studentAssociations.invert.each), {}, class: "form-select" %>
           </p>
         </div>
       </div>
