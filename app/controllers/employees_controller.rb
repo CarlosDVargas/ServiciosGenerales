@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# EmployeesController
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[show edit update destroy]
   before_action :set_user_account, only: %i[show edit update destroy]
@@ -28,6 +29,7 @@ class EmployeesController < ApplicationController
   def edit; end
 
   # POST /employees or /employees.json
+  # @return [Object] Employee
   def create
     @employee = Employee.new(employee_params)
     create_user
@@ -44,6 +46,7 @@ class EmployeesController < ApplicationController
   end
 
   # PATCH/PUT /employees/1 or /employees/1.json
+  # @return [Object] Employee
   def update
     respond_to do |format|
       if @employee.update(employee_params)
@@ -72,9 +75,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # Falta documentación
-  def status_filter; end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -82,6 +82,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
   end
 
+  # Set the user account for the employee
   def set_user_account
     @user_account = @employee.user_account
   end
@@ -91,8 +92,8 @@ class EmployeesController < ApplicationController
     params.require(:employee).permit(:employee_id_card, :employee_status, user_account_attributes: %i[id name email])
   end
 
+  # Create the user account for the employee recently created
   def create_user
-    byebug
     @user = UserAccount.new
     @user.email = params[:employee][:user_account_attributes][:email]
     @user.password = "Contra#{@employee.employee_id_card}"
