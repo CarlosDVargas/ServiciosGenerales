@@ -27,9 +27,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
   end
 
   create_table "log_entries", force: :cascade do |t|
-    t.integer "user_account_id"
-    t.string "entry_message"
-    t.integer "request_id"
+    t.integer "user_account_id", null: false
+    t.string "entry_message", null: false
+    t.integer "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,19 +43,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.string "requester_name"
-    t.string "requester_extension"
-    t.string "requester_phone"
-    t.string "requester_id"
-    t.string "requester_mail"
-    t.string "requester_type"
+    t.string "requester_name", null: false
+    t.string "requester_extension", null: false
+    t.string "requester_phone", null: false
+    t.string "requester_id", null: false
+    t.string "requester_mail", null: false
+    t.string "requester_type", null: false
     t.string "student_id"
-    t.string "student_assosiation"
-    t.string "work_location"
-    t.string "work_building"
-    t.string "work_type"
-    t.text "work_description"
-    t.string "status"
+    t.string "student_association"
+    t.string "work_location", null: false
+    t.string "work_building", null: false
+    t.string "work_type", null: false
+    t.text "work_description", null: false
+    t.string "status", default: "pending", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
