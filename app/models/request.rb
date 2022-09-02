@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Request < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   before_save { self.requester_mail = requester_mail.downcase }
@@ -17,7 +19,9 @@ class Request < ApplicationRecord
   has_many :employees, through: :tasks
 
   has_many :request_deny_reasons
-  accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr| attr["description"].blank? }
+  accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr|
+                                                                                         attr['description'].blank?
+                                                                                       }
 
   has_one :feedback, dependent: :destroy
 

@@ -7,5 +7,8 @@ class CreateLogEntries < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_foreign_key :log_entries, :user_accounts
+    add_foreign_key :log_entries, :requests
   end
 end
