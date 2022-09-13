@@ -38,6 +38,11 @@ class TasksController < ApplicationController
       LogEntry.create(user_account: current_user_account, request: @request,
                       entry_message: "Asignó a #{@employee.user_account.name} a la solicitud")
     end
+    if @request.status == 'pending'
+      @request.update(status: 'in_process')
+    end
+    @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
+                                 entry_message: 'Cambió el estado de la solicitud a en proceso')
     redirect_to requests_path
   end
 
@@ -109,7 +114,7 @@ class TasksController < ApplicationController
 
   # Take all the employees from the Employee table
   def set_employees
-    @employees = Employee.all
+    @employees = Employee.where(employee_type: 'Trabajador')
   end
 
   # Take the employees from the Employee table depending the ids from employees to add
