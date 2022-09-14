@@ -7,6 +7,7 @@
         <div class="col">
           <%= f.label :employee_status, 'Estado' %>
           <%= f.select :employee_status_eq, options_for_select(Employee.all.employee_statuses), {include_blank: "Seleccione el estado a buscar"}, class: "form-select" %>
+          <% f.text_field :employee_type_eq, value: @type %>
         </div>
         <div class="col">
           <br>

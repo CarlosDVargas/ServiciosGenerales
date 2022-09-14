@@ -4,10 +4,17 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[show edit update destroy]
   before_action :set_user_account, only: %i[show edit update destroy]
+  before_action :type_params, only: %i[new create index]
 
   # GET /employees or /employees.json
   def index
-    @query = Employee.ransack(params[:q])
+    @type ||= params[:q][:employee_type_eq]
+    @employees_selected = if @type == 'worker'
+                            Employee.where(employee_type: 'Trabajador')
+                          else
+                            Employee.where(employee_type: 'Administrador')
+                          end
+    @query = @employees_selected.ransack(params[:q])
     @employees = @query.result
   end
 
@@ -23,6 +30,11 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     @employee.build_user_account
+    @employee.employee_type = if @type == 'worker'
+                                'Trabajador'
+                              else
+                                'Administrador'
+                              end
   end
 
   # GET /employees/1/edit
@@ -31,11 +43,13 @@ class EmployeesController < ApplicationController
   # POST /employees or /employees.json
   # @return [Object] Employee
   def create
+    byebug
     @employee = Employee.new(employee_params)
     create_user
     respond_to do |format|
-      if @employee.save && @user.save
-        @user.update(employee_id: @employee.id)
+      if @employee.save
+        @user.employee = @employee
+        @user.save
         format.html { redirect_to employee_url(@employee), notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
@@ -87,9 +101,15 @@ class EmployeesController < ApplicationController
     @user_account = @employee.user_account
   end
 
+  # Set the type of employee
+  def type_params
+    @type = params[:type]
+  end
+
   # Only allow a list of trusted parameters through.
   def employee_params
-    params.require(:employee).permit(:employee_id_card, :employee_status, user_account_attributes: %i[id name email])
+    params.require(:employee).permit(:employee_id_card, :employee_status, :employee_type,
+                                     user_account_attributes: %i[id name email])
   end
 
   # Create the user account for the employee recently created
@@ -98,6 +118,10 @@ class EmployeesController < ApplicationController
     @user.email = params[:employee][:user_account_attributes][:email]
     @user.password = "Contra#{@employee.employee_id_card}"
     @user.name = params[:employee][:user_account_attributes][:name]
-    @user.role = 'employee'
+    @user.role = if @employee.employee_type == 'Trabajador'
+                   'employee'
+                 else
+                   'admin'
+                 end
   end
 end
