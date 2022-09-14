@@ -2,13 +2,10 @@ class CreateRequestDenyReasons < ActiveRecord::Migration[7.0]
   def change
     create_table :request_deny_reasons do |t|
       t.string :reason, null: false
-      t.integer :user_account_id, null: false
-      t.integer :request_id, null: false
+      t.belongs_to :request, foreign_key: true, index: true, null: false
+      t.belongs_to :user_account, foreign_key: true, index: true, null: false
 
       t.timestamps
     end
-
-    add_foreign_key :request_deny_reasons, :user_accounts
-    add_foreign_key :request_deny_reasons, :requests
   end
 end

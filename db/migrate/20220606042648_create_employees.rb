@@ -7,7 +7,5 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_foreign_key :user_accounts, :employees
-    add_index :employees, :employee_id_card, unique: true
   end
 end

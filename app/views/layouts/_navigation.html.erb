@@ -21,11 +21,20 @@
           <% if current_user_account.role == "admin" %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Empleados
+                Trabajadores
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Agregar", new_employee_path, class: "dropdown-item" %>
-                <%= link_to "Listar", employees_path, class: "dropdown-item" %>
+                <%= link_to "Agregar", new_employee_path(:type => "worker"), class: "dropdown-item" %>
+                <%= link_to "Listar", employees_path(:type => "worker"), class: "dropdown-item" %>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Administradores
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Agregar", new_employee_path(:type => "admin"), class: "dropdown-item" %>
+                <%= link_to "Listar", employees_path(:type => "admin"), class: "dropdown-item" %>
               </div>
             </li>
           <% end %>

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c52d33-d96e-4af7-addd-1046bbbc6582" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8fc9e76-3896-4c79-827a-c19fd099e6b9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a8fc9e76-3896-4c79-827a-c19fd099e6b9.xml" afterDir="false" />
+    <list default="true" id="99c52d33-d96e-4af7-addd-1046bbbc6582" name="Changes" comment="Se realizan cambios generales en la asignación de solicitudes.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8fc9e76-3896-4c79-827a-c19fd099e6b9.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/requests_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/requests_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/tasks_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/tasks_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/employees_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/employees_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/employees/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/employees/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navigation.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220605185655_devise_create_user_accounts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220605185655_devise_create_user_accounts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220606042648_create_employees.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220606042648_create_employees.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220606223216_create_tasks.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220606223216_create_tasks.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220610030227_create_task_observations.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220610030227_create_task_observations.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220610042428_create_request_deny_reasons.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220610042428_create_request_deny_reasons.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220611024844_create_feedbacks.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220611024844_create_feedbacks.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20220803205650_create_log_entries.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20220803205650_create_log_entries.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -508,7 +515,9 @@
       <workItem from="1661638842664" duration="410000" />
       <workItem from="1661887776734" duration="6282000" />
       <workItem from="1662045627278" duration="7663000" />
-      <workItem from="1663082381173" duration="1714000" />
+      <workItem from="1663082381173" duration="4186000" />
+      <workItem from="1663100335915" duration="108000" />
+      <workItem from="1663100455609" duration="12566000" />
     </task>
     <task id="LOCAL-00001" summary="Se realizan cambios menores">
       <created>1661049773799</created>
@@ -552,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661893278292</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se realizan cambios generales en la asignación de solicitudes.">
+      <created>1663085934933</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1663085934933</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +626,8 @@
     <MESSAGE value="Se realizan cambios generales en los controladores cumpliendo los estándares utilizados para Rails." />
     <MESSAGE value="Se hacen correciones en la edición de empleados" />
     <MESSAGE value="Se hacen correcciones en la DB, corrigiendo valores nulleables." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se hacen correcciones en la DB, corrigiendo valores nulleables." />
+    <MESSAGE value="Se realizan cambios generales en la asignación de solicitudes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se realizan cambios generales en la asignación de solicitudes." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ServiciosGenerales@test_should_get_new.rcov" NAME="test_should_get_new Coverage Results" MODIFIED="1661104286388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
@@ -621,7 +638,7 @@
     <SUITE FILE_PATH="coverage/ServiciosGenerales@tasks_controller_test_rb.rcov" NAME="tasks_controller_test.rb Coverage Results" MODIFIED="1661103071339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
     <SUITE FILE_PATH="coverage/ServiciosGenerales@EmployeesControllerTest.rcov" NAME="EmployeesControllerTest Coverage Results" MODIFIED="1661103836058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
     <SUITE FILE_PATH="coverage/ServiciosGenerales@test__ServiciosGenerales.rcov" NAME="test: ServiciosGenerales Coverage Results" MODIFIED="1661102329220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
-    <SUITE FILE_PATH="coverage/ServiciosGenerales@Development__ServiciosGenerales.rcov" NAME="Development: ServiciosGenerales Coverage Results" MODIFIED="1663082425232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
+    <SUITE FILE_PATH="coverage/ServiciosGenerales@Development__ServiciosGenerales.rcov" NAME="Development: ServiciosGenerales Coverage Results" MODIFIED="1663101857032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
     <SUITE FILE_PATH="coverage/ServiciosGenerales@employees_controller_test_rb.rcov" NAME="employees_controller_test.rb Coverage Results" MODIFIED="1661104393047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
     <SUITE FILE_PATH="coverage/ServiciosGenerales@All_tests_in_ServiciosGenerales__ServiciosGenerales.rcov" NAME="All tests in ServiciosGenerales: ServiciosGenerales Coverage Results" MODIFIED="1660257204626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
     <SUITE FILE_PATH="coverage/ServiciosGenerales@TasksControllerTest.rcov" NAME="TasksControllerTest Coverage Results" MODIFIED="1661103847121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ServiciosGenerales" />
