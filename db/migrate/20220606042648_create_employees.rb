@@ -7,5 +7,9 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
+    change_table :user_accounts do |t|
+      t.belongs_to :employee, foreign_key: true, index: true, null: false
+    end
+
   end
 end
