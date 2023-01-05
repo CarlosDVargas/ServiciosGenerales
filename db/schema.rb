@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_040023) do
+  create_table "campus", force: :cascade do |t|
+    t.string "campus_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "employee_id_card", null: false
     t.integer "employee_status", null: false
     t.integer "employee_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "campus_id"
+    t.index ["campus_id"], name: "index_employees_on_campus_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -64,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
     t.string "status", default: "pending", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "campus_id"
+    t.index ["campus_id"], name: "index_requests_on_campus_id"
   end
 
   create_table "task_observations", force: :cascade do |t|
@@ -97,19 +108,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_205650) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.integer "role", default: 0, null: false
-    t.integer "employee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "employee_id", null: false
     t.index ["email"], name: "index_user_accounts_on_email", unique: true
     t.index ["employee_id"], name: "index_user_accounts_on_employee_id"
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "employees", "campus", column: "campus_id"
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "log_entries", "requests"
   add_foreign_key "log_entries", "user_accounts"
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
+  add_foreign_key "requests", "campus", column: "campus_id"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts"
   add_foreign_key "tasks", "employees"
