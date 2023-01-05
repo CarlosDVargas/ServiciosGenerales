@@ -19,6 +19,12 @@
     </div>
     <div>
       <p>
+        <%= form.label "Sede", style: "display: block" %>
+        <%= form.select :campus_id, @campuses_list.all.collect{|c| [c.name, c.id]}, {}, class: "form-select" %>
+      </p>
+    </div>
+    <div>
+      <p>
         <%= form.label "Extensión telefónica", style: "display: block" %>
         <%= form.text_field :requester_extension, class: "form-control" %>
       </p>

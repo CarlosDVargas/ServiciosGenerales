@@ -2,12 +2,14 @@
 
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[show edit update destroy change_status]
+  before_action :set_campuses_list, only: %i[new create]
   before_action :set_dictionary, only: %i[new show edit update index create search]
   before_action :set_status, only: %i[show]
 
   # GET /requests or /requests.json
   def index
-    @queries = Request.ransack(params[:q])
+    @requests = Request.where(campus: current_user_account.employee.campus)
+    @queries = @requests.ransack(params[:q])
     @requests = @queries.result
     @status = params[:status] if params[:status]
     unless params[:q].present?
@@ -37,7 +39,9 @@ class RequestsController < ApplicationController
   # POST /requests or /requests.json
   def create
     @request = Request.new(request_params)
+    campus = params[:request][:campus_id]
     @request.status = 'pending'
+    @request.campus = Campus.find(campus)
     respond_to do |format|
       if @request.save
         format.html { redirect_to request_url(@request), notice: 'La solicitud fue creada correctamente.' }
@@ -127,7 +131,7 @@ class RequestsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def request_params
     params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id,
-                                    :requester_mail, :requester_type, :student_id, :student_association,
+                                    :requester_mail, :requester_type, :student_id, :student_association, :campus_id,
                                     :work_location, :work_building, :work_type, :work_description, :status,
                                     :task_id, :change_to,
                                     request_deny_reasons: %i[_destroy description request_id user_id])
@@ -136,6 +140,11 @@ class RequestsController < ApplicationController
   # Initializes the dictionary with the default values
   def set_dictionary
     @dictionary = Dictionary.new
+  end
+
+  # Initializes the list of campuses
+  def set_campuses_list
+    @campuses_list = Campus.all
   end
 
   # Initializes the status of a request
@@ -160,17 +169,18 @@ class RequestsController < ApplicationController
 
       # Case for the admin
     else
+      requests = Request.where(campus: current_user_account.employee.campus)
       @requests = case @status
                   when 'in_process'
-                    find_requests(Request.all, 'in_process')
+                    find_requests(requests, 'in_process')
                   when 'completed'
-                    find_requests(Request.all, 'completed')
+                    find_requests(requests, 'completed')
                   when 'closed'
-                    find_requests(Request.all, 'closed')
+                    find_requests(requests, 'closed')
                   when 'denied'
-                    find_requests(Request.all, 'denied')
+                    find_requests(requests, 'denied')
                   else
-                    find_requests(Request.all, 'pending')
+                    find_requests(requests, 'pending')
                   end
     end
   end

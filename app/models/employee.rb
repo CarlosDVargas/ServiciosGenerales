@@ -10,7 +10,7 @@ class Employee < ApplicationRecord
 
   has_many :tasks
   has_many :requests, through: :tasks
-
+  belongs_to :campus
   enum employee_status: { "Activo": 1, "Inactivo": 0 }
   enum employee_type: { "Trabajador": 0, "Administrador": 1 }
 end

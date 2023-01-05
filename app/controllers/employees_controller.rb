@@ -8,13 +8,14 @@ class EmployeesController < ApplicationController
 
   # GET /employees or /employees.json
   def index
+    @employees = Employee.where(campus: current_user_account.employee.campus)
     @type ||= params[:q][:employee_type_eq]
     @employees_selected = if @type == 'worker'
-                            Employee.where(employee_type: 'Trabajador')
+                            @employees.where(employee_type: 'Trabajador')
                           else
-                            Employee.where(employee_type: 'Administrador')
+                            @employees.where(employee_type: 'Administrador')
                           end
-    @query = @employees_selected.ransack(params[:q])
+    @query = @employees.ransack(params[:q])
     @employees = @query.result
   end
 
@@ -43,8 +44,9 @@ class EmployeesController < ApplicationController
   # POST /employees or /employees.json
   # @return [Object] Employee
   def create
-    byebug
     @employee = Employee.new(employee_params)
+    campus = current_user_account.employee.campus
+    @employee.campus = campus
     create_user
     respond_to do |format|
       if @employee.save

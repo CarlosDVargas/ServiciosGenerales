@@ -7,19 +7,22 @@
         <strong>Nombre completo:</strong>
         <%= employee.user_account.name %>
       </p>
-    </div>
-    <div>
       <p>
         <strong>Número de cédula:</strong>
         <%= employee.employee_id_card %>
-    <p>
-      <strong>Email:</strong>
-      <%= employee.user_account.email %>
-    </p>
-    <p>
-      <strong>Employee status:</strong>
-      <%= employee.employee_status %>
-    </p>
+      </p>
+      <p>
+        <strong>Email:</strong>
+        <%= employee.user_account.email %>
+      </p>
+      <p>
+        <strong>Estado:</strong>
+        <%= employee.employee_status %>
+      </p>
+      <p>
+        <strong>Sede de trabajo:</strong>
+        <%= employee.campus.name %>
+      </p>
+    </div>
   </div>
-</div>
 </div>

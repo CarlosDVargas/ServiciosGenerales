@@ -17,6 +17,7 @@ class Request < ApplicationRecord
 
   has_many :tasks
   has_many :employees, through: :tasks
+  belongs_to :campus
 
   has_many :request_deny_reasons
   accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr|
