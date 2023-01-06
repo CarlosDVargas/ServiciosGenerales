@@ -22,4 +22,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  database: railwayapp_production
+  username: railwayapp
+  password: <%= ENV['RAILWAYAPP_DATABASE_PASSWORD'] %>
