@@ -42,6 +42,8 @@ class RequestsController < ApplicationController
     campus = params[:request][:campus_id]
     @request.status = 'pending'
     @request.campus = Campus.find(campus)
+    date = Time.now.strftime("%d%m%Y")
+    @request.identifier = "#{@request.campus.campus_id}-#{date}-#{rand.to_s[2..6]}"
     respond_to do |format|
       if @request.save
         RequestMailer.new_request(@request).deliver_later
@@ -112,8 +114,9 @@ class RequestsController < ApplicationController
 
   # Falta documentación
   def search_state
-    if params[:session][:request_number] && params[:session][:requester_email]
-      @request = Request.where(id: params[:session][:request_number].to_i,
+
+    if params[:session][:identifier] && params[:session][:requester_email]
+      @request = Request.where(identifier: params[:session][:identifier],
                                requester_mail: params[:session][:requester_email]).first
     end
     if !@request.nil?
@@ -133,7 +136,7 @@ class RequestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def request_params
-    params.require(:request).permit(:requester_name, :requester_extension, :requester_phone, :requester_id,
+    params.require(:request).permit(:idenfifier, :requester_name, :requester_extension, :requester_phone, :requester_id,
                                     :requester_mail, :requester_type, :student_id, :student_association, :campus_id,
                                     :work_location, :work_building, :work_type, :work_description, :status,
                                     :task_id, :change_to,

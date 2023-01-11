@@ -6,12 +6,16 @@
       <% when "completed" %> Solicitud Finalizada
       <% when "closed" %> Solicitud Cerrada
       <% when "denied" %> Solicitud Rechazada
-      <% else %> Solicitud Pendiente
+      <% else %> Solicitud Pendiente de Revisión
       <% end %>
     </h3>
   </div>
   <div class="row">
     <div class="container p-3">
+      <p>
+        <strong>Solicitud:</strong>
+        <%= @request.identifier %>
+      </p>
       <p>
         <strong>Sede:</strong>
         <%= request.campus.name %>

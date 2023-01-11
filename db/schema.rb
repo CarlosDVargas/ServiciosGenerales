@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_040023) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
   create_table "campus", force: :cascade do |t|
     t.string "campus_id", null: false
     t.string "name", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_040023) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "campus_id"
+    t.string "identifier", null: false
     t.index ["campus_id"], name: "index_requests_on_campus_id"
   end
 
