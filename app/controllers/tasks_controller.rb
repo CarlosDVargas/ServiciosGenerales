@@ -26,6 +26,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
+    byebug
     set_employees_for_create
     @request = if params[:task].present?
                  Request.find(params[:task][:request_id])
@@ -39,6 +40,7 @@ class TasksController < ApplicationController
                       entry_message: "Asignó a #{@employee.user_account.name} a la solicitud")
     end
     if @request.status == 'pending'
+      RequestMailer.request_accepted(@request).deliver_later
       @request.update(status: 'in_process')
     end
     @log_entry = LogEntry.create(user_account: current_user_account, request: @request,

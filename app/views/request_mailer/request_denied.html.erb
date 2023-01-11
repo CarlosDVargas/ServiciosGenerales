@@ -1,0 +1,19 @@
+<h1>Solicitud rechazada</h1>
+
+<p>
+  Este correo fue generado por el Sistema de Servicios Generales para indicar que su solicud fue rechazada.
+</p>
+<p>
+  Las razones por las que fue rechazada son las siguientes:
+</p>
+<ul>
+  <% @deny_reasons.each do |dr|%>
+    <li><%= dr.reason %></li>
+  <% end %>
+</ul>
+<p>
+  Si cree que esto es un error, por favor comuníquese con el administrador del sistema.
+</p>
+<p>
+  Para observar más información ingrese al siguiente enlace: <%=request_url(@request) %>
+</p>

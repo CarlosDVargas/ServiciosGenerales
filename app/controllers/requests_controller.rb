@@ -44,6 +44,7 @@ class RequestsController < ApplicationController
     @request.campus = Campus.find(campus)
     respond_to do |format|
       if @request.save
+        RequestMailer.new_request(@request).deliver_later
         format.html { redirect_to request_url(@request), notice: 'La solicitud fue creada correctamente.' }
         format.json { render :show, status: :created, location: @request }
       else
@@ -65,6 +66,7 @@ class RequestsController < ApplicationController
         @request.update(status: 'denied')
         @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
                                      entry_message: 'Denegó la solicitud')
+        RequestMailer.request_denied(@request).deliver_later
         format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
         format.json { head :no_content }
       else
@@ -92,6 +94,7 @@ class RequestsController < ApplicationController
         @request.update(status: 'closed')
         @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
                                      entry_message: 'Cambió el estado de la solicitud a cerrada')
+        RequestMailer.request_completed(@request).deliver_now
       else
         reset_tasks
         @request.update(status: 'in_process')
