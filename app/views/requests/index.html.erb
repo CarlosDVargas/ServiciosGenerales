@@ -19,7 +19,7 @@
         <table class="table table-hover table-sm">
           <thead>
           <tr>
-            <th class="table-header text-center" scope="col">Consecutivo</th>
+            <th class="table-header text-center" scope="col">Solicitud</th>
             <th class="table-header text-center" scope="col">Fecha solicitud</th>
             <th class="table-header text-center" scope="col">Edificio</th>
             <th class="table-header text-center" scope="col">Sitio</th>
@@ -30,7 +30,7 @@
           <tbody>
           <% @requests.each do |request| %>
             <tr>
-              <td class="text-center" scope="row"><%= request.id %></td>
+              <td class="text-center"><%= request.identifier %></td>
               <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
               <td class="text-center">
                 <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
