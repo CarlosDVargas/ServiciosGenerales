@@ -26,7 +26,6 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    byebug
     set_employees_for_create
     @request = if params[:task].present?
                  Request.find(params[:task][:request_id])
