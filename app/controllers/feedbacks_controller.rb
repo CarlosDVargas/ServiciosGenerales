@@ -27,7 +27,7 @@ class FeedbacksController < ApplicationController
     @request = @feedback.request
     respond_to do |format|
       if @feedback.save
-        RequestMailer.feedback_sent(@request).deliver_now
+        RequestMailer.feedback_sent(@request).deliver_later
         format.html { redirect_to root_path, notice: 'Feedback enviado.' }
         format.json { render :show, status: :created, location: @feedback }
       else
