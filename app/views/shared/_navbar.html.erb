@@ -1,0 +1,97 @@
+<header>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logos">
+                    <%= image_tag('firma-ucr-c.svg', alt: 'Logo UCR', class: 'logo') %>
+                    <%= image_tag('firma-osg.svg', alt: 'Logo OSG', class: 'logo') %>
+                </div>
+                <div class="login-btn">
+                    <%# <a href="login.html" class="btn-default btn-light">Iniciar sesión</a> %>
+                    <% if current_user_account %>
+                        <%= button_to destroy_user_account_session_path, class: "btn-default btn-logout", method: :delete do %>
+                            Cerrar sesión
+                        <% end %>
+                    <% else %>
+                        <%= link_to new_user_account_session_path, class: "btn-default btn-light" do %>
+                            Iniciar sesión
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if current_user_account %>
+        <div class="header-nav">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <%= link_to '#', class: "navbar-brand fs-sm", id: "logo", rel: "prev" do %>
+                        <i class="bi bi-person"></i> &nbsp;
+                        <%= current_user_account.name %>
+                    <% end %>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <span class="vt-divider mx-2">|</span>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav navbar">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Solicitudes
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <%= link_to "Listar", requests_path, class: "dropdown-item" %>
+                                <% if current_user_account.role == "admin" %>
+                                    <%= link_to "Reportes", reports_path, method: "search", class: "dropdown-item" %>
+                                <% end %>
+                                </div>
+                            </li>
+
+                            <span class="vt-divider mx-2">|</span>
+                                
+                            <% if current_user_account.role == "admin" %>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Trabajadores
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <%= link_to "Agregar", new_employee_path(:type => "worker"), class: "dropdown-item" %>
+                                        <%= link_to "Listar", employees_path(:type => "worker"), class: "dropdown-item" %>
+                                    </div>
+                                </li>
+
+                                <span class="vt-divider mx-2">|</span>    
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Administradores
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <%= link_to "Agregar", new_employee_path(:type => "admin"), class: "dropdown-item" %>
+                                        <%= link_to "Listar", employees_path(:type => "admin"), class: "dropdown-item" %>
+                                    </div>
+                                </li>
+                            <% end %>
+
+                            <span class="vt-divider mx-2">|</span>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Cuenta
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <%= link_to edit_user_account_registration_path, class: "dropdown-item" do %>
+                                        Administrar cuenta
+                                    <% end %>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    <% end %>
+</header>

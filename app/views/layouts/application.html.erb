@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ServiciosGenerales</title>
+    <title>SO-OSG</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-   
+    <%= favicon_link_tag asset_path('ucr-favicon.ico') %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <%= render "layouts/navigation" %>
-    <%= render "layouts/devise_notifications" %>
-    <%= yield %>
+   <div class="flex-wrapper bg-image" style="background-image: url(<%= asset_path('bg-image.jpg') %>);">  <!-- style="background-image: url(<%= asset_path('bg-image.jpg') %>);" -->
+      <%= render "shared/navbar" %>
+      <!--<%= render "layouts/navigation" %>-->
+      <%= render "layouts/devise_notifications" %>
+      <%= yield %>
+      <%= render "shared/footer" %>
+   </div>
   </body>
 </html>
