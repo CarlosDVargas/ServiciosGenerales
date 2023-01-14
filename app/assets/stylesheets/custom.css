@@ -172,7 +172,8 @@ select {
     color: var(--light-dark);
 }
 
-button {
+button, 
+input[type="submit"] {
     font-size: var(--fw-regular);
     font-family: var(--font-family);
     border: none;
@@ -485,7 +486,7 @@ button {
 }
 
 .bg-mandala {
-    background-image: linear-gradient(to top, transparent 50%, var(--light-gray) 0%), url(../images/bg-form-rotated.png);
+    background-image: linear-gradient(to top, transparent 50%, var(--light-gray) 0%), url(/assets/bg-form-rotated.png);
     background-position: center, bottom;
     background-repeat: repeat, no-repeat;
     background-size: 100%, 100% 44%;
@@ -494,7 +495,7 @@ button {
 
 @media (min-width: 1024px) {
     .bg-mandala {
-        background-image: url(../images/bg-form.svg);
+        background-image: url(/assets/bg-form.svg);
         background-position: right;
         background-repeat: no-repeat;
         background-size: auto;
@@ -689,3 +690,133 @@ button {
         font-size: 4rem;
     }
 }
+
+/*-----------------------
+------- MAIN FORM -------
+-------------------------*/
+.main-form {
+    max-width: 50rem !important;
+    padding: 5rem 4rem !important;
+    text-align: center;
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius-rg);
+    -webkit-border-radius: var(--border-radius-rg);
+    -moz-border-radius: var(--border-radius-rg);
+    -ms-border-radius: var(--border-radius-rg);
+    -o-border-radius: var(--border-radius-rg);
+    box-shadow: var(--box-shadow-sm);
+}
+
+@media (min-width: 1024px) {
+    .main-form {
+        max-width: 140rem;
+        padding: 9rem 15rem !important;
+    }
+
+    .form-pad-lg {
+        padding: 13rem 9rem;
+    }
+
+}
+
+.main-form h1 {
+    line-height: 1.2;
+    font-weight: 900;
+    font-size: 2.5rem;
+    margin-top: 0;
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .main-form {
+        text-align: left;
+    }
+
+    .main-form h1 {
+        text-align: left;
+        font-size: var(--fs-h1);
+    }
+}
+
+.input {
+    text-align: left;
+    padding: 0rem .8rem;
+}
+
+.input input,
+.input select,
+.input textarea {
+    width: 100%;
+    display: block;
+    font-size: 1.6rem;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0 3rem 0;
+    border: 1px solid var(--light-gray);
+    background-color: var(--light-color);
+    border-radius: var(--border-radius-sm);
+    -webkit-border-radius: var(--border-radius-sm);
+    -moz-border-radius: var(--border-radius-sm);
+    -ms-border-radius: var(--border-radius-sm);
+    -o-border-radius: var(--border-radius-sm);
+}
+
+.input textarea {
+    resize: none;
+}
+
+@media (min-width: 1024px) {
+    .input {
+        padding: unset;
+    }
+
+    .input input,
+    .input select {
+        margin: 1rem 0 5rem 0;
+    }  
+}
+
+.form-buttons input[type="submit"] {
+    margin: 1.2rem 0;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .form-buttons {
+        max-width: 35%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .input-50 {
+        width: 50%;
+    }
+
+    .form-buttons {
+        justify-content: flex-start;
+    }
+
+    .form-buttons input[type="submit"] {
+        margin: unset;
+        margin-right: 1.2rem;
+    }
+}
+
+
+/*-------------------
+------- LOGIN -------
+---------------------*/
+.login-links {
+    margin: 2.2rem 0;
+}
+
+.login-links a {
+    color: var(--light-dark) !important;
+}
+
+.login-links a:hover {
+    color: var(--primary-color) !important;
+}
+
+.remember-me {
+    margin-bottom: 1rem;
+}
+

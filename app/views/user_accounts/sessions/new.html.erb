@@ -1,34 +1,32 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h1 class="text-center">Iniciar sesión</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="d-grid gap-2 ">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.text_field :email, class: "form-control" %>
-        </div>
-        <br>
-        <div class="form-group">
-          <%= f.label "Contraseña" %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
-        <br>
+<main class="main">
+  <div class="container main-form form-pad-lg bg-mandala"> <!-- fix bg-mandala -->
+    <h1 class="mb-5">Ingreso al sistema</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form") do |f| %>
+      <div class="input input-50 email">
+        <%= f.label "Correo electrónico" %>
+        <%= f.text_field :email, placeholder: "Correo" %>
+      </div>
+
+      <div class="input input-50 password">
+        <%= f.label "Contraseña" %>
+          <%= f.password_field :password, placeholder: "Contraseña" %>
+      </div>
+
+      <div class="login-links">
         <% if devise_mapping.rememberable? %>
-          <div class="form-group">
+          <div class="remember-me">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me, "Recordarme" %>
           </div>
         <% end %>
-        <br>
-        <div class="form-group">
-          <%= f.submit "Iniciar sesión", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-      <%= render "user_accounts/shared/links" %>
-    </div>
+        <%= render "user_accounts/shared/links" %>
+      </div>
+
+      <div class="button-group form-buttons">
+        <%= f.submit "Iniciar sesión", class: "btn-default btn-submit" %>
+        <%= link_to "Regresar", root_path, class: "btn-default btn-back" %>
+      </div>
+    <% end %>
   </div>
-</div>
+</main>
