@@ -12,22 +12,19 @@
   </head>
 
   <body>
-    <% if !current_user_account %>
-      <div class="flex-wrapper bg-image" style="background-image: url(<%= asset_path('bg-image.jpg') %>);">
-        <%= render "shared/navbar" %>
-        <!--<%= render "layouts/navigation" %>-->
+    <div class="flex-wrapper bg-image" style="background-image: url(<%= asset_path('bg-image.jpg') %>);" id="background">
+      <%= render "shared/navbar" %>
+      <% if notice || alert %>
         <%= render "layouts/devise_notifications" %>
-        <%= yield %>
-        <%= render "shared/footer" %>
-      </div>
-    <% else %>
-      <div class="flex-wrapper bg-image">
-        <%= render "shared/navbar" %>
-        <!--<%= render "layouts/navigation" %>-->
-        <%= render "layouts/devise_notifications" %>
-        <%= yield %>
-        <%= render "shared/footer" %>
-      </div>
-    <% end %>
+      <% end %>
+      <%= yield %>
+      <%= render "shared/footer" %>
+    </div>
+
+    <script>
+      if (window.location.href.charAt(window.location.href.length - 1) !== "/") {
+        document.getElementById("background").style.backgroundImage = "none";
+      }
+    </script>
   </body>
 </html>

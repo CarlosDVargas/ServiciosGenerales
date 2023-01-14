@@ -58,8 +58,8 @@
     --hover-transition: background-color .2s ease;
 
     /* Box shadow */
-    --box-shadow-sm: 0 7px 7px rgba(0, 0, 0, 0.082);
-    --box-shadow-rg: 10px 5px 5px rgba(0, 0, 0, 0.315);
+    --box-shadow-sm: 0 5px 5px rgba(0, 0, 0, 0.100);
+    --box-shadow-rg: 0px 7px 7px rgba(0, 0, 0, 0.300);
 
     /* Blur */
     --blur: blur(2px);
@@ -318,6 +318,10 @@ button {
     justify-content: space-between;
 }
 
+.bg-color {
+    background-color: var(--light-color);
+}
+
 .bg-image {
     background-image: url(../images/bg-image.jpg);
     background-size: cover;
@@ -338,6 +342,14 @@ button {
 
 .main {
     margin: 5rem 1.2rem;
+}
+
+.bottom-shadow-sm {
+    box-shadow: var(--box-shadow-sm);
+}
+
+.bottom-shadow-rg {
+    box-shadow: var(--box-shadow-rg);
 }
 
 .vt-divider {
@@ -433,7 +445,7 @@ button {
     }
 }
 
-.btn-group {
+.button-group {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -441,32 +453,32 @@ button {
 }
 
 @media (min-width: 300px) and (max-width: 400px) {
-    .btn-group {
+    .button-group {
         max-width: 90%;
         margin: 0 auto;
     }
 }
 
 @media (min-width: 400px) and (max-width: 1024px) {
-    .btn-group {
+    .button-group {
         max-width: 60%;
         margin: 0 auto;
     }
 }
 
-.btn-group a:first-child {
+.button-group a:first-child {
     margin-bottom: 2rem;
 }
 
 @media (min-width: 1024px) {
-    .btn-group {
+    .button-group {
         flex-direction: row;
         justify-content: center;
         margin: unset;
         margin-top: var(--element-spacing);
     }
 
-    .btn-group a:first-child {
+    .button-group a:first-child {
         margin-bottom: 0;
         margin-right: 1.5rem;
     }
@@ -624,5 +636,56 @@ button {
 
     .footer-copyright p {
         text-align: right;
+    }
+}
+
+/*-------------------
+------- INDEX -------
+---------------------*/
+.main-homepage {
+    padding: 1rem .7rem 4rem .7rem;
+
+    backdrop-filter: var(--blur);
+    background-color: var(--blur-background);
+    box-shadow: var(--box-shadow-rg);
+    border-radius: var(--border-radius-rg);
+    -webkit-border-radius: var(--border-radius-rg);
+    -moz-border-radius: var(--border-radius-rg);
+    -ms-border-radius: var(--border-radius-rg);
+    -o-border-radius: var(--border-radius-rg);
+}
+
+@media (min-width: 668px) and (max-width: 1024px) {
+    .main-homepage {
+        width: 70%;
+        padding: 5rem 3rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .main-homepage {
+        width: 60% !important;
+        padding: 5rem 7rem;
+    }
+}
+
+.welcome-message h1 {
+    text-align: center;
+    color: var(--light-color);
+    font-weight: 900;
+    line-height: var(--lh-rg);
+    margin: 3rem 0 5rem 0;
+    padding: 0 4rem;
+}
+
+@media (min-width: 768px) {
+    .welcome-message h1 {
+        margin: 0rem 0 5rem 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .welcome-message h1 {
+        font-size: 4rem;
     }
 }
