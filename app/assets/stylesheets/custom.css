@@ -709,7 +709,7 @@ input[type="submit"] {
 
 @media (min-width: 1024px) {
     .main-form {
-        max-width: 140rem;
+        max-width: 130rem !important;
         padding: 9rem 15rem !important;
     }
 
