@@ -710,7 +710,7 @@ input[type="submit"] {
 @media (min-width: 1024px) {
     .main-form {
         max-width: 130rem !important;
-        padding: 9rem 15rem !important;
+        padding: 9rem 10rem !important;
     }
 
     .form-pad-lg {
@@ -792,6 +792,7 @@ input[type="submit"] {
 
     .form-buttons {
         justify-content: flex-start;
+        margin-top: 3rem;
     }
 
     .form-buttons input[type="submit"] {
