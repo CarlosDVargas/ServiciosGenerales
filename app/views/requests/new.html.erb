@@ -1,3 +1,22 @@
-<h1 class="text-center"> Nueva solicitud</h1>
-<%= render "form", request: @request %>
+<main class="main">
+    <div class="container">
+        <% if @request.errors.any? %>
+            <div style="color: red">
+            <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+            <ul>
+                <% @request.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="container main-form">
+        <h1 class="text-center mb-1 uppercase">Nueva solicitud</h1>
+        <hr class="mb-3">
+
+        <%= render "form", request: @request %>
+    </div>
+</main>
 

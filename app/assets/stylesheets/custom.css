@@ -114,28 +114,28 @@ h3 {
 }
 
 h1 {
-    font-size: var(--fs-h1) !important;
+    font-size: var(--fs-h1);
 }
 
 h2 {
-    font-size: var(--fs-h2) !important;
+    font-size: var(--fs-h2);
 }
 
 h3 {
-    font-size: var(--fs-h3) !important;
+    font-size: var(--fs-h3);
 }
 
 @media (min-width: 768px) {
     h1 {
-        font-size: calc(var(--fs-h1) * 1.1) !important;
+        font-size: calc(var(--fs-h1) * 1.3);
     }
 
     h2 {
-        font-size: calc(var(--fs-h2) * 1.2) !important;
+        font-size: calc(var(--fs-h2) * 1.5);
     }
     
     h3 {
-        font-size: calc(var(--fs-h3) * 1.25) !important;
+        font-size: calc(var(--fs-h3) * 1.3);
     }
 }
 
@@ -288,15 +288,15 @@ input[type="submit"] {
 }
 
 .fs-sm {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
 }
 
 .fs-rg {
-    font-size: 1.8rem !important;
+    font-size: 1.8rem;
 }
 
 .fs-lg {
-    font-size: 2.4rem !important;
+    font-size: 2.4rem;
 }
 
 @media (min-width: 768px) {
@@ -727,6 +727,22 @@ input[type="submit"] {
     text-align: center;
 }
 
+.main-form h2 {
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+.main-form h3 {
+    line-height: 1.2;
+    font-size: 1.8rem;
+}
+
+.main-form input, 
+.main-form label,
+.main-form p {
+    font-size: 1.6rem;
+}
+
 @media (min-width: 1024px) {
     .main-form {
         text-align: left;
@@ -735,6 +751,20 @@ input[type="submit"] {
     .main-form h1 {
         text-align: left;
         font-size: var(--fs-h1);
+    }
+
+    .main-form h2 {
+        font-size: var(--fs-h2);
+    }
+    
+    .main-form h3 {
+        font-size: var(--fs-h3);
+    }
+
+    .main-form input,
+    .main-form label,
+    .main-form p {
+        font-size: var(--fs-rg);
     }
 }
 
@@ -819,5 +849,56 @@ input[type="submit"] {
 
 .remember-me {
     margin-bottom: 1rem;
+}
+
+/*---------------------
+------- REQUEST -------
+-----------------------*/
+@media (min-width: 768px) and (max-width: 1024px) {
+    .form-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: .5rem;
+    }
+
+    .form-grid-2 .input:nth-child(3) {
+        grid-column: 1 / 4;
+    }
+}
+
+@media (min-width: 1024px) {
+    .form-grid-1 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+
+    .form-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2rem;
+    }
+
+    .form-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+
+    .form-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+
+    .form-grid-5 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+
+    .form-grid-5 .input:nth-child(3) {
+        grid-column: 1 / 4;
+    }
 }
 

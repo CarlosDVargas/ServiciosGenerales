@@ -9,7 +9,7 @@
                 <div class="login-btn">
                     <%# <a href="login.html" class="btn-default btn-light">Iniciar sesión</a> %>
                     <% if current_user_account %>
-                        <%= button_to destroy_user_account_session_path, class: "btn-default btn-logout", method: :delete do %>
+                        <%= button_to destroy_user_account_session_path, :method => "delete", data: { 'turbo-method': :delete, 'turbo-confirm': '¿Estás seguro(a) que deseas salir?' }, :class => "btn-default btn-logout" do %>
                             Cerrar sesión
                         <% end %>
                     <% else %>
