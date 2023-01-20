@@ -10,8 +10,6 @@ class Request < ApplicationRecord
   validates :requester_mail, presence: true,
                              format: { with: VALID_EMAIL_REGEX }
   validates :requester_type, presence: true
-  validates :work_building, presence: true
-  validates :work_location, presence: true
   validates :work_type, presence: true
   validates :work_description, presence: true
 
@@ -23,6 +21,8 @@ class Request < ApplicationRecord
   accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr|
                                                                                          attr['description'].blank?
                                                                                        }
+  belongs_to :work_location
+  accepts_nested_attributes_for :work_location
 
   has_one :feedback, dependent: :destroy
 

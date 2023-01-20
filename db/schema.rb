@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_050520) do
   create_table "campus", force: :cascade do |t|
     t.string "campus_id", null: false
     t.string "name", null: false
@@ -66,8 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
     t.string "requester_type", null: false
     t.string "student_id"
     t.string "student_association"
-    t.string "work_location", null: false
-    t.string "work_building", null: false
     t.string "work_type", null: false
     t.text "work_description", null: false
     t.string "status", default: "pending", null: false
@@ -75,7 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
     t.datetime "updated_at", null: false
     t.integer "campus_id"
     t.string "identifier", null: false
+    t.integer "work_location_id"
     t.index ["campus_id"], name: "index_requests_on_campus_id"
+    t.index ["work_location_id"], name: "index_requests_on_work_location_id"
   end
 
   create_table "task_observations", force: :cascade do |t|
@@ -117,6 +117,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "work_buildings", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "campus_id"
+    t.index ["campus_id"], name: "index_work_buildings_on_campus_id"
+  end
+
+  create_table "work_locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "work_building_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["work_building_id"], name: "index_work_locations_on_work_building_id"
+  end
+
   add_foreign_key "employees", "campus", column: "campus_id"
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "log_entries", "requests"
@@ -124,9 +140,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_231306) do
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
   add_foreign_key "requests", "campus", column: "campus_id"
+  add_foreign_key "requests", "work_locations"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts"
   add_foreign_key "tasks", "employees"
   add_foreign_key "tasks", "requests"
   add_foreign_key "user_accounts", "employees"
+  add_foreign_key "work_buildings", "campus", column: "campus_id"
+  add_foreign_key "work_locations", "work_buildings"
 end

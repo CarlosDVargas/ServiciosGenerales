@@ -57,15 +57,11 @@
         <% end %>
         <p>
           <strong>Edificio:</strong>
-          <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
-            <%= @dictionary.workBuildings[request.work_building.to_sym] %>
-          <% else %>
-            <%= request.work_building %>
-          <% end %>
+          <%= request.work_location.work_building.name %>
         </p>
         <p>
           <strong>Lugar del trabajo a realizar:</strong>
-          <%= request.work_location %>
+          <%= request.work_location.name %>
         </p>
         <p>
           <strong>Tipo de trabajo a realizar:</strong>

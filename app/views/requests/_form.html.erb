@@ -20,7 +20,7 @@
     <div>
       <p>
         <%= form.label "Sede", style: "display: block" %>
-        <%= form.select :campus_id, @campuses_list.all.collect{|c| [c.name, c.id]}, {}, class: "form-select" %>
+        <%= form.select :campus_id, @campuses_list.all.collect { |c| [c.name, c.id] }, {}, class: "form-select" %>
       </p>
     </div>
     <div>
@@ -72,22 +72,17 @@
   </div>
   <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
     <p>Información del trabajo a solicitud</p>
-    <div data-controller="select" data-select-hidden-class="hidden">
-      <%= form.label "Zona", style: "display: block" %>
-      <div class="grid-container">
-        <div class="grid-item">
-          <%= form.select :work_building, options_for_select(@dictionary.workBuildings.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
-        </div>
-        <div class="grid-item mt-2" id="work_building" data-select-target="hidden">
-          <%= form.text_field :work_building, id: "work-building-field", data: { select_target: "field" }, class: "form-control" %>
-        </div>
+    <div data-controller="dropdown">
+      <div>
+        <p>
+          <%= form.label "Edificio", style: "display: block" %>
+          <%= form.select :work_building, "", {}, data: { action: "dropdown#workBuilding" }, class: "form-select" %>
+        </p>
+        <p>
+          <%= form.label "Locación", style: "display: block" %>
+          <%= form.select :work_location, "", {}, class: "form-select" %>
+        </p>
       </div>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Lugar", style: "display: block" %>
-        <%= form.text_field :work_location, class: "form-control" %>
-      </p>
     </div>
     <div data-controller="select" data-select-hidden-class="hidden">
       <%= form.label "Tipo de trabajo", style: "display: block" %>

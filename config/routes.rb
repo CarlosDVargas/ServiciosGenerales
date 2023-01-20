@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/request_work_buildings', to: 'requests#work_buildings'
+
   get 'reports', to: 'requests#reports'
   get 'ask_state', to: 'requests#ask_state'
   post 'ask_state', to: 'requests#search_state'

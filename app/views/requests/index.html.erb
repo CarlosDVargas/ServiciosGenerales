@@ -32,13 +32,8 @@
             <tr>
               <td class="text-center"><%= request.identifier %></td>
               <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-              <td class="text-center">
-                <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
-                  <%= @dictionary.workBuildings[request.work_building.to_sym] %>
-                <% else %>
-                  <%= request.work_building %>
-                <% end %></td>
-              <td class="text-center"><%= request.work_location %></td>
+              <td class="text-center"><%= request.work_location.work_building.name %></td>
+              <td class="text-center"><%= request.work_location.name %></td>
               <td class="text-center"><%= request.requester_name %></td>
               <td class="text-center">
                 <div class="btn-group">

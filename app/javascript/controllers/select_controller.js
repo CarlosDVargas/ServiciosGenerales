@@ -5,7 +5,7 @@ export default class extends Controller {
     static classes = ["hidden"];
 
     connect() {
-        console.log("connect");
+        console.log("connect select");
         var option = document.createElement("option");
         option.text = "Seleccione una opción";
         option.selected = true;

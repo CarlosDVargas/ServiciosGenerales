@@ -12,10 +12,10 @@ class RequestsController < ApplicationController
     @queries = @requests.ransack(params[:q])
     @requests = @queries.result
     @status = params[:status] if params[:status]
-    unless params[:q].present?
-      set_status
-      set_requests
-    end
+    return if params[:q].present?
+
+    set_status
+    set_requests
   end
 
   def search
@@ -38,12 +38,15 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
+    byebug
     @request = Request.new(request_params)
     campus = params[:request][:campus_id]
     @request.status = 'pending'
     @request.campus = Campus.find(campus)
-    date = Time.now.strftime("%d%m%Y")
+    date = Time.now.strftime('%d%m%Y')
     @request.identifier = "#{@request.campus.campus_id}-#{date}-#{rand.to_s[2..6]}"
+    work_location = params[:request][:work_location].to_i
+    @request.work_location = WorkLocation.find(work_location)
     respond_to do |format|
       if @request.save
         RequestMailer.new_request(@request).deliver_later
@@ -114,7 +117,6 @@ class RequestsController < ApplicationController
 
   # Falta documentación
   def search_state
-
     if params[:session][:identifier] && params[:session][:requester_email]
       @request = Request.where(identifier: params[:session][:identifier],
                                requester_mail: params[:session][:requester_email]).first
@@ -127,7 +129,9 @@ class RequestsController < ApplicationController
     end
   end
 
-  private
+  def work_buildings
+    render json: WorkBuilding.all.to_json(include: :work_locations)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_request
@@ -138,7 +142,7 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:idenfifier, :requester_name, :requester_extension, :requester_phone, :requester_id,
                                     :requester_mail, :requester_type, :student_id, :student_association, :campus_id,
-                                    :work_location, :work_building, :work_type, :work_description, :status,
+                                    :work_location_id, :work_building_id, :work_type, :work_description, :status,
                                     :task_id, :change_to,
                                     request_deny_reasons: %i[_destroy description request_id user_id])
   end
