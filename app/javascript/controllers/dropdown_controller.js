@@ -36,7 +36,7 @@ export default class extends Controller {
 
     createOptionsFor(id, data, name = "name") {
         const dropdown = document.getElementById(id);
-        dropdown.innerHTML = `<option value="">Seleccione una opción</option>`;
+        dropdown.innerHTML = `<option disabled selected value="">Seleccione una opción</option>`;
         data.forEach(item => {
             const option = document.createElement("option");
             option.value = item.id;

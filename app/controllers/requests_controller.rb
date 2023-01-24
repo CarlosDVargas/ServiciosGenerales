@@ -131,7 +131,8 @@ class RequestsController < ApplicationController
   end
 
   def work_buildings
-    render json: WorkBuilding.all.to_json(include: :work_locations)
+    work_buildings = WorkBuilding.all.order(name: :asc)
+    render json: work_buildings.to_json(include: :work_locations)
   end
 
   # Use callbacks to share common setup or constraints between actions.
