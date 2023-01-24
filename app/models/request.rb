@@ -10,6 +10,7 @@ class Request < ApplicationRecord
   validates :requester_mail, presence: true,
                              format: { with: VALID_EMAIL_REGEX }
   validates :requester_type, presence: true
+  validates :work_location_id, presence: true
   validates :work_type, presence: true
   validates :work_description, presence: true
 

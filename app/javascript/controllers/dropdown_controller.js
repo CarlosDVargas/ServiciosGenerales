@@ -6,19 +6,21 @@ export default class extends Controller {
 
     connect() {
         this.fetchData("request_work_building");
+        this.resetOptionsFor("request_work_location_id");
     }
 
     workBuilding(event) {
+        console.log(event.target.selectedIndex);
         const select = event.target;
         this.selectedWorkBuilding = select.options[select.selectedIndex].text;
         if (select.selectedIndex !== 0) {
-            this.removeOptionsFor("request_work_location")
+            this.removeOptionsFor("request_work_location_id")
             const workLocations = this.workBuildings[select.selectedIndex - 1].work_locations;
             if (workLocations != null && workLocations.length > 0) {
-                this.createOptionsFor("request_work_location", workLocations);
-            } else {
-
+                this.createOptionsFor("request_work_location_id", workLocations);
             }
+        } else {
+            this.resetOptionsFor("request_work_location_id");
         }
     }
 
@@ -49,5 +51,16 @@ export default class extends Controller {
         for (i = L; i >= 0; i--) {
             dropdown.remove(i);
         }
+        const option = document.createElement("option");
+        option.text = "Seleccione una opción";
+        option.selected = true;
+        option.disabled = true;
+        option.value = "0";
+        dropdown.add(option);
+    }
+
+    resetOptionsFor(id) {
+        const dropdown = document.getElementById(id)
+        dropdown.innerHTML = `<option value="0">Seleccione un edificio primero</option>`;
     }
 }
