@@ -34,8 +34,11 @@
 
     <div id="requests" class="request-table">
       <% if @requests %>
-        <h3 class="filters-title fw-bold py-4 my-4 fs-rg">Resultados: <span><%= @requests.size %></span></h3>
-        <%= render partial: 'request_list', locals: {requests: @requests} %>
+        <h3 class="filters-title fw-bold py-4 my-4 fs-rg">Resultados: <span class="fw-normal"><%= @requests.size %></span></h3>
+        
+        <div class="table">
+          <%= render partial: 'request_list', locals: {requests: @requests} %>
+        </div>
       <% else %>
         <div class="text-center mt-5 pt-2">
           <p class="fst-italic text-muted"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;Realiza la búsqueda utilizando los filtros</p>

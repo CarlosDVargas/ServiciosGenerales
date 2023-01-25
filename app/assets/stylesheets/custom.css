@@ -361,7 +361,7 @@ input[type="submit"] {
     display: block;
     text-align: center;
     padding: var(--btn-padding);
-    font-weight: var(--fw-bold-lg);
+    font-weight: var(--fw-bold-rg);
     border-radius: var(--border-radius-sm);
     -webkit-border-radius: var(--border-radius-sm);
     -moz-border-radius: var(--border-radius-sm);
@@ -397,6 +397,16 @@ input[type="submit"] {
 
 .btn-submit:hover {
     background-color: var(--primary-color-hover);
+    color: var(--light-color);
+}
+
+.btn-view {
+    background-color: var(--dark-color-hover);
+    color: var(--light-color);
+}
+
+.btn-view:hover {
+    background-color: var(--dark-color);
     color: var(--light-color);
 }
 

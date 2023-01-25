@@ -1,46 +1,43 @@
 <% if @requests.first.nil? %>
   <p  class="text-center">No hay solicitudes para mostrar</p>
 <% else %>
-  <table class= "table table-hover table-sm">
+  <table class="table table-hover table-bordered">
     <thead>
-      <tr>
-        <th class="table-header text-center" scope="col">Consecutivo</th>
-        <th class="table-header text-center" scope="col">Fecha solicitud</th>
-        <th class="table-header text-center" scope="col">Edificio</th>
-        <th class="table-header text-center" scope="col">Sitio</th>
-        <th class="table-header text-center" scope="col">Solicitante</th>
-        <th class="table-header text-center" scope="col">Acciones</th>
+      <tr style="background-color: #D9D9D9;" class="text-center">
+        <th>Consecutivo</th>
+        <th>Fecha</th>
+        <th>Edifio</th>
+        <th>Sitio</th>
+        <th>Solicitante</th>
+        <th>Acciones</th>
       </tr>
     </thead>
+
     <tbody>
       <% @requests.each do |request| %>
-        <tr>
-          <td class="text-center" scope="row"><%= request.id %></td>
-          <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-          <td class="text-center">
+        <tr class="text-center">
+          <td class="py-3"><%= request.id %></td>
+          <td class="py-3"><%= request.created_at.strftime("%d/%m/%Y") %></td>
+          <td class="py-3">
             <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
               <%= @dictionary.workBuildings[request.work_building.to_sym] %>
             <% else %>
               <%= request.work_building %>
-            <% end %></td>
-          <td class="text-center"><%= request.work_location %></td>
-          <td class="text-center"><%= request.requester_name %></td>
-          <td class="text-center">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <%= link_to request, class: "btn btn-sm btn-primary" do %>
-                    <i class="bi bi-eye"></i>
-                    Ver
-                  <% end %>
-                </div>
-                <% if current_user_account.role == "admin" %>
-                  <%= render "requests/admin_views/admin_request_actions", request: request %>
-                <% else %>
-                  <%= render "requests/employee_views/employee_request_actions", request: request %>
-                <% end %>
-              </div>
-            </div>
+            <% end %>
+          </td>
+          <td class="py-3"><%= request.work_location %></td>
+          <td class="py-3"><%= request.requester_name %></td>
+          <td class="py-3">
+            <div class="buttons-group">
+              <%= link_to request, class: "btn-default btn-view" do %>
+                Ver
+              <% end %>
+              <% if current_user_account.role == "admin" %>
+                <%= render "requests/admin_views/admin_request_actions", request: request %>
+              <% else %>
+                <%= render "requests/employee_views/employee_request_actions", request: request %>
+              <% end %>  
+            </div>    
           </td>
         </tr>
       <% end %>

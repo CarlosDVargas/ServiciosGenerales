@@ -1,15 +1,15 @@
 <% case request.status
    when "pending" %>
-<%= link_to change_status_request_path(request), class: "btn btn-sm btn-primary" do %>
+<%= link_to change_status_request_path(request), class: "btn-default btn-submit" do %>
   <i class="bi bi-pencil-square"></i>
   Atender
 <% end %>
-<%= link_to edit_request_path(request), class: "btn btn-sm btn-primary" do %>
+<%= link_to edit_request_path(request), class: "btn-default btn-submit" do %>
   <i class="bi bi-x-square"></i>
   Rechazar
 <% end %>
 <% when "in_process" %>
-<%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
+<%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn-default btn-submit" %>
 <% when "completed"%>
-<%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
+<%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn-default btn-submit" %>
 <% end %>
