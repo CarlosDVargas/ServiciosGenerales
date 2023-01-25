@@ -23,21 +23,27 @@
     </div>
 
     <% if current_user_account %>
-        <div class="header-nav">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <%= link_to '#', class: "navbar-brand fs-sm", id: "logo", rel: "prev" do %>
+        <div class="header-nav navbar-bg">
+            <div class="container nav-flex">
+                <nav class="navbar navbar-expand-lg p-0">
+                    <%= link_to '#', class: "navbar-brand fs-sm toggler", id: "logo", rel: "prev" do %>
                         <i class="bi bi-person"></i> &nbsp;
                         <%= current_user_account.name %>
                     <% end %>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <%= image_tag('menu.svg', alt: "menu", class: "menu-logo") %>
                     </button>
 
-                    <span class="vt-divider mx-2">|</span>
+                    <%# <span class="vt-divider mx-4"></span> %>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav navbar">
+                        <ul class="navbar-nav navbar p-0">
+                            <li class="nav-item">
+                                <%= link_to "Inicio", root_path, class: "nav-link" %>
+                            </li>
+
+                            <%# <span class="vt-divider mx-4"></span> %>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Solicitudes
@@ -50,7 +56,7 @@
                                 </div>
                             </li>
 
-                            <span class="vt-divider mx-2">|</span>
+                            <%# <span class="vt-divider mx-4"></span> %>
                                 
                             <% if current_user_account.role == "admin" %>
                                 <li class="nav-item dropdown">
@@ -63,7 +69,7 @@
                                     </div>
                                 </li>
 
-                                <span class="vt-divider mx-2">|</span>    
+                                <%# <span class="vt-divider mx-4"></span>     %>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,7 +82,7 @@
                                 </li>
                             <% end %>
 
-                            <span class="vt-divider mx-2">|</span>
+                            <%# <span class="vt-divider mx-4"></span> %>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
