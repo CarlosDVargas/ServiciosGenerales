@@ -29,10 +29,10 @@
           <td class="py-3 desktop-display"><%= request.requester_name %></td>
           <td class="py-3">
             <div class="report-actions">
-              <%= link_to request, class: "btn-default btn-view desktop-display" do %>
+              <%= link_to request, class: "btn-default btn-dark desktop-display" do %>
                 Ver
               <% end %>
-              <%= link_to request, class: "btn-default btn-view mobile-display" do %>
+              <%= link_to request, class: "btn-default btn-dark mobile-display" do %>
                 <i class="bi bi-eye"></i>
               <% end %>
               <% if current_user_account.role == "admin" %>
