@@ -4,11 +4,11 @@
   <table class="table table-hover table-bordered">
     <thead>
       <tr style="background-color: #D9D9D9;" class="text-center">
-        <th>Consecutivo</th>
+        <th>Número</th>
         <th>Fecha</th>
-        <th>Edifio</th>
-        <th>Sitio</th>
-        <th>Solicitante</th>
+        <th class="tablet-display">Edifio</th>
+        <th class="desktop-display">Sitio</th>
+        <th class="desktop-display">Solicitante</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -18,25 +18,28 @@
         <tr class="text-center">
           <td class="py-3"><%= request.id %></td>
           <td class="py-3"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-          <td class="py-3">
+          <td class="py-3 tablet-display">
             <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
               <%= @dictionary.workBuildings[request.work_building.to_sym] %>
             <% else %>
               <%= request.work_building %>
             <% end %>
           </td>
-          <td class="py-3"><%= request.work_location %></td>
-          <td class="py-3"><%= request.requester_name %></td>
+          <td class="py-3 desktop-display"><%= request.work_location %></td>
+          <td class="py-3 desktop-display"><%= request.requester_name %></td>
           <td class="py-3">
-            <div class="buttons-group">
-              <%= link_to request, class: "btn-default btn-view" do %>
+            <div class="report-actions">
+              <%= link_to request, class: "btn-default btn-view desktop-display" do %>
                 Ver
+              <% end %>
+              <%= link_to request, class: "btn-default btn-view mobile-display" do %>
+                <i class="bi bi-eye"></i>
               <% end %>
               <% if current_user_account.role == "admin" %>
                 <%= render "requests/admin_views/admin_request_actions", request: request %>
               <% else %>
                 <%= render "requests/employee_views/employee_request_actions", request: request %>
-              <% end %>  
+              <% end %> 
             </div>    
           </td>
         </tr>

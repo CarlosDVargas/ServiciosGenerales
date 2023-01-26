@@ -9,7 +9,10 @@
   Rechazar
 <% end %>
 <% when "in_process" %>
-<%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn-default btn-submit" %>
+<%= link_to "Editar", edit_task_path(:request => request.id), class: "btn-default btn-submit desktop-display" %>
+<%= link_to edit_task_path(:request => request.id), class: "btn-default btn-submit mobile-display" do %>
+  <i class="bi bi-pencil-square"></i>
+<% end %>
 <% when "completed"%>
-<%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn-default btn-submit" %>
+<%= link_to "Cerrar/Reabrir", edit_task_path(:request => request.id), class: "btn-default btn-submit" %>
 <% end %>
