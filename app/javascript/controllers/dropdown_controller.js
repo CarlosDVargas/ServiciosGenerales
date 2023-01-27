@@ -6,26 +6,19 @@ export default class extends Controller {
 
     connect() {
         this.fetchData("request_work_building");
-        this.resetOptionsFor("request_work_location_id");
     }
 
     workBuilding(event) {
-        console.log(event.target.selectedIndex);
         const select = event.target;
         this.selectedWorkBuilding = select.options[select.selectedIndex].text;
-        if (select.selectedIndex !== 0) {
-            this.removeOptionsFor("request_work_location_id")
-            const workLocations = this.workBuildings[select.selectedIndex - 1].work_locations;
-            if (workLocations != null && workLocations.length > 0) {
-                this.createOptionsFor("request_work_location_id", workLocations);
-            }
-        } else {
-            this.resetOptionsFor("request_work_location_id");
+        this.removeOptionsFor("request_work_location")
+        const workLocations = this.workBuildings[select.selectedIndex - 1].work_locations;
+        if (workLocations != null && workLocations.length > 0) {
+            this.createOptionsFor("request_work_location", workLocations);
         }
     }
 
     fetchData(item, name = "name") {
-        console.log("fetching");
         const items = `${item}s`;
         const path = `/${items}`;
         fetch(path).then(response => response.json()).then(data => {
@@ -43,6 +36,13 @@ export default class extends Controller {
             option.text = item[`${name}`];
             dropdown.appendChild(option);
         })
+        if (id === "request_work_location") {
+            const option = document.createElement("option");
+            option.text = "Otro";
+            option.value = "other";
+            dropdown.appendChild(option);
+        }
+
     }
 
     removeOptionsFor(id) {
@@ -57,10 +57,5 @@ export default class extends Controller {
         option.disabled = true;
         option.value = "0";
         dropdown.add(option);
-    }
-
-    resetOptionsFor(id) {
-        const dropdown = document.getElementById(id)
-        dropdown.innerHTML = `<option value="0">Seleccione un edificio primero</option>`;
     }
 }

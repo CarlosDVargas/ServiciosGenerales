@@ -38,6 +38,7 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
+    byebug
     @request = Request.new(request_params)
     campus = params[:request][:campus_id]
     @request.status = 'pending'
@@ -45,11 +46,21 @@ class RequestsController < ApplicationController
     date = Time.now.strftime('%d%m%Y')
     @request.identifier = "#{@request.campus.campus_id}-#{date}-#{rand.to_s[2..6]}"
     unless params[:request][:work_location_id] == '0'
+      request_location = RequestLocation.new
       work_location = params[:request][:work_location].to_i
-      @request.work_location = WorkLocation.find(work_location)
+      request_location.work_building = WorkBuilding.find(params[:request][:work_building])
+      if work_location.zero?
+        request_location.name = params[:request][:work_location]
+      else
+        work_location = WorkLocation.find(work_location)
+        request_location.work_location = work_location
+        request_location.name = work_location.name
+      end
     end
     respond_to do |format|
       if @request.save
+        request_location.request = @request
+        request_location.save
         RequestMailer.new_request(@request).deliver_later
         format.html { redirect_to request_url(@request), notice: 'La solicitud fue creada correctamente.' }
         format.json { render :show, status: :created, location: @request }
@@ -144,7 +155,7 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:idenfifier, :requester_name, :requester_extension, :requester_phone, :requester_id,
                                     :requester_mail, :requester_type, :student_id, :student_association, :campus_id,
-                                    :work_location_id, :work_location_id, :work_type, :work_description, :status,
+                                    :work_building, :work_location, :work_type, :work_description, :status,
                                     :task_id, :change_to,
                                     request_deny_reasons: %i[_destroy description request_id user_id])
   end

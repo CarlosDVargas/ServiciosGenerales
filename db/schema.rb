@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_050520) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_27_215600) do
   create_table "campus", force: :cascade do |t|
     t.string "campus_id", null: false
     t.string "name", null: false
@@ -57,6 +57,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_050520) do
     t.index ["user_account_id"], name: "index_request_deny_reasons_on_user_account_id"
   end
 
+  create_table "request_locations", force: :cascade do |t|
+    t.string "name"
+    t.integer "work_location_id"
+    t.integer "request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "work_building_id"
+    t.index ["request_id"], name: "index_request_locations_on_request_id"
+    t.index ["work_building_id"], name: "index_request_locations_on_work_building_id"
+    t.index ["work_location_id"], name: "index_request_locations_on_work_location_id"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.string "requester_name", null: false
     t.string "requester_extension", null: false
@@ -73,9 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_050520) do
     t.datetime "updated_at", null: false
     t.integer "campus_id"
     t.string "identifier", null: false
-    t.integer "work_location_id"
     t.index ["campus_id"], name: "index_requests_on_campus_id"
-    t.index ["work_location_id"], name: "index_requests_on_work_location_id"
   end
 
   create_table "task_observations", force: :cascade do |t|
@@ -139,8 +149,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_050520) do
   add_foreign_key "log_entries", "user_accounts"
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
+  add_foreign_key "request_locations", "requests"
+  add_foreign_key "request_locations", "work_buildings"
+  add_foreign_key "request_locations", "work_locations"
   add_foreign_key "requests", "campus", column: "campus_id"
-  add_foreign_key "requests", "work_locations"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts"
   add_foreign_key "tasks", "employees"

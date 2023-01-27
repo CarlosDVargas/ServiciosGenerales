@@ -32,8 +32,8 @@
             <tr>
               <td class="text-center"><%= request.identifier %></td>
               <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-              <td class="text-center"><%= request.work_location.work_building.name %></td>
-              <td class="text-center"><%= request.work_location.name %></td>
+              <td class="text-center"><%= request.request_location.work_building.name %></td>
+              <td class="text-center"><%= request.request_location.name %></td>
               <td class="text-center"><%= request.requester_name %></td>
               <td class="text-center">
                 <div class="btn-group">

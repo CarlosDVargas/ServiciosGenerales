@@ -72,16 +72,21 @@
   </div>
   <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
     <p>Información del trabajo a solicitud</p>
-    <div data-controller="dropdown">
+    <div data-controller="dropdown select" data-select-hidden-class="hidden">
       <div>
         <p>
           <%= form.label "Edificio", style: "display: block" %>
           <%= form.select :work_building, "", {}, data: { action: "dropdown#workBuilding" }, class: "form-select" %>
         </p>
-        <p>
-          <%= form.label "Locación", style: "display: block" %>
-          <%= form.select :work_location_id, "", {}, class: "form-select" %>
-        </p>
+        <%= form.label "Locación", style: "display: block" %>
+        <div class="grid-container">
+          <div class="grid-item">
+            <%= form.select :work_location, "", {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
+          </div>
+          <div class="grid-item mt-2" id="work_type" data-select-target="hidden">
+            <%= form.text_field :work_location, id: "work-type-field", data: { select_target: "field" }, class: "form-control" %>
+          </div>
+        </div>
       </div>
     </div>
     <div data-controller="select" data-select-hidden-class="hidden">
