@@ -1,36 +1,19 @@
-<%= render @request %>
-<div class="container mt-3 mb-3 ">
-  <div class="position-relative mt-3">
-    <% if !current_user_account %>
-      <div class="d-flex justify-content-center">
-        <div class="btn-group">
-          <%= link_to root_path, class: "btn btn-primary" do %>
-            <i class="bi bi-arrow-bar-left"></i>
-            Volver
-          <% end %>
-          <% if @request.feedback.nil? && @request.status == "closed"%>
-            <%= link_to new_feedback_path(:request_id => @request.id), class: "btn btn-primary" do %>
-              <i class="bi bi-clipboard2"></i>
-              Agregar feedback
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% else %>
-      <div class="d-flex justify-content-center">
-        <div class="btn-group">
-          <%= link_to requests_path, class: "btn btn-primary" do %>
-            <i class="bi bi-arrow-bar-left"></i>
-            Volver
-          <% end %>
-          <% if current_user_account.role == "admin" %>
-            <%= link_to log_entries_path(:request_id => @request.id), class: "btn btn-primary" do %>
-              <i class="bi bi-clipboard2"></i>
-              Ver historial de cambios
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+<main class="main">
+  <div class="container main-form">
+    <h1 class="text-center uppercase">Estado de solicitud</h1>
+
+    <hr class="mt-4 mb-3">
+
+    <%= render @request %>
+
+    <div class="button-group form-buttons">
+      <% if @request.feedback.nil? && @request.status == "closed"%>
+        <%= link_to new_feedback_path(:request_id => @request.id), class: "btn-default btn-submit" do %>
+          <%# <i class="bi bi-clipboard2"></i> %>
+          Agregar feedback
+        <% end %>
+      <% end %>
+      <%= link_to "Regresar", root_path, class: "btn-default btn-back" %>
+    </div>
   </div>
-</div>
+</main>

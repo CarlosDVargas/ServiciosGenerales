@@ -29,13 +29,10 @@
     --blur-background: rgba(70, 69, 69, 0.158);
 
     --sucess-color: #4CAF50;
-    --sucess-color-hover: #39963c;
+    --success-color-hover: #328336;
 
-    --warning-color: #F1C40F;
-    --warning-color-hover: #cca91f;
-
+    --warning-color: #E79800;
     --danger-color: #E74C3C;
-    --danger-color-hover: #c23b2b;
 
     /* Border radius */
     --border-radius-sm: .5rem;
@@ -215,6 +212,30 @@ input[type="submit"] {
 
 .text-center {
     text-align: center !important;
+}
+
+.responsive-divider {
+    border-bottom: 1px solid var(--light-gray-hover);
+    padding-bottom: 1.8rem;
+}
+
+.responsive-divider:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+@media (min-width: 992px) {
+    .responsive-divider {
+        border-bottom: none;
+        border-right: 1px solid var(--light-gray-hover);
+        padding-right: 1.8rem;
+        margin-top: 3rem;
+    }
+
+    .responsive-divider:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
 }
 
 .uppercase {
@@ -415,7 +436,7 @@ input[type="submit"] {
 
     .button-group a:first-child {
         margin-bottom: 0;
-        margin-right: 1.5rem;
+        margin-right: 1rem;
     }
 }
 
@@ -900,6 +921,91 @@ input[type="submit"] {
         grid-column: 1 / 4;
     }
 }
+/*----------------------------
+------- REQUEST STATUS -------
+------------------------------*/
+@media (min-width: 992px) {
+    .status-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+}
+
+.pending-request {
+    font-weight: var(--fw-bold-rg);
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.inprogress-request {
+    font-weight: var(--fw-bold-rg);
+    color: var(--warning-color);
+    text-transform: uppercase;
+}
+
+.finished-request {
+    font-weight: var(--fw-bold-rg);
+    color: var(--sucess-color);
+    text-transform: uppercase;
+}
+
+.closed-request {
+    font-weight: var(--fw-bold-rg);
+    color: var(--success-color-hover);
+    text-transform: uppercase;
+}
+
+.rejected-request {
+    font-weight: var(--fw-bold-rg);
+    color: var(--danger-color);
+    text-transform: uppercase;
+}
+
+.reject-reasons {
+    margin-bottom: 3rem;
+    width: 98%;
+}
+
+.reject-reasons h3 {
+    color: var(--danger-color);
+    text-transform: uppercase;
+}
+
+.reject-reasons textarea {
+    padding: 2rem .5rem;
+}
+
+@media (min-width: 768px) {
+    .reject-reasons textarea {
+        padding: 2rem 3rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .reject-reasons {
+        width: 60%;
+        margin: 0 auto;
+    }
+}
+
+.reasons {
+    padding: 2rem 3rem;
+    background-color: var(--light-color);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    -webkit-border-radius: var(--border-radius-sm);
+    -moz-border-radius: var(--border-radius-sm);
+    -ms-border-radius: var(--border-radius-sm);
+    -o-border-radius: var(--border-radius-sm);
+}
+
+.reasons p {
+    margin: .5rem 0;
+    font-size: var(--fs-rg);
+    color: var(--dark-gray);
+}
+
 
 /*---------------------
 ------- REPORTS -------
