@@ -3,6 +3,9 @@ import {Controller} from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = ["template", "add_item"];
 
+    connect() {
+        this.addDefaultOption();
+    }
     add_association(event) {
         const random = Math.floor(Math.random() * 20);
         event.preventDefault();
@@ -21,6 +24,16 @@ export default class extends Controller {
         let item = event.target.closest(".nested-fields");
         item.querySelector("input[name*='_destroy']").value = 1;
         item.style.display = 'none';
+    }
+
+    addDefaultOption() {
+        const dropdown = document.getElementById("deny_reasons");
+        const option = document.createElement("option");
+        option.text = "Seleccione una opción";
+        option.value = "";
+        option.selected = true;
+        option.disabled = true;
+        dropdown.insertBefore(option, dropdown.firstChild);
     }
 
 }
