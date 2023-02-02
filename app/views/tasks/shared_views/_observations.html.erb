@@ -1,0 +1,42 @@
+<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+  <div class="row">
+    <div class="col-6">
+      <div>
+        <h5 class="text-center">Agregar observaciones:</h5>
+        <p class="text-center">(Esta es una acción irreversible)</p>
+        <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro? ¡Esta acción es irreversible!' }) do |f| %>
+          <%= f.fields_for :observations do |observation| %>
+            <div class="row mb-4">
+              <div class="col">
+                <%= observation.text_area :description, class: "form-control" %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col">
+              <%= f.hidden_field :request, value: @request.id %>
+            </div>
+          </div>
+          <div class="row mt-4 mb-4">
+            <div class="position-relative">
+              <div class="position-absolute start-50 translate-middle">
+                <%= button_tag(class: "btn btn-primary") do %>
+                  <i class="bi bi-plus-circle"></i>
+                  Agregar observación
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-6">
+      <h5 class="text-center">Observaciones:</h5>
+      <div class="overflow-auto border border-1 p-1 rounded-1">
+        <% @request.task_observations.each do |o| %>
+          <p>[<%= o.created_at.strftime("%d/%m/%Y %I:%M %p") %>] - <%= o.user_account.name %>: <%= o.description %> </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,9 @@ class TaskObservationsController < ApplicationController
   end
 
   # GET /observations/1/edit
-  def edit; end
+  def edit
+    @task = Task.find(request: params[:request], employee: current_user_account.employee)
+  end
 
   # POST /observations or /observations.json
   def create

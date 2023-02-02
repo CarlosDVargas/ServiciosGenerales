@@ -176,6 +176,7 @@ class RequestsController < ApplicationController
   end
 
   # Set the requests depending the user role and the status of the request
+  # @return [Object]
   def set_requests
     # Case for the employee
     if current_user_account.role == 'employee'

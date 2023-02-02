@@ -1,66 +1,12 @@
 <div>
-  <div class="container">
+  <div class="container m-3">
     <%= render "/requests/request", request: @request %>
   </div>
-  <br>
-  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-    <h5>Observaciones:</h5>
-    <div class="container overflow-auto">
-      <% if @observations.length == 0 %>
-        <p>No se ha agregado ninguna observación</p>
-      <% else %>
-        <% @observations.each do |observation| %>
-          <p>[<%= observation.created_at.strftime("%d/%m/%Y") %>]: <%= observation.description %></p>
-        <% end %>
-      <% end %>
-    </div>
+  <div class="container m-3">
+    <%= render 'tasks/shared_views/observations' %>
   </div>
-  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-    <% if @request.status != "completed" %>
-      <div class="row">
-        <div class="col">
-          <h5 class="text-center">Agregar observación:</h5>
-          <p class="text-center">(Esta es una acción irreversible)</p>
-        </div>
-      </div>
-      <div class="row">
-        <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro? ¡Esta acción es irreversible!' }) do |f| %>
-          <%= f.fields_for :observations do |observation| %>
-            <div class="row mb-4">
-              <div class="col">
-                <%= observation.text_area :description, class:"form-control" %>
-              </div>
-            </div>
-          <% end %>
-          <div class="row">
-            <div class="col">
-              <%= f.hidden_field :request, value: @request.id %>
-            </div>
-          </div>
-          <div class="row mt-4 mb-4">
-            <div class="col">
-              <div class="position-relative">
-                <div class="position-absolute start-50 translate-middle">
-                  <%= button_tag(class: "btn btn-primary") do %>
-                    <i class="bi bi-plus-circle"></i>
-                    Agregar observación
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="position-relative">
-                <div class="position-absolute start-50 translate-middle">
-                  <%= link_to  change_status_request_path(@request, :task_id => @task), class: "btn btn-primary" do %>
-                    <i class="bi bi-check2-square"></i>
-                    Finalizar trabajo
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <%= link_to  change_status_request_path(@request, :task_id => @task), class: "btn btn-primary" do %>
+    <i class="bi bi-check2-square"></i>
+    Finalizar trabajo
+  <% end %>
 </div>

@@ -1,0 +1,24 @@
+<% if @request.status != "completed" && @request.status != "closed" %>
+  <div id="add-employees" class="container m-3">
+    <h5>Asignar trabajadores:</h5>
+    <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>
+  </div>
+<% end %>
+<div id="remove-employees" class="container m-3">
+  <% if @request.status != "completed" && @request.status != "closed" %>
+    <h5>Remover trabajadores:</h5>
+  <% else %>
+    <h5>Trabajadores asignados:</h5>
+  <% end %>
+  <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "remove" %>
+</div>
+<div class="container m-3">
+  <h5>Observaciones:</h5>
+  <%= render 'tasks/shared_views/observations' %>
+</div>
+<% if @request.status == "completed" %>
+  <div class="container m-2">
+    <%= link_to "Cerrar solicitud", change_status_request_path(@request, :change_to => "close"), class: "btn btn-primary" %>
+    <%= link_to "Reabrir solicitud", change_status_request_path(@request, :change_to => "open"), class: "btn btn-primary" %>
+  </div>
+<% end %>

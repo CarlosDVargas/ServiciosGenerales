@@ -5,37 +5,18 @@
   <div class="row">
     <h2 class="text-center">Solicitud <%= @request.id %></h2>
   </div>
-  <% if current_user_account.role == "employee" %>
-    <div class="row">
-      <%= render "/tasks/employee_views/employee_view" %>
-    </div>
-  <% else %>
-    <% if @request.status != "completed" && @request.status != "closed" %>
-      <div id="add-employees" class="container">
-        <h6>Asignar trabajadores:</h6>
-        <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>
+  <div class="m-3">
+    <% if current_user_account.role == "employee" %>
+      <div class="row">
+        <%= render "/tasks/employee_views/employee_view" %>
       </div>
-      <br>
+    <% else %>
+      <div class="row">
+        <%= render "/tasks/admin_views/admin_view" %>
+      </div>
     <% end %>
-    <div id="remove-employees" class="container">
-      <% if @request.status != "completed" && @request.status != "closed" %>
-        <h6>Remover trabajadores:</h6>
-      <% else %>
-        <h6>Trabajadores asignados:</h6>
-      <% end %>
-      <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "remove" %>
-    </div>
-  <% end %>
-  <br>
-  <% if @request.status == "completed" %>
-    <%= link_to "Cerrar solicitud", change_status_request_path(@request, :change_to => "close"), class: "btn btn-primary" %>
-    <br>
-    <br>
-    <%= link_to "Reabrir solicitud", change_status_request_path(@request, :change_to => "open"), class: "btn btn-primary" %>
-    <br>
-    <br>
-  <% end %>
-  <div>
+  </div>
+  <div class="m-3">
     <%= link_to "Volver a la lista de solicitudes", requests_path, class: "btn btn-primary" %>
   </div>
 </div>

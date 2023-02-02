@@ -18,53 +18,55 @@ class TasksController < ApplicationController
 
   # GET /tasks/edit
   def edit
-    if current_user_account.role == 'employee'
-      set_task
-      set_observations
-    end
+    set_task
+    set_observations
   end
 
   # POST /tasks or /tasks.json
   def create
     set_employees_for_create
+    user = current_user_account
     @request = if params[:task].present?
                  Request.find(params[:task][:request_id])
                else
                  Request.find(params[:request_id])
                end
+    if @request.tasks.empty?
+      Task.create(employee_id: user.employee.id, request_id: @request.id, status: 'admin')
+    end
     @employees&.each do |employee_id|
       Task.create(employee_id:, request_id: @request.id)
       @employee = Employee.find(employee_id)
       LogEntry.create(user_account: current_user_account, request: @request,
-                      entry_message: "Asignó a #{@employee.user_account.name} a la solicitud")
+                      entry_message: "#{user.name} asignó a #{@employee.user_account.name} a la solicitud")
     end
     if @request.status == 'pending'
       RequestMailer.request_accepted(@request).deliver_later
       @request.update(status: 'in_process')
     end
     @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
-                                 entry_message: 'Cambió el estado de la solicitud a en proceso')
+                                 entry_message: "#{user.name} cambió el estado de la solicitud a en proceso")
     redirect_to requests_path
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    if current_user_account.role == 'employee'
-      set_task
-      description = params[:task][:observations][:description]
-      if description.length.positive?
-        observation = TaskObservation.create(task_id: @task.id, user_account: current_user_account,
-                                             description:)
-      end
-      redirect_to edit_task_path(request => @request)
-    elsif !set_employees_for_destroy.nil?
+    byebug
+    set_task
+    description = params[:task][:observations][:description]
+    if description.length.positive?
+      TaskObservation.create(task_id: @task.id, user_account: current_user_account,
+                             description:)
+    end
+    redirect_to edit_task_path(request => @request)
+    if !set_employees_for_destroy.nil?
       @request = Request.find(params[:request_id])
       @employees&.each do |employee_id|
         task = Task.where(employee_id: Integer(employee_id), request_id: @request.id)
         task.destroy_all
         @employee = Employee.find(employee_id)
         LogEntry.create(user_account: current_user_account, request: @request,
-                        entry_message: "Eliminó a #{@employee.user_account.name} de la solicitud")
+                        entry_message: "#{current_user_account.name} eliminó a #{@employee.user_account.name} de la solicitud")
       end
     elsif !set_employees_for_create.nil?
       create
@@ -136,6 +138,6 @@ class TasksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:employee_id, :request_id, :selected_employees[], employees: [:id],
-                                                                                   observations: [:description])
+                                 observations: [:description])
   end
 end

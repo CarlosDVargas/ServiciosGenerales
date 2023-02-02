@@ -15,6 +15,7 @@ class Request < ApplicationRecord
 
   has_many :tasks
   has_many :employees, through: :tasks
+  has_many :task_observations, -> { order(created_at: :asc) } ,through: :tasks
   belongs_to :campus
 
   has_many :request_deny_reasons
