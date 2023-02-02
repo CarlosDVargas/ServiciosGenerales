@@ -1,28 +1,28 @@
 <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
   <%= form_with(scope: :session, url: ask_state_path, local: true) do |form| %>
 
-      <div id="requester_information" class="form-group">
-        <h2 class="text-center">Ver estado de solicitud</h2>
-        <div class="row">
-          <p>
-            <%= form.label "Ingrese el número de la solicitud", style: "display: block" %>
-            <%= form.text_field :identifier, class:"form-control" %>
-          </p>
-        </div>
-        <div class ="row">
-          <p>
-            <%= form.label "Ingrese la dirección de correo electrónico", style: "display: block" %>
-            <%= form.text_field :requester_email, class:"form-control" %>
-          </p>
-        </div>
+    <div id="requester_information" class="form-group">
+      <h2 class="text-center">Ver estado de solicitud</h2>
+      <div class="row">
+        <p>
+          <%= form.label "Ingrese el número de la solicitud", style: "display: block" %>
+          <%= form.text_field :identifier, class: "form-control" %>
+        </p>
       </div>
       <div class="row">
-        <div class="col-2">
-          <%= link_to "Cancelar", root_path, class:"btn btn-primary" %>
-        </div>
-        <div class="col-2">
-          <%= form.submit "Ver estado", class:"btn btn-primary" %>
-        </div>
+        <p>
+          <%= form.label "Ingrese la dirección de correo electrónico", style: "display: block" %>
+          <%= form.text_field :requester_email, class: "form-control" %>
+        </p>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <%= link_to "Cancelar", root_path, class: "btn btn-primary" %>
+      </div>
+      <div class="col-2">
+        <%= form.submit "Ver estado", class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
 </div>

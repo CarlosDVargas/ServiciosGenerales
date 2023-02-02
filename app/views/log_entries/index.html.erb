@@ -10,7 +10,8 @@
         <% @log_entries.each do |entry| %>
           <div class="row">
             <div class="col-12">
-              <p> <strong><%= entry.created_at.to_s(:db) %></strong> - <%= entry.user_account.name%>: <%= entry.entry_message %> </p>
+              <p><strong><%= entry.created_at.to_s(:db) %></strong> - <%= entry.user_account.name %>
+                : <%= entry.entry_message %> </p>
             </div>
           </div>
         <% end %>

@@ -1,37 +1,37 @@
-<table class= "table table-hover table-sm">
+<table class="table table-hover table-sm">
   <thead>
-    <tr>
-      <th class="table-header text-center" scope="col">Cédula</th>
-      <th class="table-header text-center" scope="col">Nombre</th>
-      <th class="table-header text-center" scope="col">Estado</th>
-      <th class="table-header text-center" scope="col">Acciones</th>
-    </tr>
+  <tr>
+    <th class="table-header text-center" scope="col">Cédula</th>
+    <th class="table-header text-center" scope="col">Nombre</th>
+    <th class="table-header text-center" scope="col">Estado</th>
+    <th class="table-header text-center" scope="col">Acciones</th>
+  </tr>
   </thead>
   <tbody>
-    <% if !@employees.empty? %>
-      <% @employees.each do |employee| %>
-        <tr>
-          <td class="text-center" scope="row"><%= employee.employee_id_card %></td>
-          <td class="text-center"><%= employee.user_account.name %></td>
-          <td class="text-center"><%= employee.employee_status%></td>
-          <td class="text-center">
-            <div class="btn-group">
-              <%= link_to employee, class: "btn btn-sm btn-primary" do %>
-                <i class="bi bi-person"></i>
-                Ver
-              <% end %>
-              <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-secondary" do %>
-                <i class="bi bi-pencil-square"></i>
-                Editar
-              <% end %>
-              <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
-                <i class="bi bi-trash"></i>
-                Eliminar
-              <% end %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
+  <% if !@employees.empty? %>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td class="text-center" scope="row"><%= employee.employee_id_card %></td>
+        <td class="text-center"><%= employee.user_account.name %></td>
+        <td class="text-center"><%= employee.employee_status %></td>
+        <td class="text-center">
+          <div class="btn-group">
+            <%= link_to employee, class: "btn btn-sm btn-primary" do %>
+              <i class="bi bi-person"></i>
+              Ver
+            <% end %>
+            <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-secondary" do %>
+              <i class="bi bi-pencil-square"></i>
+              Editar
+            <% end %>
+            <%= link_to employee, method: :delete, data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
+              <i class="bi bi-trash"></i>
+              Eliminar
+            <% end %>
+          </div>
+        </td>
+      </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>

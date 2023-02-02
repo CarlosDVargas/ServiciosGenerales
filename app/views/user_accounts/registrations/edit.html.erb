@@ -9,26 +9,26 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "user_accounts/shared/error_messages", resource: resource %>
         <div class="form-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", readonly: true  %>
+          <%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", readonly: true %>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
         <div class="form-group">
-          <%= f.label "Nueva contraseña" %> <i>(Dejar en blanco si se no se desea actualizar)</i><br />
+          <%= f.label "Nueva contraseña" %> <i>(Dejar en blanco si se no se desea actualizar)</i><br/>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
           <% if @minimum_password_length %>
-            <br />
+            <br/>
             <em><%= @minimum_password_length %> caracteres mínimos</em>
           <% end %>
         </div>
         <div class="form-group">
-          <%= f.label "Confirmación de la nueva contraseña" %><br />
+          <%= f.label "Confirmación de la nueva contraseña" %><br/>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label "Contraseña actual" %> <i>(Se necesita la contraseña actual para actualizar los datos)</i><br />
+          <%= f.label "Contraseña actual" %> <i>(Se necesita la contraseña actual para actualizar los datos)</i><br/>
           <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
         </div>
         <br>

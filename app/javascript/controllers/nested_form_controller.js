@@ -6,6 +6,7 @@ export default class extends Controller {
     connect() {
         this.addDefaultOption();
     }
+
     add_association(event) {
         const random = Math.floor(Math.random() * 20);
         event.preventDefault();

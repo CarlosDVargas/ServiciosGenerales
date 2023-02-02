@@ -8,7 +8,7 @@
             <i class="bi bi-arrow-bar-left"></i>
             Volver
           <% end %>
-          <% if @request.feedback.nil? && @request.status == "closed"%>
+          <% if @request.feedback.nil? && @request.status == "closed" %>
             <%= link_to new_feedback_path(:request_id => @request.id), class: "btn btn-primary" do %>
               <i class="bi bi-clipboard2"></i>
               Agregar feedback

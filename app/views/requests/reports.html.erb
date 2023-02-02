@@ -10,17 +10,17 @@
           <div class="col">
             <% @dictionary = Dictionary.new %>
             <%= f.label :status, 'Estado' %>
-            <%= f.select :status_eq, options_for_select(@dictionary.requestStatuses.invert().each()), {include_blank: "Seleccione el estado a buscar"}, class: "form-select" %>
+            <%= f.select :status_eq, options_for_select(@dictionary.requestStatuses.invert().each()), { include_blank: "Seleccione el estado a buscar" }, class: "form-select" %>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <%= f.label 'Desde' %>
-            <%= f.text_field :created_at_gteq, class: "form-control", type:"date" %>
+            <%= f.text_field :created_at_gteq, class: "form-control", type: "date" %>
           </div>
           <div class="col">
             <%= f.label 'Hasta' %>
-            <%= f.text_field :created_at_lteq, class: "form-control", type:"date" %>
+            <%= f.text_field :created_at_lteq, class: "form-control", type: "date" %>
           </div>
           <div class="col">
             <br>
@@ -37,7 +37,7 @@
           <h4>Cantidad: <%= @requests.size %></h4>
         </div>
         <div class="row">
-          <%= render partial: 'request_list', locals: {requests: @requests} %>
+          <%= render partial: 'request_list', locals: { requests: @requests } %>
         </div>
       </div>
     <% end %>

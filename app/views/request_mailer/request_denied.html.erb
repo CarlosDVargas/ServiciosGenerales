@@ -7,7 +7,7 @@
   Las razones por las que fue rechazada son las siguientes:
 </p>
 <ul>
-  <% @deny_reasons.each do |dr|%>
+  <% @deny_reasons.each do |dr| %>
     <li><%= dr.reason %></li>
   <% end %>
 </ul>
@@ -15,5 +15,5 @@
   Si cree que esto es un error, por favor comuníquese con el administrador del sistema.
 </p>
 <p>
-  Para observar más información ingrese al siguiente enlace: <%=request_url(@request) %>
+  Para observar más información ingrese al siguiente enlace: <%= request_url(@request) %>
 </p>

@@ -1,12 +1,12 @@
-<%= form_with(model: request, local: true ,data: { turbo_method: :delete, turbo_confirm: "¿Rechazar esta solicitud?" }) do |f| %>
+<%= form_with(model: request, local: true, data: { turbo_method: :delete, turbo_confirm: "¿Rechazar esta solicitud?" }) do |f| %>
   <div data-controller="nested-form">
     <h4>Razones para rechazar:</h4>
     <div class="container m-3">
       <div class="m-3">
-        <%= select_tag "deny_reasons" , options_for_select(@dictionary.denyReasons.invert.each), class: "form-select" %>
+        <%= select_tag "deny_reasons", options_for_select(@dictionary.denyReasons.invert.each), class: "form-select" %>
       </div>
       <div data-nested-form-target="add_item">
-        <%= link_to "#", data: { action: "nested-form#add_association" }, class:"btn btn-sm btn-primary" do %>
+        <%= link_to "#", data: { action: "nested-form#add_association" }, class: "btn btn-sm btn-primary" do %>
           <i class="bi bi-plus"></i>
           Agregar razón
         <% end %>
@@ -17,7 +17,7 @@
         <%= f.fields_for :request_deny_reasons, RequestDenyReason.new, child_index: "TEMPLATE_RECORD" do |reason| %>
           <div class="container m-3">
             <%= render "requests/admin_views/deny_reason_fields", f: reason, request: request %>
-          <% end %>
+        <% end %>
         </div>
       </template>
     </div>

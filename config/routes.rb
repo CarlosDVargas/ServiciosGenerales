@@ -4,17 +4,16 @@ Rails.application.routes.draw do
   root "pages#home"
 
   devise_for :user_accounts, controllers: {
-                             sessions: "user_accounts/sessions",
-                             registrations: "user_accounts/registrations",
-                           }
-
+    sessions: "user_accounts/sessions",
+    registrations: "user_accounts/registrations",
+  }
 
   resources :requests do
     collection do
       match 'search' => 'requests#search', via: [:get, :post], as: :search
     end
   end
-  
+
   resources :requests do
     member do
       get :change_status
