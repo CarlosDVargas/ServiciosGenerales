@@ -38,7 +38,6 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
-    byebug
     @request = Request.new(request_params)
     campus = params[:request][:campus_id]
     @request.status = 'pending'

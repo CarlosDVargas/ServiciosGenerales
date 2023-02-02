@@ -28,5 +28,5 @@ class Request < ApplicationRecord
 
   has_one :feedback, dependent: :destroy
 
-  has_many :log_entries, dependent: :destroy
+  has_many :log_entries, -> { order(created_at: :asc) }, dependent: :destroy
 end

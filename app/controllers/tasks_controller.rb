@@ -51,7 +51,6 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    byebug
     set_task
     description = params[:task][:observations][:description]
     if description.length.positive?

@@ -1,10 +1,10 @@
 <% if @request.status != "completed" && @request.status != "closed" %>
-  <div id="add-employees" class="container m-3">
+  <div id="add-employees" class="m-3 mh-25">
     <h5>Asignar trabajadores:</h5>
     <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>
   </div>
 <% end %>
-<div id="remove-employees" class="container m-3">
+<div id="remove-employees" class="m-3 mh-25">
   <% if @request.status != "completed" && @request.status != "closed" %>
     <h5>Remover trabajadores:</h5>
   <% else %>
@@ -12,9 +12,13 @@
   <% end %>
   <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "remove" %>
 </div>
-<div class="container m-3">
+<div class="m-3 mh-25">
   <h5>Observaciones:</h5>
   <%= render 'tasks/shared_views/observations' %>
+</div>
+<div class="m-3 mh-25">
+  <h5>Historial de cambios:</h5>
+  <%= render 'tasks/admin_views/request_log' %>
 </div>
 <% if @request.status == "completed" %>
   <div class="container m-2">
