@@ -1,5 +1,5 @@
 <div>
-    <canvas id="canvas_wave" style="width: 100%; height: 1px; margin-bottom: -1rem;"></canvas>
+    <%# <canvas id="canvas_wave" style="width: 100%; height: 1px; margin-bottom: -1rem;"></canvas> %>
 
     <footer class="footer">
         <div class="container footer-content">
@@ -21,9 +21,7 @@
     </footer>
 </div>
 
-<script>
-    sessionStorage.clear();
-
+<%# <script>
     if (window.location.href.indexOf("requests/") > -1 || window.location.href.indexOf("new") > -1) {
         document.getElementById("canvas_wave").style.height = "10rem";
 
@@ -74,7 +72,7 @@
         this.targetX = this.anchorX + rand(0, opt.range.x * 2) - opt.range.x;
         this.targetY = this.anchorY + rand(0, opt.range.y * 2) - opt.range.y;
         this.tick = 0;
-        this.duration = rand(opt.duration.min, opt.duration.max);
+        this.duration = 40;
         }
 
         Point.prototype.update = function(){
@@ -143,6 +141,8 @@
         ctx.clearRect(0, 0, cw, ch);
         };
 
+        clear();
+
         var loop = function(){
         window.requestAnimFrame(loop, c);
         tick++;
@@ -162,7 +162,7 @@
         }
 
         window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
-
+        
         loop();
     }
-</script>
+</script> %>

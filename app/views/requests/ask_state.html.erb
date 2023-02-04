@@ -4,7 +4,7 @@
 
     <%= form_with(scope: :session, url: ask_state_path, local: true) do |form| %>
       <div class="input input-50">
-        <%= form.label "Ingrese el número de la solicitud", style: "display: block" %>
+        <%= form.label "Ingrese el número de la solicitud" %>
         <%= form.number_field :request_number, placeholder: "Número de solicitud" %>
       </div>
 

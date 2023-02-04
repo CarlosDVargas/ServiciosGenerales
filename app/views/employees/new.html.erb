@@ -1,2 +1,19 @@
-<h1 class="text-center">Nuevo empleado</h1>
-<%= render "form", employee: @employee %>
+<main class="main">
+    <div class="container">
+        <% if @employee.errors.any? %>
+            <div style="color: red">
+                <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+                <ul>
+                    <% @employee.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+    
+    <div class="container main-form form-pad-lg bg-mandala">
+        <h1 class="mb-5 uppercase">Nuevo empleado</h1>
+        <%= render "form", employee: @employee %>
+    </div>
+</main>

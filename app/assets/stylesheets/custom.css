@@ -968,7 +968,6 @@ input[type="submit"] {
 }
 
 .reject-reasons h3 {
-    color: var(--danger-color);
     text-transform: uppercase;
 }
 
@@ -1094,3 +1093,42 @@ input[type="submit"] {
 .report-actions a:nth-child(2) {
     margin-bottom: .2rem;
 }
+
+/*--------------------------
+------- NEW EMPLOYEE -------
+----------------------------*/
+.input .input-form-check {
+    margin: 1rem 0;
+}
+
+@media (min-width: 992px) {
+    .input .input-form-check {
+        display: flex;
+    }    
+}
+
+.input .form-check {
+    padding: unset;
+    margin: 1.5rem 0;
+}
+
+@media (min-width: 992px) {
+    .input .form-check {
+        margin-right: 1.5rem;
+    }
+}
+
+.input .form-check:last-of-type {
+    margin-bottom: 0;
+}
+
+.input .form-check label {
+    margin-left: .7rem;
+}
+
+.input .form-check input[type="radio"] {
+    width: auto;
+    margin: unset;
+    padding: 1rem;
+}
+
