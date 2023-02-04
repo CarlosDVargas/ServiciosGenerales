@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_27_215600) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
   create_table "campus", force: :cascade do |t|
     t.string "campus_id", null: false
     t.string "name", null: false
@@ -45,6 +45,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_27_215600) do
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_log_entries_on_request_id"
     t.index ["user_account_id"], name: "index_log_entries_on_user_account_id"
+  end
+
+  create_table "reopen_reasons", force: :cascade do |t|
+    t.string "reason", null: false
+    t.integer "user_account_id", null: false
+    t.integer "request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_reopen_reasons_on_request_id"
+    t.index ["user_account_id"], name: "index_reopen_reasons_on_user_account_id"
   end
 
   create_table "request_deny_reasons", force: :cascade do |t|
@@ -107,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_27_215600) do
     t.integer "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
     t.index ["employee_id"], name: "index_tasks_on_employee_id"
     t.index ["request_id"], name: "index_tasks_on_request_id"
   end
@@ -147,6 +158,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_27_215600) do
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "log_entries", "requests"
   add_foreign_key "log_entries", "user_accounts"
+  add_foreign_key "reopen_reasons", "requests"
+  add_foreign_key "reopen_reasons", "user_accounts"
   add_foreign_key "request_deny_reasons", "requests"
   add_foreign_key "request_deny_reasons", "user_accounts"
   add_foreign_key "request_locations", "requests"

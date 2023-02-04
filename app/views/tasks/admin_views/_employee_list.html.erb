@@ -14,15 +14,13 @@
       </tr>
       </thead>
       <tbody>
-      <% @employees.each do |employee| %>
-        <% if list_type == "add" %>
-          <% if employee.employee_status == "Activo" && (!@request.employees.ids.include? employee.id) %>
-            <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
-          <% end %>
-        <% else %>
-          <% if (@request.employees.ids.include? employee.id) %>
-            <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
-          <% end %>
+      <% if list_type == "add" %>
+        <% @not_working_employees.each do |employee| %>
+          <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
+        <% end %>
+      <% else %>
+        <% @working_employees.each do |employee| %>
+          <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
         <% end %>
       <% end %>
       </tbody>

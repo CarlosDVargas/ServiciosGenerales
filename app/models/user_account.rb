@@ -17,6 +17,8 @@ class UserAccount < ApplicationRecord
 
   has_many :log_entries, dependent: :destroy
 
+  has_many :reopen_reasons
+
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role

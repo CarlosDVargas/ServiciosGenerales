@@ -35,7 +35,13 @@ class TasksController < ApplicationController
       Task.create(employee_id: user.employee.id, request_id: @request.id, status: 'admin')
     end
     @employees&.each do |employee_id|
-      Task.create(employee_id:, request_id: @request.id)
+      task = Task.find_by(employee_id:, request_id: @request.id)
+      if task.nil?
+        Task.create(employee_id:, request_id: @request.id)
+      else
+        task.active = true
+        task.save
+      end
       @employee = Employee.find(employee_id)
       LogEntry.create(user_account: current_user_account, request: @request,
                       entry_message: "#{user.name} asignó a #{@employee.user_account.name} a la solicitud")
@@ -43,26 +49,31 @@ class TasksController < ApplicationController
     if @request.status == 'pending'
       RequestMailer.request_accepted(@request).deliver_later
       @request.update(status: 'in_process')
+      @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
+                                   entry_message: "#{user.name} cambió el estado de la solicitud a en proceso")
+      redirect_to requests_path
     end
-    @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
-                                 entry_message: "#{user.name} cambió el estado de la solicitud a en proceso")
-    redirect_to requests_path
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    byebug
     set_task
-    description = params[:task][:observations][:description]
-    if description.length.positive?
-      TaskObservation.create(task_id: @task.id, user_account: current_user_account,
-                             description:)
+    if params[:task][:observations].present? && params[:task][:observations][:description].present?
+      description = params[:task][:observations][:description]
+      byebug
+      if description.length.positive?
+        byebug
+        TaskObservation.create(task_id: @task.id, user_account: current_user_account,
+                               description:)
+        byebug
+      end
     end
-    redirect_to edit_task_path(request => @request)
     if !set_employees_for_destroy.nil?
-      @request = Request.find(params[:request_id])
       @employees&.each do |employee_id|
-        task = Task.where(employee_id: Integer(employee_id), request_id: @request.id)
-        task.destroy_all
+        task = Task.find_by(employee_id: Integer(employee_id), request_id: @request.id)
+        task.active = false
+        task.save
         @employee = Employee.find(employee_id)
         LogEntry.create(user_account: current_user_account, request: @request,
                         entry_message: "#{current_user_account.name} eliminó a #{@employee.user_account.name} de la solicitud")
@@ -70,6 +81,7 @@ class TasksController < ApplicationController
     elsif !set_employees_for_create.nil?
       create
     end
+    redirect_to edit_task_path(request => @request)
   end
 
   # DELETE /tasks/1 or /tasks/1.json
@@ -100,7 +112,13 @@ class TasksController < ApplicationController
   # Take the task from the Task table depending the request_id and employee_id
   def set_task
     employee_id = current_user_account.employee_id
-    @request = Request.find(params[:task][:request]) if @request.nil?
+    if @request.nil?
+      if params[:task][:request_id].present?
+        @request = Request.find(params[:task][:request_id])
+      elsif params[:task][:request].present?
+        @request = Request.find(params[:task][:request])
+      end
+    end
     @task = Task.where(employee_id:, request_id: @request.id).first
   end
 
@@ -109,14 +127,15 @@ class TasksController < ApplicationController
     @request = Request.find(params[:request])
   end
 
-  # Take an especific employee from the Employee table depending the user_id
+  # Take an specific employee from the Employee table depending the user_id
   def employee(id)
     @employee = Employee.find(id)
   end
 
   # Take all the employees from the Employee table
   def set_employees
-    @employees = Employee.where(employee_type: 'Trabajador')
+    @working_employees = @request.employees_currently_working
+    @not_working_employees = @request.employees_not_working
   end
 
   # Take the employees from the Employee table depending the ids from employees to add

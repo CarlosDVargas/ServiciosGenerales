@@ -29,4 +29,18 @@ class Request < ApplicationRecord
   has_one :feedback, dependent: :destroy
 
   has_many :log_entries, -> { order(created_at: :asc) }, dependent: :destroy
+
+  def employees_currently_working
+    Employee.where(id: tasks.where(active: true).pluck(:employee_id),
+                   employee_type: 'Trabajador',
+                   employee_status: 'Activo')
+  end
+
+  def employees_not_working
+    Employee.where.missing(:tasks).or(
+      Employee.where(id: tasks.where(active: false).pluck(:employee_id),
+                     employee_type: 'Trabajador',
+                     employee_status: 'Activo'))
+  end
+
 end
