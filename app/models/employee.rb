@@ -13,4 +13,8 @@ class Employee < ApplicationRecord
   belongs_to :campus
   enum employee_status: { "Activo": 1, "Inactivo": 0 }
   enum employee_type: { "Trabajador": 0, "Administrador": 1 }
+
+  def active_requests
+    requests.where(id: tasks.where(active: true).pluck(:request_id))
+  end
 end

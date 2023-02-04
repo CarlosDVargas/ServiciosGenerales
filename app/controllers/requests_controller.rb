@@ -180,7 +180,7 @@ class RequestsController < ApplicationController
     # Case for the employee
     if current_user_account.role == 'employee'
       employee = Employee.find_by(user_account: current_user_account)
-      employee_requests = employee.requests
+      employee_requests = employee.active_requests
       @requests = case @status
                   when 'completed'
                     find_requests(employee_requests, 'completed')

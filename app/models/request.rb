@@ -42,5 +42,4 @@ class Request < ApplicationRecord
                      employee_type: 'Trabajador',
                      employee_status: 'Activo'))
   end
-
 end

@@ -19,7 +19,6 @@ class TasksController < ApplicationController
   # GET /tasks/edit
   def edit
     set_task
-    set_observations
   end
 
   # POST /tasks or /tasks.json
@@ -57,16 +56,12 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    byebug
     set_task
     if params[:task][:observations].present? && params[:task][:observations][:description].present?
       description = params[:task][:observations][:description]
-      byebug
       if description.length.positive?
-        byebug
         TaskObservation.create(task_id: @task.id, user_account: current_user_account,
                                description:)
-        byebug
       end
     end
     if !set_employees_for_destroy.nil?
@@ -101,13 +96,6 @@ class TasksController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-
-  # Take observations from Observation table depending the task_id and user_id
-  def set_observations
-    @observations = TaskObservation.where(task_id: @task.id, user_account: current_user_account)
-  end
 
   # Take the task from the Task table depending the request_id and employee_id
   def set_task
