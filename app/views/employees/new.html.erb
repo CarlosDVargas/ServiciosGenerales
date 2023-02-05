@@ -13,7 +13,7 @@
     </div>
     
     <div class="container main-form form-pad-lg bg-mandala">
-        <h1 class="mb-5 uppercase">Nuevo empleado</h1>
+        <h1 class="mb-5 uppercase">Nuevo <%= @employee.employee_type == 'Trabajador' ? 'empleado' : 'administrador' %></h1>
         <%= render "form", employee: @employee %>
     </div>
 </main>

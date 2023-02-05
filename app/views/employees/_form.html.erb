@@ -16,13 +16,13 @@
         <%= form.text_field :employee_id_card, placeholder: "Número de cédula" %>
     </div>
 
-    <div class="input input-50 d-none">
+    <div class="d-none">
         <%= form.label "Tipo de empleado" %>
         <%= form.text_field :employee_type, placeholder: "Tipo de empleado" %>
     </div>
 
     <div class="input">
-      <%= form.label "Estado del empleado" %>
+      <%= form.label @employee.employee_type == 'Trabajador' ? 'Estado del empleado' : 'Estado del administrador' %>
       <div class="input-form-check">
         <div class="form-check">
           <%= form.label :employee_status, "Activo", :value => "Activo" %>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="button-group form-buttons mt-5">
-        <%= form.submit "Agregar empleado", class: "btn-default btn-submit" %>
+        <%= form.submit @employee.employee_type == 'Trabajador' ? 'Agregar empleado' : 'Agregar administrador', class: "btn-default btn-submit" %>
         <%= link_to "Regresar", :back, class: "btn-default btn-back" %>
     </div>
 <% end %>

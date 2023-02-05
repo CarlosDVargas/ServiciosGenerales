@@ -1114,7 +1114,6 @@ input[type="submit"] {
 @media (min-width: 992px) {
     .input .input-form-check {
         display: flex;
-        justify-content: space-between;
     }    
 }
 

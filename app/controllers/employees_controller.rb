@@ -31,11 +31,7 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     @employee.build_user_account
-    @employee.employee_type = if @type == 'worker'
-                                'Trabajador'
-                              else
-                                'Administrador'
-                              end
+    @employee.employee_type = @type == 'worker' ? 'Trabajador' : 'Administrador'
   end
 
   # GET /employees/1/edit
