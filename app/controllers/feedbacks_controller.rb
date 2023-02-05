@@ -14,6 +14,7 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/new
   def new
+    # @dictionary = Dictionary.new
     @feedback = Feedback.new
   end
 

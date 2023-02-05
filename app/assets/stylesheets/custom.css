@@ -316,6 +316,16 @@ input[type="submit"] {
     box-shadow: var(--box-shadow-rg);
 }
 
+.mobile-d-block {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .mobile-d-block {
+        display: inline;
+    }
+}
+
 .btn-default {
     display: block;
     text-align: center;
@@ -1104,22 +1114,22 @@ input[type="submit"] {
 @media (min-width: 992px) {
     .input .input-form-check {
         display: flex;
+        justify-content: space-between;
     }    
 }
 
 .input .form-check {
     padding: unset;
     margin: 1.5rem 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 
 @media (min-width: 992px) {
     .input .form-check {
         margin-right: 1.5rem;
     }
-}
-
-.input .form-check:last-of-type {
-    margin-bottom: 0;
 }
 
 .input .form-check label {
