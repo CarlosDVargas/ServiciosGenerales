@@ -12,6 +12,12 @@
           Agregar retroalimentación
         <% end %>
       <% end %>
+
+      <% if @request.status =="pending" && current_user_account %>
+        <%= link_to change_status_request_path(@request), class: "btn-default btn-submit" do %>
+          Atender
+        <% end %>
+      <% end %>
       <%= link_to "Regresar", :back, class: "btn-default btn-back" %>
     </div>
   </div>

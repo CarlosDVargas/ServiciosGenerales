@@ -454,7 +454,7 @@ input[type="submit"] {
     background-image: linear-gradient(to top, transparent 50%, var(--light-gray) 0%), url(/assets/bg-form-rotated.png);
     background-position: center, bottom;
     background-repeat: repeat, no-repeat;
-    background-size: 100%, 100% 44%;
+    background-size: 100%, 100% auto;
 }
 
 
@@ -1114,6 +1114,7 @@ input[type="submit"] {
 @media (min-width: 992px) {
     .input .input-form-check {
         display: flex;
+        flex-direction: row-reverse;
     }    
 }
 
