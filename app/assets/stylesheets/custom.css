@@ -1109,11 +1109,12 @@ input[type="submit"] {
 ----------------------------*/
 .input .input-form-check {
     margin: 1rem 0;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 @media (min-width: 992px) {
     .input .input-form-check {
-        display: flex;
         flex-direction: row-reverse;
     }    
 }
