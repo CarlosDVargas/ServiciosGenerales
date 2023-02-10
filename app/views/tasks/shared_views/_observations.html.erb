@@ -31,12 +31,7 @@
       </div>
     </div>
     <div class="col-6">
-      <h5 class="text-center">Observaciones:</h5>
-      <div class="overflow-auto border border-1 p-1 rounded-1" style="height: 150px">
-        <% @request.task_observations.each do |o| %>
-          <p>[<%= o.created_at.strftime("%d/%m/%Y %I:%M %p") %>] - <%= o.user_account.name %>: <%= o.description %> </p>
-        <% end %>
-      </div>
+      <%= render 'tasks/shared_views/observation_list' %>
     </div>
   </div>
 </div>
