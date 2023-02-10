@@ -20,12 +20,17 @@ class Request < ApplicationRecord
 
   has_many :request_deny_reasons
   accepts_nested_attributes_for :request_deny_reasons, allow_destroy: true, reject_if: proc { |attr|
-    attr['description'].blank?
+    attr['reason'].blank?
   }
+
+  has_many :reopen_reasons
+  accepts_nested_attributes_for :reopen_reasons, allow_destroy: true, reject_if: proc { |attr|
+    attr['reason'].blank?
+  }
+
   has_one :request_location
   attribute :work_location, :integer
   attribute :work_building, :integer
-
   has_one :feedback, dependent: :destroy
 
   has_many :log_entries, -> { order(created_at: :asc) }, dependent: :destroy

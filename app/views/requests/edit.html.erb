@@ -6,5 +6,5 @@
   <%= render @request %>
 </div>
 <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <%= render "requests/admin_views/deny_request", request: @request %>
+  <%= render "requests/admin_views/request_reasons", request: @request, type: "deny" %>
 </div>

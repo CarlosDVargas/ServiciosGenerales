@@ -73,26 +73,21 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1 or /requests/1.json
   # @return [Object]
   def update
+    byebug
     respond_to do |format|
-      reasons_array = deny_reasons
-      if reasons_array
-        reasons_array.each do |reason|
-          RequestDenyReason.create(reason: reason[:reason], user_account: current_user_account, request: @request)
-        end
-        @request.update(status: 'denied')
-        @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
-                                     entry_message: 'Denegó la solicitud')
-        RequestMailer.request_denied(@request).deliver_later
-        format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
-        format.json { head :no_content }
-      else
+      reasons, type = get_reasons
+      if reasons.empty? || type.nil?
         format.html { render :edit }
         format.json { render json: @request.errors }
+      else
+        create_reasons(reasons, type)
+        format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
+        format.json { head :no_content }
       end
     end
   end
 
-  # Encharged of updating the status of a request depending on the status obtained from the params
+  # In charge of updating the status of a request depending on the status obtained from the params
   def change_status
     status = @request.status
     case status
@@ -152,11 +147,12 @@ class RequestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def request_params
-    params.require(:request).permit(:idenfifier, :requester_name, :requester_extension, :requester_phone, :requester_id,
+    params.require(:request).permit(:identifier, :requester_name, :requester_extension, :requester_phone, :requester_id,
                                     :requester_mail, :requester_type, :student_id, :student_association, :campus_id,
                                     :work_building, :work_location, :work_type, :work_description, :status,
                                     :task_id, :change_to,
-                                    request_deny_reasons: %i[_destroy description request_id user_id])
+                                    request_deny_reasons: %i[_destroy reason request_id user_id],
+                                    reopen_reasons: %i[_destroy reason request_id user_id])
   end
 
   # Initializes the dictionary with the default values
@@ -227,8 +223,42 @@ class RequestsController < ApplicationController
   end
 
   # Return the deny reasons of a request
-  def deny_reasons
-    params[:request][:request_deny_reasons_attributes].values if params[:request]
+  def get_reasons
+    reasons = []
+    type = ''
+    if params[:request] && params[:request][:request_deny_reasons_attributes]
+      reasons = params[:request][:request_deny_reasons_attributes].values
+      type = 'deny'
+    elsif params[:request] && params[:request][:reopen_reasons_attributes]
+      reasons = params[:request][:reopen_reasons_attributes].values
+      type = 'reopen'
+    end
+    [reasons, type]
+  end
+
+  # Creates the deny reasons or reopen reasons of a request
+  def create_reasons(reasons, type)
+    reasons.each do |reason|
+      if reason[:_destroy] == "false"
+        if type == 'deny'
+          RequestDenyReason.create(reason: reason[:reason], request: @request,
+                                   user_account: current_user_account)
+        else
+          ReopenReason.create(reason: reason[:reason], request: @request,
+                              user_account: current_user_account)
+          LogEntry.create(user_account: current_user_account, request: @request,
+                          entry_message: "Reabrió la solicitud, razón: #{reason[:reason]}")
+        end
+      end
+    end
+    if type == 'deny'
+      @request.update(status: 'denied')
+      @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
+                                   entry_message: 'Denegó la solicitud')
+      RequestMailer.request_denied(@request).deliver_later
+    else
+      @request.update(status: 'in_process')
+    end
   end
 
   # Depending the value of the completed? attribute of the tasks of the current request,

@@ -5,6 +5,7 @@ export default class extends Controller {
 
     connect() {
         this.addDefaultOption();
+        this.remove_associations();
     }
 
     add_association(event) {
@@ -12,8 +13,13 @@ export default class extends Controller {
         event.preventDefault();
         const content = this.templateTarget.innerHTML.replace(/TEMPLATE_RECORD/g, random);
         this.add_itemTarget.insertAdjacentHTML('beforebegin', content);
-        const input = document.getElementById("request_request_deny_reasons_attributes_" + random + "_reason");
-        const select = document.getElementById("deny_reasons");
+        var input = document.getElementById("request_request_deny_reasons_attributes_" + random + "_reason");
+        console.log(input);
+        if (input === null) {
+            input = document.getElementById("request_reopen_reasons_attributes_" + random + "_reason");
+        }
+        const select = document.getElementById("reasons");
+        console.log(select);
         if (select.options[select.selectedIndex].text !== "Otro") {
             input.value = select.options[select.selectedIndex].text;
             input.readOnly = true;
@@ -27,8 +33,16 @@ export default class extends Controller {
         item.style.display = 'none';
     }
 
+    remove_associations() {
+        const items = document.querySelectorAll(".nested-fields");
+        items.forEach(item => {
+            item.querySelector("input[name*='_destroy']").value = 1;
+            item.style.display = 'none';
+        });
+    }
+
     addDefaultOption() {
-        const dropdown = document.getElementById("deny_reasons");
+        const dropdown = document.getElementById("reasons");
         const option = document.createElement("option");
         option.text = "Seleccione una opción";
         option.value = "";
