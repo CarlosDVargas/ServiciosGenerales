@@ -128,11 +128,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.string "name", null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "employee_id", null: false
+    t.index ["confirmation_token"], name: "index_user_accounts_on_confirmation_token", unique: true
     t.index ["email"], name: "index_user_accounts_on_email", unique: true
     t.index ["employee_id"], name: "index_user_accounts_on_employee_id"
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
