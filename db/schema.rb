@@ -10,22 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_083940) do
   create_table "campus", force: :cascade do |t|
     t.string "campus_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "employees", force: :cascade do |t|
-    t.string "employee_id_card", null: false
-    t.integer "employee_status", null: false
-    t.integer "employee_type", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "campus_id"
-    t.index ["campus_id"], name: "index_employees_on_campus_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -113,13 +103,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
     t.datetime "finished_at"
     t.datetime "assigned_at"
     t.string "status", default: "pending", null: false
-    t.integer "employee_id", null: false
+    t.integer "user_account_id", null: false
     t.integer "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
-    t.index ["employee_id"], name: "index_tasks_on_employee_id"
     t.index ["request_id"], name: "index_tasks_on_request_id"
+    t.index ["user_account_id"], name: "index_tasks_on_user_account_id"
   end
 
   create_table "user_accounts", force: :cascade do |t|
@@ -132,13 +122,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "name", null: false
+    t.string "id_card", null: false
+    t.integer "status", default: 1, null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "employee_id", null: false
+    t.integer "campus_id"
+    t.index ["campus_id"], name: "index_user_accounts_on_campus_id"
     t.index ["confirmation_token"], name: "index_user_accounts_on_confirmation_token", unique: true
     t.index ["email"], name: "index_user_accounts_on_email", unique: true
-    t.index ["employee_id"], name: "index_user_accounts_on_employee_id"
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
@@ -158,7 +150,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
     t.index ["work_building_id"], name: "index_work_locations_on_work_building_id"
   end
 
-  add_foreign_key "employees", "campus", column: "campus_id"
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "log_entries", "requests"
   add_foreign_key "log_entries", "user_accounts"
@@ -172,9 +163,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_193005) do
   add_foreign_key "requests", "campus", column: "campus_id"
   add_foreign_key "task_observations", "tasks"
   add_foreign_key "task_observations", "user_accounts"
-  add_foreign_key "tasks", "employees"
   add_foreign_key "tasks", "requests"
-  add_foreign_key "user_accounts", "employees"
+  add_foreign_key "tasks", "user_accounts"
+  add_foreign_key "user_accounts", "campus", column: "campus_id"
   add_foreign_key "work_buildings", "campus", column: "campus_id"
   add_foreign_key "work_locations", "work_buildings"
 end

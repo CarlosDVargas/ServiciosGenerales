@@ -5,7 +5,7 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.datetime :finished_at
       t.datetime :assigned_at
       t.string :status, null: false, default: 'pending'
-      t.belongs_to :employee, foreign_key: true, index: true, null: false
+      t.belongs_to :user_account, foreign_key: true, index: true, null: false
       t.belongs_to :request, foreign_key: true, index: true, null: false
 
       t.timestamps

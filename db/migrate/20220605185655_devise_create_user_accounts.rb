@@ -33,6 +33,8 @@ class DeviseCreateUserAccounts < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
       t.string :name, null: false
+      t.string :id_card, null: false
+      t.integer :status, null: false, default: 1
       t.integer :role, null: false, default: 0
       t.timestamps null: false
     end
