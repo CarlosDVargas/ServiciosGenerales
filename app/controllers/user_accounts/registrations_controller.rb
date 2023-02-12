@@ -3,6 +3,7 @@
 class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  skip_before_action :require_no_authentication, only: [:new, :create]
 
   # GET /resource/sign_up
   def new
@@ -11,7 +12,13 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    byebug
+    user = UserAccount.new(email: params[:user_account][:email], name: params[:user_account][:name],
+                           id_card: params[:user_account][:id_card],
+                           password_confirmation: params[:user_account][:password_confirmation],
+                           role: 0, campus_id: 1)
+    user.save
+    redirect_to root_path
   end
 
   # GET /resource/edit

@@ -7,11 +7,14 @@ class UserAccount < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  enum role: %i[employee assistant admin]
+  validates :id_card, presence: true, uniqueness: true
 
-  belongs_to :employee, dependent: :destroy
+  enum role: %i[admin employee]
+
+  enum status: %i[active inactive]
 
   has_many :task_observations, dependent: :destroy
+
   has_many :tasks, through: :task_observations
 
   has_many :request_deny_reasons
@@ -20,9 +23,23 @@ class UserAccount < ApplicationRecord
 
   has_many :reopen_reasons
 
+  has_many :tasks
+
+  has_many :requests, through: :tasks
+
+  belongs_to :campus
+
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :employee
+  end
+
+  def set_default_status
+    self.status ||= :active
+  end
+
+  def active_requests
+    requests.where(id: tasks.where(active: true).pluck(:request_id))
   end
 end

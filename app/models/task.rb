@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :employee
+  belongs_to :user_account
   belongs_to :request
 
   has_many :task_observations, dependent: :destroy
