@@ -9,9 +9,9 @@ class UserAccount < ApplicationRecord
 
   validates :id_card, presence: true, uniqueness: true
 
-  enum role: %i[admin employee]
+  enum role: %i[admin worker]
 
-  enum status: %i[active inactive]
+  enum status: %i[inactive active]
 
   has_many :task_observations, dependent: :destroy
 

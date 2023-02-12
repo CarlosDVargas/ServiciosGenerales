@@ -24,8 +24,8 @@
                 Trabajadores
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Agregar", new_employee_path(:type => "worker"), class: "dropdown-item" %>
-                <%= link_to "Listar", employees_path(:type => "worker"), class: "dropdown-item" %>
+                <%= link_to "Agregar", new_user_account_registration_path(:role => "worker"), class: "dropdown-item" %>
+                <%= link_to "Listar", employees_path(:role => "worker"), class: "dropdown-item" %>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -33,8 +33,8 @@
                 Administradores
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Agregar", new_employee_path(:type => "admin"), class: "dropdown-item" %>
-                <%= link_to "Listar", employees_path(:type => "admin"), class: "dropdown-item" %>
+                <%= link_to "Agregar", new_user_account_registration_path(:role => "admin"), class: "dropdown-item" %>
+                <%= link_to "Listar", employees_path(:role => "admin"), class: "dropdown-item" %>
               </div>
             </li>
           <% end %>

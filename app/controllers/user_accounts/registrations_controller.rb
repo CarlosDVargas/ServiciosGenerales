@@ -4,19 +4,23 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   skip_before_action :require_no_authentication, only: [:new, :create]
+  before_action :set_role, only: %i[new index]
 
   # GET /resource/sign_up
   def new
-    super
+    #byebug
+    @user_account = UserAccount.new
+    @user_account.role = @role
   end
 
   # POST /resource
   def create
     byebug
     user = UserAccount.new(email: params[:user_account][:email], name: params[:user_account][:name],
-                           id_card: params[:user_account][:id_card],
-                           password_confirmation: params[:user_account][:password_confirmation],
-                           role: 0, campus_id: 1)
+                           id_card: params[:user_account][:id_card], campus_id: Campus.first.id,
+                           role: params[:user_account][:role])
+    user.password = "Contra#{user.id_card}"
+    user.status = params[:user_account][:status] == 'Activo' ? 1 : 0
     user.save
     redirect_to root_path
   end
@@ -66,4 +70,12 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+
+  private
+
+  def set_role
+    @role = params[:role]
+  end
+
 end
