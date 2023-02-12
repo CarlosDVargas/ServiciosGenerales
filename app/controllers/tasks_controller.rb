@@ -31,19 +31,19 @@ class TasksController < ApplicationController
                  Request.find(params[:request_id])
                end
     if @request.tasks.empty?
-      Task.create(employee_id: user.employee.id, request_id: @request.id, status: 'admin')
+      Task.create(user_account_id: user.id, request_id: @request.id, status: 'admin')
     end
-    @employees&.each do |employee_id|
-      task = Task.find_by(employee_id:, request_id: @request.id)
+    @employees&.each do |user_account_id|
+      task = Task.find_by(user_account_id:, request_id: @request.id)
       if task.nil?
-        Task.create(employee_id:, request_id: @request.id)
+        Task.create(user_account_id:, request_id: @request.id)
       else
         task.active = true
         task.save
       end
-      @employee = Employee.find(employee_id)
+      worker = UserAccount.find(user_account_id)
       LogEntry.create(user_account: current_user_account, request: @request,
-                      entry_message: "#{user.name} asignó a #{@employee.user_account.name} a la solicitud")
+                      entry_message: "#{user.name} asignó a #{worker.name} a la solicitud")
     end
     if @request.status == 'pending'
       RequestMailer.request_accepted(@request).deliver_later
@@ -65,13 +65,13 @@ class TasksController < ApplicationController
       end
     end
     if !set_employees_for_destroy.nil?
-      @employees&.each do |employee_id|
-        task = Task.find_by(employee_id: Integer(employee_id), request_id: @request.id)
+      @employees&.each do |user_account_id|
+        task = Task.find_by(user_account_id:, request_id: @request.id)
         task.active = false
         task.save
-        @employee = Employee.find(employee_id)
+        worker = UserAccount.find(user_account_id)
         LogEntry.create(user_account: current_user_account, request: @request,
-                        entry_message: "#{current_user_account.name} eliminó a #{@employee.user_account.name} de la solicitud")
+                        entry_message: "#{current_user_account.name} eliminó a #{worker.name} de la solicitud")
       end
     elsif !set_employees_for_create.nil?
       create
@@ -99,7 +99,7 @@ class TasksController < ApplicationController
 
   # Take the task from the Task table depending the request_id and employee_id
   def set_task
-    employee_id = current_user_account.employee_id
+    user_account_id = current_user_account.id
     if @request.nil?
       if params[:task][:request_id].present?
         @request = Request.find(params[:task][:request_id])
@@ -107,17 +107,12 @@ class TasksController < ApplicationController
         @request = Request.find(params[:task][:request])
       end
     end
-    @task = Task.where(employee_id:, request_id: @request.id).first
+    @task = Task.where(user_account_id:, request_id: @request.id).first
   end
 
   # Find the request using the request_id from the params
   def set_request
     @request = Request.find(params[:request])
-  end
-
-  # Take an specific employee from the Employee table depending the user_id
-  def employee(id)
-    @employee = Employee.find(id)
   end
 
   # Take all the employees from the Employee table

@@ -1,6 +1,6 @@
 <tr>
-  <td class="text-center"><%= employee.employee_id_card %></td>
-  <td class="text-center"><%= employee.user_account.name %></td>
+  <td class="text-center"><%= employee.id_card %></td>
+  <td class="text-center"><%= employee.name %></td>
   <% if list_type == "remove" %>
     <td class="text-center">
       <% if employee.tasks.where(:request_id => @request.id).first.status != "pending" %>

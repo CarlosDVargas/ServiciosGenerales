@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
 
   # GET /requests or /requests.json
   def index
-    @requests = Request.where(campus: current_user_account.employee.campus)
+    @requests = Request.where(campus: current_user_account.campus)
     @queries = @requests.ransack(params[:q])
     @requests = @queries.result
     @status = params[:status] if params[:status]
@@ -188,7 +188,7 @@ class RequestsController < ApplicationController
 
       # Case for the admin
     else
-      requests = Request.where(campus: current_user_account.employee.campus)
+      requests = Request.where(campus: current_user_account.campus)
       @requests = case @status
                   when 'in_process'
                     find_requests(requests, 'in_process')

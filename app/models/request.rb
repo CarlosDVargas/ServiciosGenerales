@@ -36,15 +36,16 @@ class Request < ApplicationRecord
   has_many :log_entries, -> { order(created_at: :asc) }, dependent: :destroy
 
   def employees_currently_working
-    Employee.where(id: tasks.where(active: true).pluck(:employee_id),
-                   employee_type: 'Trabajador',
-                   employee_status: 'Activo')
+    UserAccount.where(id: tasks.where(active: true).pluck(:id),
+                      role: 'worker', status: 'active')
   end
 
   def employees_not_working
-    Employee.where.missing(:tasks).or(
-      Employee.where(id: tasks.where(active: false).pluck(:employee_id),
-                     employee_type: 'Trabajador',
-                     employee_status: 'Activo'))
+    UserAccount.where.missing(:tasks).and(
+      UserAccount.where(role: 'worker', status: 'active')
+    ).or(
+      UserAccount.where(id: tasks.where(active: false).pluck(:id),
+                        role: 'worker', status: 'active')
+    )
   end
 end
