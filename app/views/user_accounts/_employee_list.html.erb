@@ -11,9 +11,9 @@
   <% if !@employees.empty? %>
     <% @employees.each do |employee| %>
       <tr>
-        <td class="text-center" scope="row"><%= employee.employee_id_card %></td>
-        <td class="text-center"><%= employee.user_account.name %></td>
-        <td class="text-center"><%= employee.employee_status %></td>
+        <td class="text-center"><%= employee.id_card %></td>
+        <td class="text-center"><%= employee.name %></td>
+        <td class="text-center"><%= employee.status == 'active'? 'Activo' : 'Inactivo' %></td>
         <td class="text-center">
           <div class="btn-group">
             <%= link_to employee, class: "btn btn-sm btn-primary" do %>

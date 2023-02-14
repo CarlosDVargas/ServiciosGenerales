@@ -1,0 +1,32 @@
+<div id="<%= dom_id user_account %>">
+  <div class="container mt-3 mb-3 p-5 border border-2 rounded-3">
+    <h4 class="text-center">Información del empleado</h4>
+    <br>
+    <div>
+      <p>
+        <strong>Nombre completo:</strong>
+        <%= user_account.name %>
+      </p>
+      <p>
+        <strong>Número de cédula:</strong>
+        <%= user_account.id_card %>
+      </p>
+      <p>
+        <strong>Email:</strong>
+        <%= user_account.email %>
+      </p>
+      <p>
+        <strong>Estado:</strong>
+        <%= user_account.status %>
+      </p>
+      <p>
+        <strong>Sede de trabajo:</strong>
+        <%= user_account.campus.name %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <%= link_to "Volver a la lista de empleados", employees_path %>
+</div>

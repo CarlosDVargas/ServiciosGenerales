@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     registrations: "user_accounts/registrations",
   }
 
+  resources :user_accounts, only: [:index, :show] do
+    collection do
+      match 'search' => 'user_accounts#search', via: [:get, :post], as: :search
+    end
+  end
+
+  get '/employees', to: 'user_accounts#index', as: 'employees'
+
   resources :requests do
     collection do
       match 'search' => 'requests#search', via: [:get, :post], as: :search
@@ -29,11 +37,5 @@ Rails.application.routes.draw do
   get '/tasks/edit', to: 'tasks#edit', as: 'edit_task'
   post '/tasks/edit', to: 'tasks#update'
   resources :tasks, except: [:show]
-
-  resources :employees do
-    collection do
-      match 'search' => 'employees#search', via: [:get, :post], as: :search
-    end
-  end
 
 end
