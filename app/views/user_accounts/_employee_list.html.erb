@@ -20,14 +20,7 @@
               <i class="bi bi-person"></i>
               Ver
             <% end %>
-            <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-secondary" do %>
-              <i class="bi bi-pencil-square"></i>
-              Editar
-            <% end %>
-            <%= link_to employee, method: :delete, data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
-              <i class="bi bi-trash"></i>
-              Eliminar
-            <% end %>
+
           </div>
         </td>
       </tr>
