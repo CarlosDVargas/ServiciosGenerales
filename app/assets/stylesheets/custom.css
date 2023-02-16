@@ -32,7 +32,8 @@
     --success-color-hover: #328336;
 
     --warning-color: #E79800;
-    --danger-color: #E74C3C;
+    --danger-color: #c92a19;
+    --danger-color-hover: #b62515;
 
     /* Border radius */
     --border-radius-sm: .5rem;
@@ -214,6 +215,10 @@ input[type="submit"] {
     text-align: center !important;
 }
 
+.border-bottom-2 {
+    border-bottom: 1px solid #000 !important;
+}
+
 .responsive-divider {
     border-bottom: 1px solid var(--light-gray-hover);
     padding-bottom: 1.8rem;
@@ -328,6 +333,7 @@ input[type="submit"] {
 
 .btn-default {
     display: block;
+    width: 100%;
     text-align: center;
     padding: var(--btn-padding);
     font-weight: var(--fw-bold-lg);
@@ -345,6 +351,7 @@ input[type="submit"] {
 
 @media (min-width: 992px) {
     .btn-default {
+        width: auto;
         display: inline-block;
     }
 }
@@ -376,6 +383,16 @@ input[type="submit"] {
 
 .btn-submit:hover {
     background-color: var(--primary-color-hover);
+    color: var(--light-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-color-hover);
     color: var(--light-color);
 }
 
@@ -1098,15 +1115,21 @@ input[type="submit"] {
 
 .report-actions {
     display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5rem;
 }
 
-.report-actions a:nth-child(2) {
-    margin-bottom: .2rem;
+@media (min-width: 992px) {
+    .report-actions {
+        flex-direction: row;
+    }
 }
 
-/*--------------------------
-------- NEW EMPLOYEE -------
-----------------------------*/
+/*--------------------------------
+------- NEW EMPLOYEE/ADMIN -------
+----------------------------------*/
 .input .input-form-check {
     margin: 1rem 0;
     display: flex;
@@ -1144,3 +1167,90 @@ input[type="submit"] {
     padding: 1rem;
 }
 
+/*--------------------------
+------- REQUEST LIST -------
+----------------------------*/
+.list-content {
+    margin-top: 5rem;
+}
+
+ul.nav.nav-tabs {
+    border: 1px solid #cbcdcb;
+    border-top-left-radius: var(--border-radius-sm);
+    border-top-right-radius: var(--border-radius-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 992px) {
+    ul.nav.nav-tabs {
+        flex-direction: row;
+        border: none;
+        border-bottom: 1px solid #cbcdcb;
+    }    
+}
+
+.nav-item-tab {
+    font-size: 1.8rem;
+}
+
+.nav-item-tab .nav-link {
+    padding: 1.2rem 3rem 1rem;
+    color: var(--dark-color);
+}
+
+li.nav-item-tab a.nav-link:hover {
+    color: inherit;
+    border: 1px solid #cbcdcb;
+}
+
+.nav-item-tab .nav-link.link-active {
+    background-color: var(--light-color-hover);
+    font-weight: var(--fw-bold-rg);
+    border: 1px solid #cbcdcb;
+}
+
+.nav-item-tab .nav-link.link-active:hover {
+    border: 1px solid #cbcdcb;
+    color: inherit;
+}
+
+@media (min-width: 992px) {
+    .nav-item-tab .nav-link.link-active {
+        border-bottom: 1px solid var(--light-color-hover);
+    }
+
+    .nav-item-tab .nav-link.link-active:hover {
+        border-bottom: 1px solid var(--light-color-hover);
+    }
+}
+
+.request-list-border {
+    border: 1px solid #cbcdcb;
+    border-top: none;
+    border-bottom: none;
+}
+
+.request-list-border h3 {
+    color: var(--dark-color-hover);
+    margin-bottom: 0;
+}
+
+table.table-bordered > :not(caption) > * {
+    border-width: 1px 1px;
+}
+
+table.table-bordered > thead > tr > th{
+    border: none;
+}
+
+.custom-border {
+    border: 1px solid #cbcdcb;
+}
+
+/* table {
+    border:1px solid #16c000;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid #c00000;
+} */
