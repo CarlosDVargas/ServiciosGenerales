@@ -1116,6 +1116,7 @@ input[type="submit"] {
 @media (min-width: 992px) {
     .input .input-form-check {
         flex-direction: row-reverse;
+        justify-content: flex-end;
     }    
 }
 
