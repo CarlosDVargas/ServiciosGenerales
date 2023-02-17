@@ -15,7 +15,7 @@ class EmployeesController < ApplicationController
                           else
                             @employees.where(employee_type: 'Administrador')
                           end
-    @query = @employees.ransack(params[:q])
+    @query = @employees_selected.ransack(params[:q])
     @employees = @query.result
   end
 
