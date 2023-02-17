@@ -9,10 +9,10 @@
       <div class="input">
           <%= f.label :employee_status, 'Estado' %>
           <%= f.select :employee_status_eq, options_for_select(Employee.all.employee_statuses), {include_blank: "Seleccione el estado"}, class: "form-select" %>
-          <% f.text_field :employee_type_eq, value: @type %>
+          <%= f.hidden_field :employee_type_eq, value: @type %>
       </div>
 
-      <%= f.submit "Buscar", class: "btn-default btn-submit" %>
+      <%= f.submit "Buscar", class: "btn-default btn-submit"%>
     <% end %>
 
     <%= link_to "Agregar empleado", new_employee_path(:type => "worker"), class: "btn-default btn-submit" %>

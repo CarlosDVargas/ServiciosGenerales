@@ -9,6 +9,9 @@ class EmployeesController < ApplicationController
   # GET /employees or /employees.json
   def index
     @employees = Employee.where(campus: current_user_account.employee.campus)
+
+    @employee_type = params[:type]
+
     @type ||= params[:q][:employee_type_eq]
     @employees_selected = if @type == 'worker'
                             @employees.where(employee_type: 'Trabajador')
