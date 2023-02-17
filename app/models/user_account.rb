@@ -39,6 +39,12 @@ class UserAccount < ApplicationRecord
     self.status ||= :active
   end
 
+  def change_status
+    status = self.status
+    self.status = status == 'active' ? 'inactive' : 'active'
+    save
+  end
+
   def active_requests
     requests.where(id: tasks.where(active: true).pluck(:request_id))
   end

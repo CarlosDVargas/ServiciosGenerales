@@ -13,12 +13,16 @@
       <tr>
         <td class="text-center"><%= employee.id_card %></td>
         <td class="text-center"><%= employee.name %></td>
-        <td class="text-center"><%= employee.status == 'active'? 'Activo' : 'Inactivo' %></td>
+        <td class="text-center"><%= employee.status == 'active' ? 'Activo' : 'Inactivo' %></td>
         <td class="text-center">
           <div class="btn-group">
             <%= link_to employee, class: "btn btn-sm btn-primary" do %>
               <i class="bi bi-person"></i>
               Ver
+            <% end %>
+            <%= button_to change_status_user_account_path(employee), class: "btn btn-sm btn-warning", method: :put do %>
+              <i class="bi bi-pencil"></i>
+              Cambiar estado
             <% end %>
 
           </div>

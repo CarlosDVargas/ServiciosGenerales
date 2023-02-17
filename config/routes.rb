@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     collection do
       match 'search' => 'user_accounts#search', via: [:get, :post], as: :search
     end
+    member do
+      put :change_status
+    end
   end
 
   get '/employees', to: 'user_accounts#index', as: 'employees'

@@ -1,6 +1,6 @@
 class UserAccountsController < ApplicationController
   before_action :set_role, only: %i[new index search]
-  before_action :set_user_account, only: %i[show edit update destroy]
+  before_action :set_user_account, only: %i[show change_status]
 
   def index
     @employees = UserAccount.where(campus: current_user_account.campus)
@@ -16,6 +16,13 @@ class UserAccountsController < ApplicationController
 
   # GET /user_accounts/1 or /user_accounts/1.json
   def show; end
+
+  def change_status
+    status = @user_account.status
+    @user_account.status = status == 'active' ? 'inactive' : 'active'
+    @user_account.save
+    redirect_back_or_to employees_path(role: @user_account.role), notice: 'El estado del usuario ha sido cambiado'
+  end
 
   private
 

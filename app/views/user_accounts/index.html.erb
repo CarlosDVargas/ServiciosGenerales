@@ -1,5 +1,13 @@
 <div class="container">
-  <h1 class="text-center">Empleados</h1>
+  <h1 class="text-center">
+    <% if @role %>
+      <% if @role == 0 || @role == 'admin' %>
+        Administradores
+      <% elsif @role == 1 || @role == 'worker' %>
+        Trabajadores
+      <% end %>
+    <% end %>
+  </h1>
   <%= search_form_for @query, url: search_user_accounts_path, data: { turbo: false } do |f| %>
     <div class="container mb-4 mt-4">
       <h5>Filtro:</h5>
