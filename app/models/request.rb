@@ -37,18 +37,18 @@ class Request < ApplicationRecord
 
   def employees_currently_working
     UserAccount.where(id: tasks.where(active: true, request_id: self.id).pluck(:user_account_id),
-                      role: 'worker', status: 'active')
+                      role: 'worker', status: 'Activo')
   end
 
   def employees_not_working
     UserAccount.where.missing(:tasks).and(
-      UserAccount.where(role: 'worker', status: 'active')
+      UserAccount.where(role: 'worker', status: 'Activo')
     ).or(
       UserAccount.where(id: tasks.where(active: false, request_id: self.id).pluck(:user_account_id),
-                        role: 'worker', status: 'active')
+                        role: 'worker', status: 'Activo')
     ).or(
       UserAccount.where.not(id: tasks.where(request_id: self.id).pluck(:user_account_id)).and(
-        UserAccount.where(role: 'worker', status: 'active')
+        UserAccount.where(role: 'worker', status: 'Activo')
       )
     ).distinct
   end

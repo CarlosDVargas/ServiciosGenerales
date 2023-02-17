@@ -13,4 +13,7 @@ class UserMailer < Devise::Mailer
     super
   end
 
+  def new_request(request)
+    @request = request
+  end
 end

@@ -11,7 +11,7 @@ class UserAccount < ApplicationRecord
 
   enum role: %i[admin worker]
 
-  enum status: %i[inactive active]
+  enum status: {Inactivo: 0, Activo: 1}
 
   has_many :task_observations, dependent: :destroy
 

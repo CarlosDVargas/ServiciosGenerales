@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col">
           <%= f.label :status, 'Estado' %>
-          <%= f.select :status_eq, options_for_select(Employee.all.employee_statuses), { include_blank: "Seleccione el estado a buscar" }, class: "form-select" %>
+          <%= f.select :status_eq, options_for_select(UserAccount.all.statuses), { include_blank: "Seleccione el estado a buscar" }, class: "form-select" %>
           <%= f.text_field :role_eq, value: @role, class: "d-none" %>
         </div>
         <div class="col">
