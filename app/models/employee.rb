@@ -15,6 +15,6 @@ class Employee < ApplicationRecord
   enum employee_type: { "Trabajador": 0, "Administrador": 1 }
 
   def active_requests
-    requests.where(id: tasks.where(active: true).pluck(:request_id))
+    requests.where(id: tasks.where(active: true, user_account_id: self.id).pluck(:request_id))
   end
 end

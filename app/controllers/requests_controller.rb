@@ -174,8 +174,8 @@ class RequestsController < ApplicationController
   # @return [Object]
   def set_requests
     # Case for the employee
-    if current_user_account.role == 'employee'
-      employee = Employee.find_by(user_account: current_user_account)
+    if current_user_account.role == 'worker'
+      employee = current_user_account
       employee_requests = employee.active_requests
       @requests = case @status
                   when 'completed'

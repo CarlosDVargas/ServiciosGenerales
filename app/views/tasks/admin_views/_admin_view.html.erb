@@ -20,13 +20,13 @@
   <h5>Historial de cambios:</h5>
   <%= render 'requests/admin_views/request_log' %>
 </div>
-<div class="m-3 mh-25">
-  <h5>Reabrir solicitud:</h5>
-  <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-    <%= render 'requests/admin_views/request_reasons', request: @request, type: "reopen" %>
-  </div>
-</div>
 <% if @request.status == "completed" %>
+  <div class="m-3 mh-25">
+    <h5>Reabrir solicitud:</h5>
+    <div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
+      <%= render 'requests/admin_views/request_reasons', request: @request, type: "reopen" %>
+    </div>
+  </div>
   <div class="container m-2">
     <%= link_to "Cerrar solicitud", change_status_request_path(@request, :change_to => "close"), class: "btn btn-primary" %>
   </div>

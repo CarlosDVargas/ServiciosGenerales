@@ -5,10 +5,9 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   skip_before_action :require_no_authentication, only: [:new, :create]
 
-
   # GET /resource/sign_up
   def new
-    #byebug
+    # byebug
     @user_account = UserAccount.new
     @user_account.role = @role
   end
@@ -70,7 +69,6 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
 
   private
 
