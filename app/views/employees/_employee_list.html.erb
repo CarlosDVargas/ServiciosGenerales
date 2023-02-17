@@ -1,37 +1,49 @@
-<table class= "table table-hover table-sm">
-  <thead>
-    <tr>
-      <th class="table-header text-center" scope="col">Cédula</th>
-      <th class="table-header text-center" scope="col">Nombre</th>
-      <th class="table-header text-center" scope="col">Estado</th>
-      <th class="table-header text-center" scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if !@employees.empty? %>
+<% if @employees.empty? %>
+  <div class="text-center py-5">
+    <p class="fst-italic fs-sm"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay solicitudes para mostrar</p>
+  </div>
+<% else %>
+  <table class="table table-bordered">
+    <thead>
+      <tr style="background-color: var(--light-color-hover);" class="text-center custom-border">
+        <th class="tablet-display">N° Cédula</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
       <% @employees.each do |employee| %>
-        <tr>
-          <td class="text-center" scope="row"><%= employee.employee_id_card %></td>
-          <td class="text-center"><%= employee.user_account.name %></td>
-          <td class="text-center"><%= employee.employee_status%></td>
-          <td class="text-center">
-            <div class="btn-group">
-              <%= link_to employee, class: "btn btn-sm btn-primary" do %>
-                <i class="bi bi-person"></i>
-                Ver
+        <tr class="text-center custom-border">
+          <td class="py-3 tablet-display"><%= employee.employee_id_card %></td>
+          <td class="py-3"><%= employee.user_account.name %></td>
+          <td class="py-3"><%= employee.employee_status%></td>
+          <td class="py-3">
+            <div class="report-actions">
+              <%= link_to "Ver", employee, class: "btn-default btn-submit desktop-display" %>
+
+              <%= link_to employee, class: "btn-default btn-submit mobile-display" do %>
+                <i class="bi bi-eye"></i>
               <% end %>
-              <%= link_to edit_employee_path(employee), class: "btn btn-sm btn-secondary" do %>
+
+
+              <%= link_to "Editar", edit_employee_path(employee), class: "btn-default btn-dark desktop-display" %>
+
+              <%= link_to edit_employee_path(employee), class: "btn-default btn-dark mobile-display" do %>
                 <i class="bi bi-pencil-square"></i>
-                Editar
               <% end %>
-              <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Eliminar este registro?" }, class: "btn btn-sm btn-danger" do %>
+
+
+              <%= link_to "Eliminar", employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Desear eliminar este registro?" }, class: "btn-default btn-danger desktop-display"%>
+
+              <%= link_to employee, method: :delete,data: { turbo_method: :delete, turbo_confirm: "¿Desear eliminar este registro?" }, class: "btn-default btn-danger mobile-display" do %>
                 <i class="bi bi-trash"></i>
-                Eliminar
               <% end %>
-            </div>
+            </div>    
           </td>
         </tr>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>

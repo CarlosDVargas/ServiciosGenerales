@@ -1,28 +1,25 @@
-<div class="container">
-  <h1 class="text-center">Empleados</h1>
-  <%= search_form_for @query, url: search_employees_path, data: { turbo: false } do |f| %>
-    <div class="container mb-4 mt-4">
-      <h5>Filtro:</h5>
-      <div class="row">
-        <div class="col">
+<main class="main main-form container">
+  <h1 class="text-center mb-1 uppercase">Lista de <%= @type == 'worker' ? 'empleados' : 'administradores' %></h1>
+  <hr class="mb-1">
+
+  <div class="status-flex">
+    <%= search_form_for @query, url: search_employees_path, class: "status-form", data: { turbo: false } do |f| %>
+      <h3 class="filters-title fw-bold mt-5 mb-3 fs-rg">Filtrar:</h3>
+    
+      <div class="input">
           <%= f.label :employee_status, 'Estado' %>
-          <%= f.select :employee_status_eq, options_for_select(Employee.all.employee_statuses), {include_blank: "Seleccione el estado a buscar"}, class: "form-select" %>
+          <%= f.select :employee_status_eq, options_for_select(Employee.all.employee_statuses), {include_blank: "Estado"}, class: "form-select" %>
           <% f.text_field :employee_type_eq, value: @type %>
-        </div>
-        <div class="col">
-          <br>
-          <%= f.submit "Buscar", class: "btn btn-primary" %>
-        </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<div class="container">
-  <div id="employees">
-    <div class="row">
-      <div class="container mt-3 mb-3 p-5 border border-2 rounded-3" >
-        <%= render partial: 'employees/employee_list', locals: { employees: @employees} %>
-      </div>
-    </div>
+
+      <%= f.submit "Buscar", class: "btn-default btn-submit" %>
+    <% end %>
+
+    <%= link_to "Agregar empleado", new_employee_path(:type => "worker"), class: "btn-default btn-submit" %>
   </div>
-</div>
+
+  <hr class="mb-3 mt-negative-1">
+  <h3 class="py-4 fs-rg">Tabla de resultados</h3>
+
+  <%= render partial: 'employees/employee_list', locals: { employees: @employees} %>
+</main>
