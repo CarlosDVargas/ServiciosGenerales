@@ -1236,6 +1236,8 @@ li.nav-item-tab a.nav-link:hover {
     margin-bottom: 0;
 }
 
+/* Bootstrap table custom styling */
+
 table.table-bordered > :not(caption) > * {
     border-width: 1px 1px;
 }
@@ -1247,10 +1249,3 @@ table.table-bordered > thead > tr > th{
 .custom-border {
     border: 1px solid #cbcdcb;
 }
-
-/* table {
-    border:1px solid #16c000;
-}
-table.table-bordered > tbody > tr > td{
-    border:1px solid #c00000;
-} */
