@@ -13,7 +13,39 @@ class UserMailer < Devise::Mailer
     super
   end
 
-  def new_request(request)
+  def new_request_admin(request, admin)
     @request = request
+    @admin = admin
+
+    mail to: @admin.email, subject: "Nueva solicitud de servicio registrada en el sistema"
+  end
+
+  def request_assigned(request, worker)
+    @request = request
+    @worker = worker
+
+    mail to: @worker.email, subject: "Solicitud de servicio: #{request.identifier}"
+  end
+
+  def request_reassigned(request, worker)
+    @request = request
+    @worker = worker
+
+    mail to: @worker.email, subject: "Solicitud de servicio: #{request.identifier}"
+  end
+
+  def request_removed(request, worker)
+    @request = request
+    @worker = worker
+
+    mail to: @worker.email, subject: "Solicitud de servicio: #{request.identifier}"
+  end
+
+  def request_reopened(request, worker, reasons)
+    @request = request
+    @worker = worker
+    @reasons = reasons
+
+    mail to: @worker.email, subject: "Solicitud de servicio: #{request.identifier}"
   end
 end

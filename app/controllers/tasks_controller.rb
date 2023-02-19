@@ -35,13 +35,15 @@ class TasksController < ApplicationController
     end
     @employees&.each do |user_account_id|
       task = Task.find_by(user_account_id:, request_id: @request.id)
+      worker = UserAccount.find(user_account_id)
       if task.nil?
         Task.create(user_account_id:, request_id: @request.id)
+        UserMailer.request_assigned(@request, worker).deliver_later
       else
         task.active = true
         task.save
+        UserMailer.request_reassigned(@request, worker).deliver_later
       end
-      worker = UserAccount.find(user_account_id)
       LogEntry.create(user_account: current_user_account, request: @request,
                       entry_message: "#{user.name} asignó a #{worker.name} a la solicitud")
     end
@@ -70,6 +72,7 @@ class TasksController < ApplicationController
         task.active = false
         task.save
         worker = UserAccount.find(user_account_id)
+        UserMailer.request_removed(@request, worker).deliver_later
         LogEntry.create(user_account: current_user_account, request: @request,
                         entry_message: "#{current_user_account.name} eliminó a #{worker.name} de la solicitud")
       end

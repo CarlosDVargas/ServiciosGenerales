@@ -38,6 +38,7 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
+    request_location = RequestLocation.new
     @request = Request.new(request_params)
     campus = params[:request][:campus_id]
     @request.status = 'pending'
@@ -45,7 +46,6 @@ class RequestsController < ApplicationController
     date = Time.now.strftime('%d%m%Y')
     @request.identifier = "#{@request.campus.campus_id}-#{date}-#{rand.to_s[2..6]}"
     unless params[:request][:work_location_id] == '0'
-      request_location = RequestLocation.new
       work_location = params[:request][:work_location].to_i
       request_location.work_building = WorkBuilding.find(params[:request][:work_building])
       if work_location.zero?
@@ -61,6 +61,10 @@ class RequestsController < ApplicationController
         request_location.request = @request
         request_location.save
         RequestMailer.new_request(@request).deliver_later
+        admins = UserAccount.where(role: 'admin')
+        admins.each do |admin|
+          UserMailer.new_request_admin(@request, admin).deliver_later
+        end
         format.html { redirect_to request_url(@request), notice: 'La solicitud fue creada correctamente.' }
         format.json { render :show, status: :created, location: @request }
       else
@@ -73,14 +77,17 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1 or /requests/1.json
   # @return [Object]
   def update
-    byebug
     respond_to do |format|
       reasons, type = get_reasons
       if reasons.empty? || type.nil?
         format.html { render :edit }
         format.json { render json: @request.errors }
       else
-        create_reasons(reasons, type)
+        reasons = create_reasons(reasons, type)
+        workers = @request.employees_currently_working
+        workers.each do |worker|
+          UserMailer.request_reopened(@request, worker, reasons).deliver_later if type != 'deny'
+        end
         format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
         format.json { head :no_content }
       end
@@ -154,6 +161,8 @@ class RequestsController < ApplicationController
                                     request_deny_reasons: %i[_destroy reason request_id user_id],
                                     reopen_reasons: %i[_destroy reason request_id user_id])
   end
+
+  private
 
   # Initializes the dictionary with the default values
   def set_dictionary
@@ -238,6 +247,7 @@ class RequestsController < ApplicationController
 
   # Creates the deny reasons or reopen reasons of a request
   def create_reasons(reasons, type)
+    valid_reasons = []
     reasons.each do |reason|
       if reason[:_destroy] == "false"
         if type == 'deny'
@@ -246,6 +256,7 @@ class RequestsController < ApplicationController
         else
           ReopenReason.create(reason: reason[:reason], request: @request,
                               user_account: current_user_account)
+          valid_reasons << reason[:reason]
           LogEntry.create(user_account: current_user_account, request: @request,
                           entry_message: "Reabrió la solicitud, razón: #{reason[:reason]}")
         end
@@ -259,6 +270,7 @@ class RequestsController < ApplicationController
     else
       @request.update(status: 'in_process')
     end
+    valid_reasons
   end
 
   # Depending the value of the completed? attribute of the tasks of the current request,

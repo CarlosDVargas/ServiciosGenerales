@@ -1,0 +1,19 @@
+<h1>Solicitud reabierta</h1>
+
+<p>
+  Hola <%= @worker.name %>, este correo fue generado para indicarle que se le ha reasignado a la
+  solicitud <%= @request.identifier %>. Las siguientes son las observaciones del administrador:
+</p>
+</br>
+<ul>
+  <% @reasons.each do |reason| %>
+    <li><%= reason %></li>
+  <% end %>
+</ul>
+<p>
+  Para ver la solicitud, ingrese al sistema y diríjase a la sección de solicitudes asignadas.
+</p>
+</br>
+<p>
+  <%= root_url %>
+</p>

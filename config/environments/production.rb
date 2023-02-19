@@ -96,6 +96,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = 'servicios-generales-production.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_options = { from: ENV["MAIL_USERNAME"] }
 
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
