@@ -15,7 +15,9 @@
       <%= f.submit "Buscar", class: "btn-default btn-submit"%>
     <% end %>
 
-    <%= link_to "Agregar empleado", new_employee_path(:type => "worker"), class: "btn-default btn-submit" %>
+    <%= link_to new_employee_path(:type => "worker"), class: "btn-default btn-submit" do %>
+      Agregar <%= @type == 'worker' ? 'empleado' : 'administrador' %>
+    <% end %>
   </div>
 
   <hr class="mb-3 mt-negative-1">

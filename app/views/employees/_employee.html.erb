@@ -1,26 +1,30 @@
 <div id="<%= dom_id employee %>">
-  <div class="input input-50">
-    <label for="fullname">Nombre completo</label>
-    <input type="text" id="fullname" value="<%= employee.user_account.name %>" disabled>
+  <div class="form-grid-1">
+    <div class="input">
+      <label for="fullname">Nombre completo</label>
+      <input type="text" id="fullname" value="<%= employee.user_account.name %>" disabled>
+    </div>
+    
+    <div class="input">
+      <label for="employee_id">Número de cédula</label>
+      <input type="text" id="employee_id" value="<%= employee.employee_id_card %>" disabled>
+    </div>
   </div>
 
-  <div class="input input-50">
-    <label for="employee_id">Número de cédula</label>
-    <input type="text" id="employee_id" value="<%= employee.employee_id_card %>" disabled>
-  </div>
+  <div class="form-grid-2">
+    <div class="input">
+      <label for="email">Correo electrónico</label>
+      <input type="text" id="email" value="<%= employee.user_account.email %>" disabled>
+    </div>
+    
+    <div class="input">
+      <label for="campus">Sede de trabajo</label>
+      <input type="text" id="campus" value="<%= employee.campus.name %>" disabled>
+    </div>
 
-  <div class="input input-50">
-    <label for="email">Correo electrónico</label>
-    <input type="text" id="email" value="<%= employee.user_account.email %>" disabled>
-  </div>
-
-  <div class="input input-50">
-    <label for="status">Estado</label>
-    <input type="text" id="status" value="<%= employee.employee_status %>" disabled>
-  </div>
-
-  <div class="input input-50">
-    <label for="campus">Sede de trabajo</label>
-    <input type="text" id="campus" value="<%= employee.campus.name %>" disabled>
+    <div class="input">
+      <label for="status">Estado</label>
+      <input type="text" id="status" value="<%= employee.employee_status %>" disabled>
+    </div>
   </div>
 </div>  
