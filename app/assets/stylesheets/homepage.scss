@@ -1,0 +1,43 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.homepage {
+    margin: 3rem auto;
+    padding: 1rem .7rem 4rem .7rem;
+    backdrop-filter: v.$blur;
+    background-color: v.$blur-background;
+    box-shadow: v.$box-shadow-rg;
+    border-radius: v.$border-radius-rg;
+    -webkit-border-radius: v.$border-radius-rg;
+    -moz-border-radius: v.$border-radius-rg;
+    -ms-border-radius: v.$border-radius-rg;
+    -o-border-radius: v.$border-radius-rg;
+
+    @include m.tablet {
+        width: 70%;
+        padding: 5rem 3rem;
+    }
+
+    @include m.desktop {
+        width: 65%;
+        padding: 5rem 7rem;
+        margin: 0 auto;
+    }
+
+    &__heading {
+        text-transform: none;
+        color: v.$light-color;
+        line-height: 1.2;
+        margin: 3rem 0 5rem 0;
+        padding: 0 3rem;
+        text-align: center;
+
+        @include m.tablet {
+            margin: 0rem 0 5rem 0;
+        }
+    }
+
+    &__button {
+        @include m.button(v.$light-color, v.$dark-color);
+    }
+}

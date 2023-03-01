@@ -34,22 +34,14 @@
     flex-direction: column;
     justify-content: space-between;
     margin: v.$spacing-sm 0;
+    gap: 1rem;
     max-width: 90%;
     margin: 0 auto;
-
-    a:first-child {
-        margin-bottom: 2rem;
-    }
 
     @include m.desktop {
         flex-direction: row;
         justify-content: center;
+        max-width: 100%;
         margin: unset;
-        margin-top: v.$spacing-sm;
-
-        a:first-child {
-            margin-bottom: 0;
-            margin-right: 1rem;
-        }
     }
 }

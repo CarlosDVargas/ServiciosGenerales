@@ -1,29 +1,16 @@
-<div class="container mt-5 mb-5 p-5 border border-2 rounded-3">
-  <div class="row">
-    <div class="col">
-      <h1 class="text-center">
-        Página de inicio
-      </h1>
+<main class="main">
+  <div class="homepage container">
+    <div class="homepage__message">
+      <h1 class="homepage__heading">Bienvenido/a al Sistema de Solicitudes de Servicios Generales de la Sede Occidente</h1>
     </div>
-    <div class="col">
-      <div class="d-grid m-2 p-3 gap-3">
-        <div class="row">
-          <div class="col">
-            <%= link_to new_request_path, class: "btn btn-primary" do %>
-              <i class="bi bi-bookmark-plus"></i>
-              Crear una nueva solicitud
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <%= link_to ask_state_path, class: "btn btn-primary" do %>
-              <i class="bi bi-search"></i>
-              Ver el estado de una solicitud
-            <% end %>
-          </div>
-        </div>
-      </div>
+
+    <div class="button-group homepage__buttons">
+      <%= link_to new_request_path, class:"homepage__button" do %>
+          Crear una nueva solicitud
+      <% end %>
+      <%= link_to ask_state_path, class:"homepage__button" do %>
+        Consultar estado de una solicitud
+      <% end %>
     </div>
   </div>
-</div>
+</main>
