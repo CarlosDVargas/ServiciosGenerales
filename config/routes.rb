@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :log_entries
-  resources :feedbacks
+  resources :log_entries, only: [:index]
+  
+  resources :feedbacks, only: %i[new create]
   root "pages#home"
 
   devise_for :user_accounts, controllers: {
@@ -8,9 +9,9 @@ Rails.application.routes.draw do
     registrations: "user_accounts/registrations",
   }
 
-  resources :user_accounts, only: [:index, :show] do
+  resources :user_accounts, only: %i[index show] do
     collection do
-      match 'search' => 'user_accounts#search', via: [:get, :post], as: :search
+      match 'search' => 'user_accounts#search', via: %i[get post], as: :search
     end
     member do
       put :change_status
@@ -19,13 +20,13 @@ Rails.application.routes.draw do
 
   get '/employees', to: 'user_accounts#index', as: 'employees'
 
-  resources :requests do
+  resources :requests, only: %i[index show edit update] do
     collection do
-      match 'search' => 'requests#search', via: [:get, :post], as: :search
+      match 'search' => 'requests#search', via: %i[get post], as: :search
     end
   end
 
-  resources :requests do
+  resources :requests, only: %i[index show edit update] do
     member do
       get :change_status
     end
@@ -39,6 +40,6 @@ Rails.application.routes.draw do
 
   get '/tasks/edit', to: 'tasks#edit', as: 'edit_task'
   post '/tasks/edit', to: 'tasks#update'
-  resources :tasks, except: [:show]
+  resources :tasks, except: %i[show delete]
 
 end

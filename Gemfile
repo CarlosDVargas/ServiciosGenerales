@@ -87,3 +87,5 @@ gem "ruby-lsp", "~> 0.0.3", :group => :development
 gem "ransack", "~> 3.2"
 
 gem "yard", "~> 0.9.28"
+
+gem "hashid-rails", "~> 1.4"

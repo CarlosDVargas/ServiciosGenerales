@@ -18,7 +18,11 @@ class TasksController < ApplicationController
 
   # GET /tasks/edit
   def edit
-    set_task
+    if current_user_account
+      set_task
+    else
+      return_to_root('No tienes permisos para acceder a esta página')
+    end
   end
 
   # POST /tasks or /tasks.json
@@ -80,16 +84,6 @@ class TasksController < ApplicationController
       create
     end
     redirect_to edit_task_path(request => @request)
-  end
-
-  # DELETE /tasks/1 or /tasks/1.json
-  def destroy
-    @task.destroy
-
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   # Falta documentar

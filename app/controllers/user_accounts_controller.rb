@@ -3,10 +3,14 @@ class UserAccountsController < ApplicationController
   before_action :set_user_account, only: %i[show change_status]
 
   def index
-    @employees = UserAccount.where(campus: current_user_account.campus)
-    employees_selected = @employees.where(role: @role)
-    @query = employees_selected.ransack(params[:q])
-    @employees = @query.result
+    if current_user_account && current_user_account.role == 'admin'
+      @employees = UserAccount.where(campus: current_user_account.campus)
+      employees_selected = @employees.where(role: @role)
+      @query = employees_selected.ransack(params[:q])
+      @employees = @query.result
+    else
+      return_to_root('No tienes permisos para acceder a esta página')
+    end
   end
 
   def search

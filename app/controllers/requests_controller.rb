@@ -1,21 +1,25 @@
 # frozen_string_literal: true
 
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[show edit update destroy change_status]
+  before_action :set_request, only: %i[show change_status]
   before_action :set_campuses_list, only: %i[new create]
   before_action :set_dictionary, only: %i[new show edit update index create search]
   before_action :set_status, only: %i[show]
 
   # GET /requests or /requests.json
   def index
-    @requests = Request.where(campus: current_user_account.campus)
-    @queries = @requests.ransack(params[:q])
-    @requests = @queries.result
-    @status = params[:status] if params[:status]
-    return if params[:q].present?
+    if current_user_account
+      @requests = Request.where(campus: current_user_account.campus)
+      @queries = @requests.ransack(params[:q])
+      @requests = @queries.result
+      @status = params[:status] if params[:status]
+      return if params[:q].present?
 
-    set_status
-    set_requests
+      set_status
+      set_requests
+    else
+      return_to_root('No se poseen permisos para acceder a esta página')
+    end
   end
 
   def search
@@ -25,6 +29,10 @@ class RequestsController < ApplicationController
 
   # GET /requests/1 or /requests/1.json
   def show
+    if @request.nil?
+      return_to_root('No se encontró la solicitud')
+      return
+    end
     @reasons = RequestDenyReason.where(request_id: @request.id) if @request.status == 'denied'
   end
 
@@ -149,7 +157,7 @@ class RequestsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_request
-    @request = Request.find(params[:id])
+    @request = Request.find_by_hashid(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

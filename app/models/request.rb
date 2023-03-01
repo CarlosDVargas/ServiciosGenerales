@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Request < ApplicationRecord
+  include Hashid::Rails
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   before_save { self.requester_mail = requester_mail.downcase }
   validates :requester_name, presence: true
