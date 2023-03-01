@@ -1,0 +1,62 @@
+@use 'variables' as v;
+
+// MEDIA QUERIES
+@mixin mobile {
+    @media (min-width: v.$mobile) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: v.$tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: v.$desktop) {
+        @content;
+    }
+}
+
+// GRID
+@mixin grid($columns, $spacing) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $spacing;
+}
+
+// BUTTON
+@mixin button($bg-color, $txt-color) {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: .7rem 2rem;
+    font-weight: bolder;
+    color: $txt-color;
+    text-decoration: none;
+    background-color: $bg-color;
+    border: none;
+    font-size: v.$fs-normal;
+    border-radius: v.$border-radius-sm;
+    -webkit-border-radius: v.$border-radius-sm;
+    -moz-border-radius: v.$border-radius-sm;
+    -ms-border-radius: v.$border-radius-sm;
+    -o-border-radius: v.$border-radius-sm;
+    transition: v.$hover-transition-1;
+    -webkit-transition: v.$hover-transition-1;
+    -moz-transition: v.$hover-transition-1;
+    -ms-transition: v.$hover-transition-1;
+    -o-transition: v.$hover-transition-1;
+
+    &:hover {
+        cursor: pointer;
+        background-color: darken($bg-color, 5);
+        color: $txt-color;
+    }
+
+    @include desktop {
+        width: auto;
+        display: inline-block;
+    }
+}

@@ -1,0 +1,50 @@
+// CUSTOM PROPERTIES
+
+// Color Palette
+$primary-color: #4AACE1;
+$secondary-color: #313232;
+
+$light-color: #f8f8f8;
+$dark-color: #4A4A4B;
+
+$gray-color: #A9A9A9;
+$light-gray: #ececec;
+$dark-gray: #5e5e5e;
+
+$success-color: #4CAF50;
+$warning-color: #E79800;
+$danger-color: #c92a19;
+
+// Font Properties
+$font-family-primary: 'Open Sans', sans-serif;
+
+$fs-normal: 1.6rem;
+$fs-medium: 1.8rem;
+$fs-large: 2rem;
+
+// Media Queries
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 992px;
+
+// Spacing
+$spacing-sm: 2rem;
+$spacing-rg: 5rem;
+$spacing-lg: 10rem;
+
+// Border radius
+$border-radius-sm: .5rem;
+$border-radius-rg: 1rem;
+$border-radius-lg: 2rem;
+
+// Transitions
+$hover-transition-1: background-color .2s ease;
+$hover-transition-2: background-color .5s ease;
+
+// Box shadows
+$box-shadow-sm: 0 5px 5px rgba(0, 0, 0, 0.100);
+$box-shadow-rg: 0px 7px 7px rgba(0, 0, 0, 0.300);
+
+// Blur
+$blur: blur(2px);
+$blur-background: rgba(70, 69, 69, 0.158);

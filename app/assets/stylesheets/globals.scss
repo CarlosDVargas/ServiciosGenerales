@@ -1,0 +1,109 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+/*--------------------
+--- HTML STRUCTURE ---
+----------------------*/
+html,
+body {
+    height: 100%;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    /* 1rem = 10px */
+}
+
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+body {
+    // Font
+    font-family: v.$font-family-primary;
+    font-size: v.$fs-medium;
+    font-weight: normal;
+    line-height: 1.5;
+    color: v.$secondary-color;
+
+    // Background
+    background-color: v.$light-color;
+
+    // Positioning
+    min-height: 100vh;
+    position: relative;
+}
+
+/*-------------------
+--- GLOBAL STYLES ---
+---------------------*/
+h1, h2, h3 {
+    margin: 0 0 v.$spacing-rg 0;
+    font-weight: bolder;
+    color: v.$dark-gray;
+}
+
+h1 {
+    font-size: 3.2rem;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+p {
+    color: v.$dark-color;
+    font-size: v.$fs-large;
+}
+
+label {
+    color: v.$dark-gray;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: v.$dark-gray;
+
+    &:hover {
+        color: v.$primary-color;
+    }
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input,
+select {
+    color: v.$dark-gray;
+}
+
+button,
+input[type="submit"] {
+    font-size: v.$fs-normal;
+    font-family: v.$font-family-primary;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+}

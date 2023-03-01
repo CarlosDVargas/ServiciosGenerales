@@ -5,17 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
-
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 
 <body>
-<%= render "layouts/navigation" %>
-<%= render "layouts/devise_notifications" %>
-<%= yield %>
+  <div class="flex-wrapper bg-image" style="background-image: url(<%= asset_path('bg-image.jpg') %>);" id="background">
+      <%= render "shared/header" %>
+      <% if notice || alert %>
+        <%= render "layouts/devise_notifications" %>
+      <% end %>
+      <%= yield %>
+    </div>
+
+    <script>
+      if (window.location.href.charAt(window.location.href.length - 1) !== "/") {
+        document.getElementById("background").style.backgroundImage = "none";
+      }
+    </script>
 </body>
 </html>

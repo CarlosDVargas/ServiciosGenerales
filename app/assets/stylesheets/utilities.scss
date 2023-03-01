@@ -1,0 +1,55 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.container {
+    max-width: 140rem;
+    // width: 95%;
+    margin: 0 auto;
+}
+
+.main {
+    margin: 5rem 1.2rem;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bg-image {
+    background-image: url(../images/bg-image.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100%;
+
+    @include m.tablet {
+        background-position: bottom;
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: v.$spacing-sm 0;
+    max-width: 90%;
+    margin: 0 auto;
+
+    a:first-child {
+        margin-bottom: 2rem;
+    }
+
+    @include m.desktop {
+        flex-direction: row;
+        justify-content: center;
+        margin: unset;
+        margin-top: v.$spacing-sm;
+
+        a:first-child {
+            margin-bottom: 0;
+            margin-right: 1rem;
+        }
+    }
+}

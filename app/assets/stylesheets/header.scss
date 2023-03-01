@@ -1,0 +1,59 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+header {
+    box-shadow: v.$box-shadow-sm;
+}
+
+.header {
+    background-color: v.$primary-color;
+    padding: 1.5rem .7rem;
+
+    &__content {
+        @include m.desktop {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__logos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include m.desktop {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    &__logo:last-of-type {
+        margin: 1.5rem 0;
+        width: 80%;
+
+        @include m.tablet {
+            width: 40%;
+        }
+
+        @include m.desktop {
+            margin: .5rem 1rem 0 1rem;
+            width: unset;
+        }
+    }
+
+    &__button {
+        @include m.button(v.$light-color, v.$dark-color);
+        max-width: 80%;
+        margin: 0 auto;
+
+        @include m.tablet {
+            max-width: 70%;
+        }
+
+        @include m.desktop {
+            max-width: 100%;
+        }
+    }
+}

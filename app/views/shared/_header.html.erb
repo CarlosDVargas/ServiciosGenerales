@@ -1,0 +1,94 @@
+<header>
+    <div class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logos">
+                    <%= image_tag('firma-ucr-c.svg', alt: 'Logo UCR', class: 'header__logo') %>
+                    <%= image_tag('firma-osg.svg', alt: 'Logo OSG', class: 'header__logo') %>
+                </div>
+                
+                <div class="header__buttons">
+                    <% if current_user_account %>
+                        <%= button_to destroy_user_account_session_path, :method => "delete", data: { 'turbo-method': :delete, 'turbo-confirm': '¿Estás seguro(a) que deseas salir?' }, :class => "header__button" do %>
+                            Cerrar sesión
+                        <% end %>
+                    <% else %>
+                        <%= link_to new_user_account_session_path, class: "header__button" do %>
+                            Iniciar sesión
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if current_user_account %>
+      <div class="navegation">
+        <div class="container">
+            <nav class="navbar-expand-lg container">
+                <div class="navegation__header">
+                    <%= link_to '#', class: "navbar-brand navegation__toggler", id: "logo", rel: "prev" do %>
+                        <i class="bi bi-person"></i>&nbsp;
+                        <%= current_user_account.name %>
+                    <% end %>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <%= image_tag('menu.svg', alt: "menu", class: "navegation__menu-logo") %>
+                    </button>
+                </div>
+
+                <div class="navegation__collapse collapse navbar-collapse" id="navbarSupportedContent">
+                    <% if current_user_account %>
+                        <ul class="navegation__navbar">
+                            <li class="navegation__item">
+                                <%= link_to 'Inicio', root_path, class: "navegation__link" %>
+                            </li>
+
+                            <li class="navegation__item dropdown">
+                                <a class="navegation__link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Solicitudes</a>
+                                <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <%= link_to "Listar", requests_path, class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                    
+                                    <% if current_user_account.role == "admin" %>
+                                        <%= link_to "Reportes", reports_path, method: "search", class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                    <% end %>
+                                </div>
+                            </li>
+
+                            <% if current_user_account.role == "admin" %>
+                                <li class="navegation__item dropdown">
+                                    <a class="navegation__link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trabajadores</a>
+                                    <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "worker"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                        <%= link_to "Listar", employees_path(:role => "worker"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                    </div>
+                                </li>
+                                <li class="navegation__item dropdown">
+                                    <a class="navegation__link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Administradores
+                                    </a>
+                                    <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "admin"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                        <%= link_to "Listar", employees_path(:role => "admin"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                    </div>
+                                </li>
+                            <% end %>
+
+                            <li class="navegation__item  dropdown">
+                                <a class="navegation__link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Cuenta
+                                </a>
+                                <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <%= link_to edit_user_account_registration_path, class: "navegation__link navegation__link--dropdown dropdown-item" do %>
+                                        Cambiar contraseña
+                                    <% end %>
+                                </div>
+                            </li>
+                        </ul>
+                    <% end %>
+                </div>
+            </nav>
+        </div>
+      </div>
+    <% end %>
+</header>
