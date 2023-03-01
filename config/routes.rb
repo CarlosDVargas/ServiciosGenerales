@@ -20,13 +20,13 @@ Rails.application.routes.draw do
 
   get '/employees', to: 'user_accounts#index', as: 'employees'
 
-  resources :requests, only: %i[index show edit update] do
+  resources :requests, only: %i[index show edit update new create] do
     collection do
       match 'search' => 'requests#search', via: %i[get post], as: :search
     end
   end
 
-  resources :requests, only: %i[index show edit update] do
+  resources :requests, only: %i[index show edit update new create] do
     member do
       get :change_status
     end
