@@ -1,0 +1,46 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.footer {
+    background-color: v.$secondary-color;
+    padding: 1rem .7rem;
+
+    &__content,
+    &__left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        @include m.desktop {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+    }
+
+    &__logo {
+        width: 17rem;
+
+        img {
+            margin: 0 auto;
+        }
+
+        @include m.desktop {
+            width: auto;
+        }
+    }
+
+    &__paragraph {
+        color: v.$light-color;
+        font-size: v.$fs-normal;
+        margin-top: 1rem;
+    }
+
+    &__copyright {
+        @include m.desktop {
+            text-align: right;
+        }
+    }
+}
