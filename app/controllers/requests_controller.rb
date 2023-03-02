@@ -138,15 +138,17 @@ class RequestsController < ApplicationController
 
   # Falta documentación
   def search_state
-    if params[:session][:identifier] && params[:session][:requester_email]
-      @request = Request.where(identifier: params[:session][:identifier],
-                               requester_mail: params[:session][:requester_email]).first
+    byebug
+    if params[:session][:identifier] && params[:session][:requester_mail]
+      identifier = params[:session][:identifier]
+      requester_mail = params[:session][:requester_mail]
+      @request = Request.where(identifier:, requester_mail:).first
     end
     if !@request.nil?
       session[:request_id] = @request.id
       redirect_to request_url(@request)
     else
-      render 'ask_state'
+      render 'ask_state', notice: 'No se encontró la solicitud'
     end
   end
 
