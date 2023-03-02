@@ -60,62 +60,6 @@
         }
     }
 
-    &__input {
-        text-align: left;
-        padding: 0;
-
-        &-label {
-            padding-left: .2rem;
-        }
-
-        &-textfield,
-        &-select,
-        &-textarea {
-            width: 100%;
-            display: block;
-            font-size: v.$fs-normal;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0 3rem;
-            border: 1px solid v.$light-gray;
-            background-color: v.$light-color;
-            border-radius: v.$border-radius-sm;
-            -webkit-border-radius: v.$border-radius-sm;
-            -moz-border-radius: v.$border-radius-sm;
-            -ms-border-radius: v.$border-radius-sm;
-            -o-border-radius: v.$border-radius-sm;
-        }
-
-        &--mandala {
-            @include m.desktop {
-                width: 50%;
-            }
-        }
-
-        &-select {
-            padding: 1.175rem 1.5rem;
-        }
-
-        &-textarea {
-            resize: none;
-        }
-
-        @include m.desktop {
-            padding: unset;
-
-            &-textfield,
-            &-select {
-                margin: 1rem 0 4rem;
-            }
-        }
-
-        &-radio {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            gap: .5rem
-        }
-    }
-
     &__links {
         display: flex;
         flex-direction: column;
@@ -129,19 +73,6 @@
 
     &__link {
         font-size: v.$fs-normal;
-    }
-
-    &__check-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 1rem 0 2rem;
-        gap: 1rem;
-        
-        @include m.desktop {
-            flex-direction: row;
-            gap: 2rem;
-        }
     }
 
     .form__button {
