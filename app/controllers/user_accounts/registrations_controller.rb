@@ -4,17 +4,18 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   skip_before_action :require_no_authentication, only: [:new, :create]
+  before_action :set_role, only: %i[new create]
 
   # GET /resource/sign_up
   def new
-    # byebug
+    byebug
     @user_account = UserAccount.new
     @user_account.role = @role
   end
 
   # POST /resource
   def create
-    # byebug
+    byebug
     user = UserAccount.new(email: params[:user_account][:email], name: params[:user_account][:name],
                            id_card: params[:user_account][:id_card], campus_id: Campus.first.id,
                            role: params[:user_account][:role])
