@@ -1,113 +1,100 @@
 <%= form_with(model: request) do |form| %>
-  <% if request.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(request.errors.count, "error") %> prohibited this request from being saved:</h2>
-      <ul>
-        <% request.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-    <h4 class="text-center">Información del solicitante</h4>
-    <div>
-      <p>
-        <%= form.label "Nombre completo", style: "display: block" %>
-        <%= form.text_field :requester_name, class: "form-control" %>
-      </p>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Sede", style: "display: block" %>
-        <%= form.select :campus_id, @campuses_list.all.collect { |c| [c.name, c.id] }, {}, class: "form-select" %>
-      </p>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Extensión telefónica", style: "display: block" %>
-        <%= form.text_field :requester_extension, class: "form-control" %>
-      </p>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Número telefónico", style: "display: block" %>
-        <%= form.text_field :requester_phone, class: "form-control" %>
-      </p>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Número de identificación", style: "display: block" %>
-        <%= form.text_field :requester_id, class: "form-control" %>
-      </p>
-    </div>
-    <div>
-      <p>
-        <%= form.label "Dirección de correo electrónico", style: "display: block" %>
-        <%= form.email_field :requester_mail, class: "form-control" %>
-      </p>
-    </div>
-    <div data-controller="select" data-select-hidden-class="hidden">
-      <div>
-        <p>
-          <%= form.label "Tipo de solicitante", style: "display: block" %>
-          <%= form.select :requester_type, options_for_select(@dictionary.requesterTypes.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
-        </p>
+  <div data-controller="select" data-select-hidden-class="hidden">
+    <h3 class="form__subheading">Información del solicitante</h3>
+
+    <div class="grid-columns-2">
+      <div class="form__input">
+        <%= form.label "Número de identificación", class: "form__input-label" %>
+        <%= form.text_field :requester_id, placeholder: "Número de identificación", class: "form__input-textfield" %>
       </div>
-      <div data-select-target="hidden">
-        <div>
-          <p>
-            <%= form.label "Carnet de estudiante", style: "display: block" %>
-            <%= form.text_field :student_id, class: "form-control" %>
-          </p>
-        </div>
-        <div>
-          <p>
-            <%= form.label "Dependencia estudiantil", style: "display: block" %>
-            <%= form.select :student_association, options_for_select(@dictionary.studentAssociations.invert.each), {}, class: "form-select" %>
-          </p>
-        </div>
+
+      <div class="form__input">
+        <%= form.label "Nombre completo", class: "form__input-label" %>
+        <%= form.text_field :requester_name, placeholder: "Nombre completo", class: "form__input-textfield" %>
       </div>
     </div>
-  </div>
-  <div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-    <p>Información del trabajo a solicitud</p>
-    <div data-controller="dropdown select" data-select-hidden-class="hidden">
-      <div>
-        <p>
-          <%= form.label "Edificio", style: "display: block" %>
-          <%= form.select :work_building, "", {}, data: { action: "dropdown#workBuilding" }, class: "form-select" %>
-        </p>
-        <%= form.label "Locación", style: "display: block" %>
-        <div class="grid-container">
-          <div class="grid-item">
-            <%= form.select :work_location, "", {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
-          </div>
-          <div class="grid-item mt-2" id="work_type" data-select-target="hidden">
-            <%= form.text_field :work_location, id: "work-type-field", data: { select_target: "field" }, class: "form-control" %>
-          </div>
-        </div>
+
+    <div class="grid-columns-2">
+      <div class="form__input">
+        <%= form.label "Dirección de correo electrónico", class: "form__input-label" %>
+        <%= form.text_field :requester_mail, placeholder: "Correo electrónico", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input">
+        <%= form.label "Sede", class: "form__input-label" %>
+        <%= form.select :campus_id, @campuses_list.all.collect{|c| [c.name, c.id]}, {}, class: "form__input-select" %>
+      </div>
+    </div>  
+
+    <div class="grid-columns-2-tablet grid-columns-3">
+      <div class="form__input">
+        <%= form.label "Extensión telefónica", class: "form__input-label" %>
+        <%= form.text_field :requester_extension, placeholder: "Ej: +506", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input">
+        <%= form.label "Número telefónico", class: "form__input-label" %>
+        <%= form.text_field :requester_phone, placeholder: "Número telefónico", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input">
+        <%= form.label "Tipo de solicitante", class: "form__input-label" %>
+        <%= form.select :requester_type, options_for_select(@dictionary.requesterTypes.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form__input-select" %>
       </div>
     </div>
-    <div data-controller="select" data-select-hidden-class="hidden">
-      <%= form.label "Tipo de trabajo", style: "display: block" %>
-      <div class="grid-container">
-        <div class="grid-item">
-          <%= form.select :work_type, options_for_select(@dictionary.workTypes.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form-select" %>
-        </div>
-        <div class="grid-item mt-2" id="work_type" data-select-target="hidden">
-          <%= form.text_field :work_type, id: "work-type-field", data: { select_target: "field" }, class: "form-control" %>
-        </div>
+
+    <div class="grid-columns-2" data-select-target="hidden">
+      <div class="form__input">
+        <%= form.label "Carné del solicitante", class: "form__input-label" %>
+        <%= form.text_field :student_id, placeholder: "Carné del solicitante", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input">
+        <%= form.label "Dependencia estudiantil", class: "form__input-label" %>
+        <%= form.select :student_association, options_for_select(@dictionary.studentAssociations.invert.each), {}, class: "form__input-select" %>
       </div>
     </div>
-    <div>
-      <p>
-        <%= form.label "Tipo de trabajo", style: "display: block" %>
-        <%= form.text_area :work_description, class: "form-control" %>
-      </p>
+
+    <hr class="mb-3">
+    <h3 class="form__subheading">Información del trabajo a solicitar</h3>
+
+    <div data-controller="select" data-select-hidden-class="hidden" class="grid-columns-2">
+      <div class="form__input">
+        <%= form.label "Zona", class: "form__input-label" %>
+        <%= form.select :work_building, "", {}, data: { action: "dropdown#workBuilding" }, class: "form__input-select" %>
+      </div>
+
+      <div class="form__input" id="work_building" data-select-target="hidden">
+        <%= form.label "Descripción de la zona", class: "form__input-label" %>
+        <%= form.select :work_building, options_for_select(@dictionary.workBuildings.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input">
+        <%= form.label "Lugar", class: "form__input-label" %>
+        <%= form.text_field :work_location, placeholder: "Lugar del trabajo", class: "form__input-textfield" %>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center">
-    <%= form.submit "Crear solicitud", class: "btn btn-sm btn-primary" %>
+
+    <div data-controller="select" data-select-hidden-class="hidden" class="grid-columns-2">
+      <div class="form__input">
+        <%= form.label "Tipo de trabajo", class: "form__input-label" %>
+        <%= form.select :work_type, options_for_select(@dictionary.workTypes.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form__input-select" %>
+      </div>
+
+      <div class="form__input" id="work_type" data-select-target="hidden">
+        <%= form.label "Descripción del tipo de trabajo", class: "form__input-label" %>
+        <%= form.text_field :work_type, id: "work-type-field", data: { select_target: "field" }, placeholder: "Indique el tipo de trabajo", class: "form__input-select" %>
+      </div>
+    </div>
+
+    <div class="form__input">
+      <%= form.label "Descripción", class: "form__input-label" %>
+      <%= form.text_area :work_description, rows: "8", placeholder: "Agregar descripción", class: "form__input-textarea" %>
+    </div>
+
+    <div class="button-group">
+      <%= form.submit "Enviar solicitud", class: "form__button-submit" %>
+      <%= link_to "Regresar", root_path, class: "form__button-back" %>
+    </div>
   </div>
 <% end %>

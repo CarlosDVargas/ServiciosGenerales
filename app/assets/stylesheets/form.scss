@@ -1,0 +1,93 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.form {
+    max-width: 50rem;
+    padding: 5rem 4rem;
+    background-color: v.$light-gray;
+    border-radius: v.$border-radius-rg;
+    -webkit-border-radius: v.$border-radius-rg;
+    -moz-border-radius: v.$border-radius-rg;
+    -ms-border-radius: v.$border-radius-rg;
+    -o-border-radius: v.$border-radius-rg;
+    box-shadow: v.$box-shadow-sm;
+
+    @include m.desktop {
+        max-width: 130rem;
+        padding: 9rem 10rem;
+    }
+
+    &__heading {
+        margin-bottom: 1rem;
+        text-align: center;
+
+        &--mandala {
+            text-align: left;
+        }
+    }
+
+    &__subheading {
+        font-weight: normal;
+        font-size: v.$fs-large;
+        text-align: center;
+        padding: 3rem 0 3.5rem;
+        margin: 0;
+        
+        &--mandala {
+            text-align: left;
+        }
+    }
+
+    &__input {
+        text-align: left;
+        padding: 0rem .8rem;
+
+        &-textfield,
+        &-select,
+        &-textarea {
+            width: 100%;
+            display: block;
+            font-size: v.$fs-normal;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 3rem;
+            border: 1px solid v.$light-gray;
+            background-color: v.$light-color;
+            border-radius: v.$border-radius-sm;
+            -webkit-border-radius: v.$border-radius-sm;
+            -moz-border-radius: v.$border-radius-sm;
+            -ms-border-radius: v.$border-radius-sm;
+            -o-border-radius: v.$border-radius-sm;
+
+            &--mandala {
+                width: 50%;
+            }
+        }
+
+        &-select {
+            padding: 1.175rem 1.5rem;
+        }
+
+        &-textarea {
+            resize: none;
+        }
+
+        @include m.desktop {
+            padding: unset;
+
+            &-textfield,
+            &-select {
+                margin: 1rem 0 4rem;
+            }
+        }
+    }
+
+    .button-group .form__button {
+        &-submit {
+            @include m.button(v.$primary-color, v.$light-color);
+        }
+        
+        &-back {
+            @include m.button(v.$gray-color, v.$light-color);
+        }
+    }
+}

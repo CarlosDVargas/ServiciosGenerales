@@ -37,6 +37,10 @@
         }
     }
 
+    &__buttons {
+        justify-content: center;
+    }
+
     &__button {
         @include m.button(v.$light-color, v.$dark-color);
     }
