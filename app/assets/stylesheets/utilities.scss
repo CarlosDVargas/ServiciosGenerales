@@ -38,6 +38,10 @@
     max-width: 100%;
     margin: 5rem auto 0;
 
+    &--homepage {
+        max-width: 80%;
+    }
+
     @include m.desktop {
         flex-direction: row;
         justify-content: left;

@@ -1,34 +1,33 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h1 class="text-center">Iniciar sesión</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="d-grid gap-2 ">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.text_field :email, class: "form-control" %>
-        </div>
-        <br>
-        <div class="form-group">
-          <%= f.label "Contraseña" %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
-        <br>
-        <% if devise_mapping.rememberable? %>
-          <div class="form-group">
+<main class="main">
+  <div class="container form form--mandala">
+    <h1 class="form__heading--mandala">Ingreso al sistema</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form__input--mandala">
+        <%= f.label "Correo electrónico", class: "form__input-label" %>
+        <%= f.text_field :email, placeholder: "Correo electrónico", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input--mandala">
+        <%= f.label "Contraseña", class: "form__input-label" %>
+        <%= f.password_field :password, placeholder: "Contraseña", class: "form__input-textfield" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form__links">
+          <div class="remerber-me">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me, "Recordarme" %>
+            <%= f.label :remember_me, "Recordarme", class: "form__link" %>
           </div>
-        <% end %>
-        <br>
-        <div class="form-group">
-          <%= f.submit "Iniciar sesión", class: "btn btn-primary" %>
+
+          <%= render "user_accounts/shared/links" %>
         </div>
       <% end %>
-      <%= render "user_accounts/shared/links" %>
-    </div>
+
+      <div class="button-group">
+        <%= f.submit "Iniciar sesión", class: "form__button-submit" %>
+        <%= link_to "Regresar", root_path, class: "form__button-back" %>
+      </div>
+    <% end %>
   </div>
-</div>
+</main>

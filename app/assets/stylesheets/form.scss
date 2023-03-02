@@ -105,7 +105,22 @@
         }
     }
 
-    .button-group .form__button {
+    &__links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        @include m.desktop {
+            align-items: flex-start;
+        }
+    }
+
+    &__link {
+        font-size: v.$fs-normal;
+    }
+
+    .form__button {
         &-submit {
             @include m.button(v.$primary-color, v.$light-color);
         }
