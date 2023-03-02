@@ -64,6 +64,10 @@
         text-align: left;
         padding: 0;
 
+        &-label {
+            padding-left: .2rem;
+        }
+
         &-textfield,
         &-select,
         &-textarea {
@@ -103,6 +107,13 @@
                 margin: 1rem 0 4rem;
             }
         }
+
+        &-radio {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: .5rem
+        }
     }
 
     &__links {
@@ -118,6 +129,19 @@
 
     &__link {
         font-size: v.$fs-normal;
+    }
+
+    &__check-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 1rem 0 2rem;
+        gap: 1rem;
+        
+        @include m.desktop {
+            flex-direction: row;
+            gap: 2rem;
+        }
     }
 
     .form__button {

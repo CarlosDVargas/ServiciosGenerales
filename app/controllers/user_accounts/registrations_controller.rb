@@ -14,7 +14,7 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    byebug
+    # byebug
     user = UserAccount.new(email: params[:user_account][:email], name: params[:user_account][:name],
                            id_card: params[:user_account][:id_card], campus_id: Campus.first.id,
                            role: params[:user_account][:role])

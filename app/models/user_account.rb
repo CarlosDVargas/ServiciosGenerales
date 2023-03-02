@@ -32,7 +32,7 @@ class UserAccount < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
-    self.role ||= :employee
+    self.role ||= :worker
   end
 
   def set_default_status

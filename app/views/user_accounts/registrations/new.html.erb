@@ -1,47 +1,66 @@
-<h2>Sign up</h2>
+<main class="main">
+  <div class="container">
+    <%= render "user_accounts/shared/error_messages", resource: resource %>
+  </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "user_accounts/shared/error_messages", resource: resource %>
+  <div class="container form form--mandala">
+    <h1 class="form__heading--mandala" id="form__heading">Nuevo empleado</h1>
 
-  <div class="form-group mb-3">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
-  <div class="form-group mb-3">
-    <%= f.label "Nombre completo" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  <div class="form-group mb-3">
-    <p>
-      <%= f.label "Número de cédula", style: "display: block" %>
-      <%= f.text_field :id_card, class: "form-control" %>
-    </p>
-  </div>
-  <div class="form-group d-none">
-    <p>
-      <%= f.label "Tipo de empleado", style: "display: block" %>
-      <%= f.text_field :role, readonly: true, class: "form-control" %>
-    </p>
-  </div>
-  <div>
-    <p>
-      <%= f.label "Estado del empleado", style: "display: block" %>
-    </p>
-    <div class="container mb-3">
-      <div class="form-check">
-        <%= f.label :status, "Activo", :value => "active" %>
-        <%= f.radio_button :status, "Activo", :value => "active", class: "form-check-input", type: "radio" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="form__input--mandala">
+        <%= f.label "Nombre completo", class: "form__input-label" %>
+        <%= f.text_field :name, placeholder: "Nombre completo", class: "form__input-textfield" %>
       </div>
-      <div class="form-check">
-        <%= f.label :status, "Inactivo", :value => "inactive" %>
-        <%= f.radio_button :status, "Inactivo", :value => "inactive", class: "form-check-input", type: "radio", :checked => true %>
+
+      <div class="form__input--mandala">
+        <%= f.label "Número de cédula", class: "form__input-label" %>
+        <%= f.text_field :email, placeholder: "Número de cédula", class: "form__input-textfield" %>
       </div>
-    </div>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="form__input--mandala">
+        <%= f.label "Correo electrónico", class: "form__input-label" %>
+        <%= f.text_field :email, placeholder: "Correo electrónico", class: "form__input-textfield" %>
+      </div>
 
-<%= render "user_accounts/shared/links" %>
+      <div class="form__input--mandala">
+        <label id="employee-status" class="form__input-label">Estado del empleado</label>
+        <div class="form__check-group">
+          <% if resource.status == "Activo" %>
+            <div class="form__input-radio">
+              <%= f.label :status, "Activo", :value => "active" %>
+              <%= f.radio_button :status, "Activo", type: "radio", :checked => true %>
+            </div>
+          
+            <div class="form__input-radio">
+              <%= f.label :status, "Inactivo", :value => "inactive" %>
+              <%= f.radio_button :status, "Inactivo", type: "radio" %>
+            </div>
+          <% else %>
+            <div class="form__input-radio">
+              <%= f.label :status, "Activo", :value => "active" %>
+              <%= f.radio_button :status, "Activo", type: "radio" %>
+            </div>
+          
+            <div class="form__input-radio">
+              <%= f.label :status, "Inactivo", :value => "inactive" %>
+              <%= f.radio_button :status, "Inactivo", type: "radio", :checked => true %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <%= f.submit "Agregar empleado", class: "form__button-submit", id: "add-button" %>
+        <%= link_to "Regresar", root_path, class: "form__button-back" %>
+      </div>
+    <% end %>
+  </div>
+</main>
+
+<script>
+  if (window.location.href.indexOf("admin") > -1) {
+    document.getElementById("form__heading").innerHTML = "Nuevo administrador";
+    document.getElementById("employee-status").innerHTML = "Estado del administrador";
+    document.getElementById("add-button").value = "Agregar administrador";
+  }
+</script>
