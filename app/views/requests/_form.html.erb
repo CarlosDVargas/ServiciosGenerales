@@ -58,21 +58,21 @@
     <hr class="mb-3">
     <h3 class="form__subheading">Información del trabajo a solicitar</h3>
 
-    <div data-controller="select" data-select-hidden-class="hidden" class="grid-columns-2">
+    <div data-controller="dropdown select" data-select-hidden-class="hidden" class="grid-columns-2">
       <div class="form__input">
-        <%= form.label "Zona", class: "form__input-label" %>
+        <%= form.label "Edificio", class: "form__input-label" %>
         <%= form.select :work_building, "", {}, data: { action: "dropdown#workBuilding" }, class: "form__input-select" %>
       </div>
 
-      <div class="form__input" id="work_building" data-select-target="hidden">
-        <%= form.label "Descripción de la zona", class: "form__input-label" %>
-        <%= form.select :work_building, options_for_select(@dictionary.workBuildings.invert.each), {}, data: { select_target: "select", action: "select#select" }, class: "form__input-textfield" %>
+      <div class="form__input">
+        <%= form.label "Locación", class: "form__input-label" %>
+        <%= form.select :work_location, "", {}, data: { select_target: "select", action: "select#select" }, class: "form__input-select" %>
       </div>
 
-      <div class="form__input">
-        <%= form.label "Lugar", class: "form__input-label" %>
-        <%= form.text_field :work_location, placeholder: "Lugar del trabajo", class: "form__input-textfield" %>
-      </div>
+      <div class="form__input" id="work_building" data-select-target="hidden">
+        <%= form.label "Descripción del lugar", class: "form__input-label" %>
+        <%= form.text_field :work_type, id: "work-type-field", data: { select_target: "field" }, placeholder: "Indique el tipo de trabajo", class: "form__input-textfield" %>
+      </div>      
     </div>
 
     <div data-controller="select" data-select-hidden-class="hidden" class="grid-columns-2">
