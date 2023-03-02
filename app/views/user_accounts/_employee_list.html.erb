@@ -1,34 +1,38 @@
-<table class="table table-hover table-sm">
-  <thead>
-  <tr>
-    <th class="table-header text-center" scope="col">Cédula</th>
-    <th class="table-header text-center" scope="col">Nombre</th>
-    <th class="table-header text-center" scope="col">Estado</th>
-    <th class="table-header text-center" scope="col">Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if !@employees.empty? %>
-    <% @employees.each do |employee| %>
-      <tr>
-        <td class="text-center"><%= employee.id_card %></td>
-        <td class="text-center"><%= employee.name %></td>
-        <td class="text-center"><%= employee.status %></td>
-        <td class="text-center">
-          <div class="btn-group">
-            <%= link_to employee, class: "btn btn-sm btn-primary" do %>
-              <i class="bi bi-person"></i>
-              Ver
-            <% end %>
-            <%= button_to change_status_user_account_path(employee), class: "btn btn-sm btn-warning", method: :put do %>
-              <i class="bi bi-pencil"></i>
-              Cambiar estado
-            <% end %>
-
-          </div>
-        </td>
+<% if @employees.empty? %>
+  <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay solicitudes para mostrar</p>
+<% else %>
+  <table class="form__table table table-bordered">
+    <thead>
+      <tr class="form__table-head">
+        <th class="tablet-display">Cédula</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Acciones</th>
       </tr>
-    <% end %>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <td class="form__table-data tablet-display"><%= employee.id_card %></td>
+          <td class="form__table-data"><%= employee.name %></td>
+          <td class="form__table-data"><%= employee.status%></td>
+
+          <td class="form__table-data">
+            <div class="form__table-buttons">
+                <%= link_to "Ver", employee, class: "form__table-button-view form__table-button--desktop" %>
+                <%= button_to "Cambiar estado", change_status_user_account_path(employee), class: "form__table-button-toggle form__table-button--desktop", method: :put, data: { turbo_method: :delete, turbo_confirm: "¿Desea cambiar el estado de este usuario?" } %>
+            
+                <%= link_to employee, class: "form__table-button-view form__table-button--mobile" do %>
+                  <i class="bi bi-eye"></i>
+                <% end %>
+                <%= button_to change_status_user_account_path(employee), class: "form__table-button-toggle form__table-button--mobile", method: :put, data: { turbo_method: :delete, turbo_confirm: "¿Desea cambiar el estado de este usuario?" } do %>
+                  <i class="bi bi-toggles"></i>
+                <% end %>
+            </div>    
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

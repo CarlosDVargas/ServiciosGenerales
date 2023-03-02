@@ -1,0 +1,67 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+// Removing Bootstrap custom styles
+table.table-bordered > :not(caption) > * {
+    border-width: 1px 1px;
+}
+
+table.table-bordered > thead > tr > th{
+    border: none;
+}
+
+.form__table {
+    text-align: center;
+    border: 1px solid darken(v.$light-color, 10);
+
+    &--empty {
+        font-style: italic;
+        padding: v.$spacing-rg 0;
+    }
+
+    &-head {
+        text-align: center;
+        background-color: darken(v.$light-color, 10);
+    }
+
+    &-data {
+        padding: 1rem 0 !important;
+    }
+
+    &-buttons {
+        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: .5rem;
+
+        @include m.desktop {
+            flex-direction: row;
+        }
+    }
+
+    &-button {
+        &-view {
+            @include m.button(v.$primary-color, v.$light-color);
+        }
+
+        &-toggle {
+            @include m.button(v.$warning-color, v.$light-color);
+        }
+
+        &--mobile {
+            width: 70%;
+            margin: 0 auto;
+            @include m.desktop {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+            @include m.desktop {
+                display: inline-block;
+            }
+        }
+    }
+}

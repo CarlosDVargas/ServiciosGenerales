@@ -43,11 +43,11 @@
     -moz-border-radius: v.$border-radius-sm;
     -ms-border-radius: v.$border-radius-sm;
     -o-border-radius: v.$border-radius-sm;
-    transition: v.$hover-transition-1;
-    -webkit-transition: v.$hover-transition-1;
-    -moz-transition: v.$hover-transition-1;
-    -ms-transition: v.$hover-transition-1;
-    -o-transition: v.$hover-transition-1;
+    transition: v.$hover-transition-2;
+    -webkit-transition: v.$hover-transition-2;
+    -moz-transition: v.$hover-transition-2;
+    -ms-transition: v.$hover-transition-2;
+    -o-transition: v.$hover-transition-2;
 
     &:hover {
         cursor: pointer;

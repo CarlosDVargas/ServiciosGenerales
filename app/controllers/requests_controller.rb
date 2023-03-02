@@ -138,7 +138,7 @@ class RequestsController < ApplicationController
 
   # Falta documentación
   def search_state
-    byebug
+    #byebug
     if params[:session][:identifier] && params[:session][:requester_mail]
       identifier = params[:session][:identifier]
       requester_mail = params[:session][:requester_mail]
