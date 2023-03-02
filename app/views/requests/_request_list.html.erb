@@ -15,15 +15,10 @@
     <tbody>
     <% @requests.each do |request| %>
       <tr>
-        <td class="text-center" scope="row"><%= request.id %></td>
+        <td class="text-center"><%= request.identifier %></td>
         <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-        <td class="text-center">
-          <% if !@dictionary.workBuildings[request.work_building.to_sym].nil? %>
-            <%= @dictionary.workBuildings[request.work_building.to_sym] %>
-          <% else %>
-            <%= request.work_building %>
-          <% end %></td>
-        <td class="text-center"><%= request.work_location %></td>
+        <td class="text-center"><%= request.request_location.work_building.name %></td>
+        <td class="text-center"><%= request.request_location.name %></td>
         <td class="text-center"><%= request.requester_name %></td>
         <td class="text-center">
           <div class="container">
@@ -34,11 +29,6 @@
                   Ver
                 <% end %>
               </div>
-              <% if current_user_account.role == "admin" %>
-                <%= render "requests/admin_views/admin_request_actions", request: request %>
-              <% else %>
-                <%= render "requests/employee_views/employee_request_actions", request: request %>
-              <% end %>
             </div>
           </div>
         </td>
