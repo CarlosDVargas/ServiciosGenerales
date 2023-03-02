@@ -49,27 +49,27 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-transform: uppercase;
 
     @include m.desktop {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
     }
 }
 
 h2 {
-    font-size: 2.5rem;
-
-    @include m.desktop {
-        font-size: 3rem;
-    }
-}
-
-h3 {
     font-size: 2rem;
 
     @include m.desktop {
         font-size: 2.5rem;
+    }
+}
+
+h3 {
+    font-size: 1.8rem;
+
+    @include m.desktop {
+        font-size: 2.2rem;
     }
 }
 

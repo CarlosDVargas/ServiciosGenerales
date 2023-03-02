@@ -51,7 +51,7 @@
 
     &:hover {
         cursor: pointer;
-        background-color: darken($bg-color, 5);
+        background-color: darken($bg-color, 10);
         color: $txt-color;
     }
 
