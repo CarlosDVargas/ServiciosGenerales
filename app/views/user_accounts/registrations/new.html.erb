@@ -14,12 +14,17 @@
 
       <div class="form__input--mandala">
         <%= f.label "Número de cédula", class: "form__input-label" %>
-        <%= f.text_field :email, placeholder: "Número de cédula", class: "form__input-textfield" %>
+        <%= f.text_field :id_card, placeholder: "Número de cédula", class: "form__input-textfield" %>
       </div>
 
       <div class="form__input--mandala">
         <%= f.label "Correo electrónico", class: "form__input-label" %>
         <%= f.text_field :email, placeholder: "Correo electrónico", class: "form__input-textfield" %>
+      </div>
+
+      <div class="form__input--mandala d-none">
+        <%= f.label "Tipo de empleado", class: "form__input-label" %>
+        <%= f.text_field :role, readonly: true, class: "form__input-textfield" %>
       </div>
 
       <div class="form__input--mandala">
@@ -30,7 +35,7 @@
               <%= f.label :status, "Activo", :value => "active" %>
               <%= f.radio_button :status, "Activo", type: "radio", :checked => true %>
             </div>
-          
+
             <div class="form__input-radio">
               <%= f.label :status, "Inactivo", :value => "inactive" %>
               <%= f.radio_button :status, "Inactivo", type: "radio" %>
@@ -40,7 +45,7 @@
               <%= f.label :status, "Activo", :value => "active" %>
               <%= f.radio_button :status, "Activo", type: "radio" %>
             </div>
-          
+
             <div class="form__input-radio">
               <%= f.label :status, "Inactivo", :value => "inactive" %>
               <%= f.radio_button :status, "Inactivo", type: "radio", :checked => true %>
