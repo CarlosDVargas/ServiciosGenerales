@@ -32,11 +32,9 @@
     <hr class="mb-3">
 
     <div id="requests">
-      <% if !@requests.nil? %>
-        <h3 class="form__subheading form__subheading--table text-left">
-          Resultados: <span class="fw-normal"><%= @requests.size %></span>
-        </h3>
-      <% end %>
+      <h3 class="form__subheading form__subheading--table text-left">
+        Resultados: <span class="fw-normal"><%= @requests.nil? ? "0" : @requests.size %></span>
+      </h3>
       <%= render partial: 'request_list', locals: { requests: @requests } %>
     </div>
   </div>
