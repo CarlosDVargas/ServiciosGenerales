@@ -2,7 +2,6 @@
 @use 'mixins' as m;
 
 .reports {
-
     &__grid {
         @include m.grid(3, 2rem);
 
