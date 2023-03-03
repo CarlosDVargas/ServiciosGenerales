@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[show change_status]
+  before_action :set_request, only: %i[show edit update change_status]
   before_action :set_campuses_list, only: %i[new create]
   before_action :set_dictionary, only: %i[new show edit update index create search]
   before_action :set_status, only: %i[show]
