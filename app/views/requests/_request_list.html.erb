@@ -1,39 +1,38 @@
-<% if @requests.first.nil? %>
-  <p class="text-center">No hay solicitudes para mostrar</p>
+<% if @requests.nil? %>
+  <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;Realiza la búsqueda utilizando los filtros</p>
 <% else %>
-  <table class="table table-hover table-sm">
+  <table class="form__table table table-bordered">
     <thead>
-    <tr>
-      <th class="table-header text-center" scope="col">Consecutivo</th>
-      <th class="table-header text-center" scope="col">Fecha solicitud</th>
-      <th class="table-header text-center" scope="col">Edificio</th>
-      <th class="table-header text-center" scope="col">Sitio</th>
-      <th class="table-header text-center" scope="col">Solicitante</th>
-      <th class="table-header text-center" scope="col">Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @requests.each do |request| %>
-      <tr>
-        <td class="text-center"><%= request.identifier %></td>
-        <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-        <td class="text-center"><%= request.request_location.work_building.name %></td>
-        <td class="text-center"><%= request.request_location.name %></td>
-        <td class="text-center"><%= request.requester_name %></td>
-        <td class="text-center">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <%= link_to request, class: "btn btn-sm btn-primary" do %>
-                  <i class="bi bi-eye"></i>
-                  Ver
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </td>
+      <tr class="form__table-head">
+        <th>Código</th>
+        <th>Fecha</th>
+        <th class="tablet-display">Edificio</th>
+        <th class="desktop-display">Sitio</th>
+        <th class="desktop-display">Solicitante</th>
+        <th>Acciones</th>
       </tr>
-    <% end %>
+    </thead>
+
+    <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+          <td class="form__table-data"><%= request.identifier %></td>
+          <td class="form__table-data"><%= request.created_at.strftime("%d/%m/%Y") %></td>
+          <td class="form__table-data tablet-display"><%= request.request_location.work_building.name %></td>
+          <td class="form__table-data desktop-display"><%= request.request_location.name %></td>
+          <td class="form__table-data desktop-display"><%= request.requester_name %></td>
+
+          <td class="form__table-data">
+            <div class="form__table-buttons">
+                <%= link_to "Ver", request, class: "form__table-button-view form__table-button--desktop" %>
+
+                <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
+                  <i class="bi bi-eye"></i>
+                <% end %>
+            </div>    
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 <% end %>

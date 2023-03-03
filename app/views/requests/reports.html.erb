@@ -1,55 +1,43 @@
-<div class="container">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center">Reportes de solicitudes</h1>
-    </div>
+<main class="main">
+  <div class="container form">
+    <h1 class="form__heading">Reporte de solicitudes</h1>
+    <hr class="mb-3">
+
     <%= search_form_for @q = Request.ransack(params[:q]), url: search_requests_path, data: { turbo: false }, remote: true do |f| %>
-      <div class="container mb-4 mt-4 p-4">
-        <h5>Filtro:</h5>
-        <div class="row">
-          <div class="col">
-            <% @dictionary = Dictionary.new %>
-            <%= f.label :status, 'Estado' %>
-            <%= f.select :status_eq, options_for_select(@dictionary.requestStatuses.invert().each()), { include_blank: "Seleccione el estado a buscar" }, class: "form-select" %>
-          </div>
+      <h3 class="form__subheading form__subheading--table text-left">Filtros:</h3>
+
+      <div class="reports__grid">
+        <div class="form__input">
+          <% @dictionary = Dictionary.new %>
+          <%= f.label :status, 'Estado', class: "form__input-label" %>
+          <%= f.select :status_eq, options_for_select(@dictionary.requestStatuses.invert().each()), { include_blank: "Seleccione el estado" }, class: "form__input-select" %>
         </div>
-        <div class="row">
-          <div class="col">
-            <%= f.label 'Desde' %>
-            <%= f.text_field :created_at_gteq, class: "form-control", type: "date" %>
-          </div>
-          <div class="col">
-            <%= f.label 'Hasta' %>
-            <%= f.text_field :created_at_lteq, class: "form-control", type: "date" %>
-          </div>
-          <div class="col">
-            <br>
-            <%= f.submit "Buscar", class: "btn btn-primary" %>
-          </div>
+
+        <div class="form__input">
+          <%= f.label 'Desde', class: "form__input-label" %>
+          <%= f.text_field :created_at_gteq, class: "form__input-textfield", type: "date" %>
         </div>
-      </div>
-    <% end %>
-  </div>
-  <div id="requests" class="request-table">
-    <% if @requests %>
-      <div class="container mt-4 mb-4">
-        <div class="row">
-          <h4>Cantidad: <%= @requests.size %></h4>
+
+        <div class="form__input">
+          <%= f.label 'Hasta', class: "form__input-label" %>
+          <%= f.text_field :created_at_lteq, class: "form__input-textfield", type: "date" %>
         </div>
-        <div class="row">
-          <%= render partial: 'request_list', locals: { requests: @requests } %>
+        
+        <div class="reports__button">
+          <%= f.submit "Buscar", class: "form__button-submit" %>
         </div>
       </div>
     <% end %>
-  </div>
-</div>
-<div class="container mt-3 mb-3 ">
-  <div class="position-relative mt-3">
-    <div class="position-absolute end-50">
-      <%= link_to :back, class: "btn btn-primary" do %>
-        <i class="bi bi-arrow-bar-left"></i>
-        Volver
+
+    <hr class="mb-3">
+
+    <div id="requests">
+      <% if !@requests.nil? %>
+        <h3 class="form__subheading form__subheading--table text-left">
+          Resultados: <span class="fw-normal"><%= @requests.size %></span>
+        </h3>
       <% end %>
+      <%= render partial: 'request_list', locals: { requests: @requests } %>
     </div>
   </div>
-</div>
+</main>
