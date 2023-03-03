@@ -32,7 +32,7 @@ class UserAccounts::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    byebug
+    #byebug
     super
   end
 
