@@ -9,7 +9,7 @@
                 
                 <div class="header__buttons">
                     <% if current_user_account %>
-                        <%= button_to destroy_user_account_session_path, :method => "delete", data: { 'turbo-method': :delete, 'turbo-confirm': '¿Estás seguro(a) que deseas salir?' }, :class => "header__button" do %>
+                        <%= button_to destroy_user_account_session_path, :method => "delete", data: { 'turbo-method': :delete, 'turbo-confirm': '¿Está seguro(a) que deseas salir?' }, :class => "header__button" do %>
                             Cerrar sesión
                         <% end %>
                     <% else %>
@@ -47,7 +47,7 @@
                             <li class="navegation__item dropdown">
                                 <a class="navegation__link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Solicitudes</a>
                                 <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <%= link_to "Listar", requests_path, class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                    <%= link_to "Listar", current_user_account.role == "admin" ? requests_path(:status => "pending") : requests_path(:status => "in_process"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
                                     
                                     <% if current_user_account.role == "admin" %>
                                         <%= link_to "Reportes", reports_path, method: "search", class: "navegation__link navegation__link--dropdown dropdown-item" %>

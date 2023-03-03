@@ -1,19 +1,17 @@
-<% if @requests.nil? %>
-  <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;Realiza la búsqueda utilizando los filtros</p>
-<% else %>
-  <table class="form__table table table-bordered">
-    <thead>
-      <tr class="form__table-head">
-        <th>Código</th>
-        <th>Fecha</th>
-        <th class="tablet-display">Edificio</th>
-        <th class="desktop-display">Sitio</th>
-        <th class="desktop-display">Solicitante</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
+<table class="form__table table table-bordered">
+  <thead>
+    <tr class="form__table-head">
+      <th>Código</th>
+      <th>Fecha</th>
+      <th class="tablet-display">Edificio</th>
+      <th class="desktop-display">Sitio</th>
+      <th class="desktop-display">Solicitante</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
 
-    <tbody>
+  <tbody>
+    <% if !@requests.nil? %>
       <% @requests.each do |request| %>
         <tr>
           <td class="form__table-data"><%= request.identifier %></td>
@@ -24,15 +22,25 @@
 
           <td class="form__table-data">
             <div class="form__table-buttons">
-                <%= link_to "Ver", request, class: "form__table-button-view form__table-button--desktop" %>
+                <% if @commit == "Buscar" %>
+                  <%= link_to request, class: "form__table-button-view form__table-button--desktop" do %>
+                    <i class="bi bi-eye"></i>&nbsp;Ver
+                  <% end %>
 
-                <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
-                  <i class="bi bi-eye"></i>
+                  <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
+                    <i class="bi bi-eye"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user_account.role == "admin" %>
+                    <%= render "requests/admin_views/admin_request_actions", request: request %>
+                  <% else %>
+                    <%= render "requests/employee_views/employee_request_actions", request: request %>
+                  <% end %>
                 <% end %>
             </div>    
           </td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-<% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -13,6 +13,7 @@ class RequestsController < ApplicationController
       @queries = @requests.ransack(params[:q])
       @requests = @queries.result
       @status = params[:status] if params[:status]
+      @commit = params[:commit] #Para diferenciar la vista de la lista de solicitudes de reportes.
       return if params[:q].present?
 
       set_status

@@ -20,8 +20,12 @@
 
           <td class="form__table-data">
             <div class="form__table-buttons">
-                <%= link_to "Ver", employee, class: "form__table-button-view form__table-button--desktop" %>
-                <%= button_to "Cambiar estado", change_status_user_account_path(employee), class: "form__table-button-toggle form__table-button--desktop", method: :put, data: { turbo_method: :delete, turbo_confirm: "¿Desea cambiar el estado de este usuario?" } %>
+                <%= link_to employee, class: "form__table-button-view form__table-button--desktop" do %>
+                  <i class="bi bi-eye"></i>&nbsp;Ver
+                <% end %>
+                <%= button_to change_status_user_account_path(employee), class: "form__table-button-toggle form__table-button--desktop", method: :put, data: { turbo_method: :delete, turbo_confirm: "¿Desea cambiar el estado de este usuario?" } do %>
+                  <i class="bi bi-toggles"></i>&nbsp;Cambiar estado
+                <% end %>
             
                 <%= link_to employee, class: "form__table-button-view form__table-button--mobile" do %>
                   <i class="bi bi-eye"></i>

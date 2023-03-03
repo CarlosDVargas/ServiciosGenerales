@@ -1,15 +1,35 @@
 <% case request.status
    when "pending" %>
-  <%= link_to change_status_request_path(request), class: "btn btn-sm btn-primary", :data => { :confirm => '¿Está seguro? Esta acción es irreversible' } do %>
-    <i class="bi bi-pencil-square"></i>
-    Atender
-  <% end %>
-  <%= link_to edit_request_path(request), class: "btn btn-sm btn-primary", :data => { :confirm => '¿Está seguro? Esta acción es irreversible' } do %>
-    <i class="bi bi-x-square"></i>
-    Rechazar
-  <% end %>
+      <%= link_to change_status_request_path(request), class: "form__table-button-view form__table-button--desktop" do %>
+        <i class="bi bi-pencil-square"></i>&nbsp;Atender
+      <% end %>
+
+      <%= link_to change_status_request_path(request), class: "form__table-button-view form__table-button--mobile" do %>
+        <i class="bi bi-pencil-square"></i>
+      <% end %>
+
+      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--desktop", data: { turbo_method: :delete, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+        <i class="bi bi-x-square"></i>&nbsp;Rechazar
+      <% end %>
+
+      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--mobile", data: { turbo_method: :delete, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+        <i class="bi bi-x-square"></i>
+      <% end %>
+
 <% when "in_process" %>
-  <%= link_to "Editar asignaciones", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-view form__table-button--desktop" do %>
+    <i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Editar asignaciones
+  <% end %>
+    
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-view form__table-button--mobile" do %>
+    <i class="bi bi-pencil-square"></i>
+  <% end %>
 <% when "completed" %>
-  <%= link_to "Cerrar/Reabrir solicitud", edit_task_path(:request => request.id), class: "btn btn-sm btn-primary" %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--desktop", data: { turbo_method: :delete, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+    <i class="bi bi-x-square"></i>&nbsp;Cerrar/Reabrir
+  <% end %>
+
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--mobile", data: { turbo_method: :delete, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+    <i class="bi bi-x-square"></i>
+  <% end %>
 <% end %>

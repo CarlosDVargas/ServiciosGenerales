@@ -36,6 +36,12 @@
         Resultados: <span class="fw-normal"><%= @requests.nil? ? "0" : @requests.size %></span>
       </h3>
       <%= render partial: 'request_list', locals: { requests: @requests } %>
+
+      <% if @requests.nil? %>
+        <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;Realiza la búsqueda utilizando los filtros</p>
+      <% elsif !@requests.nil? && @requests.size == 0 %>
+        <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay solicitudes para mostrar</p>
+      <% end %>
     </div>
   </div>
 </main>

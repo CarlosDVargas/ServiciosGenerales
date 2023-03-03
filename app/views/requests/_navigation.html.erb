@@ -1,22 +1,24 @@
-<ul class="nav nav-tabs" role="tablist">
-  <% if current_user_account.role == "admin" %>
-    <li class="nav-item" role="presentation">
-      <%= link_to "Pendientes", requests_path(:status => "pending"), class: (@status == "pending" ? "nav-link active" : "nav-link"), data: { "toggle" => "tab" } %>
+<div class="navegation-tabs">
+  <ul class="navegation-tabs__list" role="tablist">
+    <% if current_user_account.role == "admin" %>
+      <li class="navegation-tabs__item" role="presentation">
+        <%= link_to "Pendientes", requests_path(:status => "pending"), class: (@status == "pending" ? "navegation-tabs__link navegation-tabs__link--active" : "navegation-tabs__link"), data: { "toggle" => "tab" } %>
+      </li>
+    <% end %>
+    <li class="navegation-tabs__item" role="presentation">
+      <%= link_to (current_user_account.role == "admin" ? "En proceso" : "Asignados"), requests_path(:status => "in_process"), class: (@status == "in_process" ? "navegation-tabs__link navegation-tabs__link--active" : "navegation-tabs__link") %>
     </li>
-  <% end %>
-  <li class="nav-item" role="presentation">
-    <%= link_to (current_user_account.role == "admin" ? "En Proceso" : "Asignados"), requests_path(:status => "in_process"), class: (@status == "in_process" ? "nav-link active" : "nav-link") %>
-  </li>
-  <li class="nav-item" role="presentation">
-    <%= link_to "Finalizadas", requests_path(:status => "completed"), class: (@status == "completed" ? "nav-link active" : "nav-link") %>
-  </li>
-  <li class="nav-item" role="presentation">
-    <%= link_to "Cerradas", requests_path(:status => "closed"), class: (@status == "closed" ? "nav-link active" : "nav-link") %>
-  </li>
-  <% if current_user_account.role == "admin" %>
-    <li class="nav-item" role="presentation">
-      <%= link_to "Rechazadas", requests_path(:status => "denied"), class: (@status == "denied" ? "nav-link active" : "nav-link") %>
+    <li class="navegation-tabs__item" role="presentation">
+      <%= link_to "Finalizadas", requests_path(:status => "completed"), class: (@status == "completed" ? "navegation-tabs__link navegation-tabs__link--active" : "navegation-tabs__link") %>
     </li>
-  <% end %>
-</ul>
+    <li class="navegation-tabs__item" role="presentation">
+      <%= link_to "Cerradas", requests_path(:status => "closed"), class: (@status == "closed" ? "navegation-tabs__link navegation-tabs__link--active" : "navegation-tabs__link") %>
+    </li>
+    <% if current_user_account.role == "admin" %>
+      <li class="navegation-tabs__item" role="presentation">
+        <%= link_to "Rechazadas", requests_path(:status => "denied"), class: (@status == "denied" ? "navegation-tabs__link navegation-tabs__link--active" : "navegation-tabs__link") %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 

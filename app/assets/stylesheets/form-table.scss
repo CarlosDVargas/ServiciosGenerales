@@ -12,11 +12,13 @@ table.table-bordered > thead > tr > th{
 
 .form__table {
     text-align: center;
-    border: 1px solid darken(v.$light-color, 10);
+    font-size: v.$fs-normal;
+    border: 1px solid darken(v.$light-color, 15);
 
     &--empty {
         font-style: italic;
         padding: v.$spacing-rg 0;
+        margin-top: -1rem;
     }
 
     &-head {
@@ -47,6 +49,10 @@ table.table-bordered > thead > tr > th{
 
         &-toggle {
             @include m.button(v.$warning-color, v.$light-color);
+        }
+
+        &-close {
+            @include m.button(v.$danger-color, v.$light-color);
         }
 
         &--mobile {

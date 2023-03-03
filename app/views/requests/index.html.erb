@@ -1,58 +1,27 @@
-<%= render 'requests/navigation' %>
-<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <div class="row">
-    <h3 class="text-center">
-      <% case @status
-         when "in_process" %> Solicitudes en Proceso
-      <% when "completed" %> Solicitudes Finalizadas
-      <% when "closed" %> Solicitudes Cerradas
-      <% when "denied" %> Solicitudes Rechazadas
-      <% else %> Solicitudes Pendientes
-      <% end %>
-    </h3>
-  </div>
-  <div class="row">
-    <div class="container">
-      <% if @requests.first.nil? %>
-        <p class="text-center">No hay solicitudes para mostrar</p>
-      <% else %>
-        <table class="table table-hover table-sm">
-          <thead>
-          <tr>
-            <th class="table-header text-center" scope="col">Solicitud</th>
-            <th class="table-header text-center" scope="col">Fecha solicitud</th>
-            <th class="table-header text-center" scope="col">Edificio</th>
-            <th class="table-header text-center" scope="col">Sitio</th>
-            <th class="table-header text-center" scope="col">Solicitante</th>
-            <th class="table-header text-center" scope="col">Acciones</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @requests.each do |request| %>
-            <tr>
-              <td class="text-center"><%= request.identifier %></td>
-              <td class="text-center"><%= request.created_at.strftime("%d/%m/%Y") %></td>
-              <td class="text-center"><%= request.request_location.work_building.name %></td>
-              <td class="text-center"><%= request.request_location.name %></td>
-              <td class="text-center"><%= request.requester_name %></td>
-              <td class="text-center">
-                <div class="btn-group">
-                  <%= link_to request, class: "btn btn-sm btn-primary" do %>
-                    <i class="bi bi-eye"></i>
-                    Ver
-                  <% end %>
-                  <% if current_user_account.role == "admin" %>
-                    <%= render "requests/admin_views/admin_request_actions", request: request %>
-                  <% else %>
-                    <%= render "requests/employee_views/employee_request_actions", request: request %>
-                  <% end %>
-                </div>
-              </td>
-            </tr>
+<main class="main">
+  <div class="container form">
+    <h1 class="form__heading">Lista de solicitudes</h1>
+
+    <div class="mt-5 py-3">
+      <%= render 'requests/navigation' %>
+
+      <div class="request-list__header">
+        <h3 class="request-list__subheading">
+          <% case @status
+            when "in_process" %> Solicitudes en Proceso
+          <% when "completed" %> Solicitudes Finalizadas
+          <% when "closed" %> Solicitudes Cerradas
+          <% when "denied" %> Solicitudes Rechazadas
+          <% else %> Solicitudes Pendientes
           <% end %>
-          </tbody>
-        </table>
+        </h3>
+      </div>
+
+      <%= render partial: 'request_list', locals: { requests: @requests } %>
+
+      <% if !@requests.nil? && @requests.size == 0 %>
+        <p class="form__table form__table--empty"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay solicitudes para mostrar</p>
       <% end %>
     </div>
   </div>
-</div>
+</main>

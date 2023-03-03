@@ -1,13 +1,16 @@
 <div class="btn-group">
   <% case request.status
      when "in_process" %>
-    <%= link_to edit_task_path(request: request), class: "btn btn-sm btn-primary" do %>
+    <%= link_to "Atender", edit_task_path(request: request), class: "form__table-button-view form__table-button--desktop" %>
+    
+    <%= link_to edit_task_path(request: request), class: "form__table-button-view form__table-button--mobile" do %>
       <i class="bi bi-pencil-square"></i>
-      Atender
     <% end %>
-    <%= link_to "#", class: "btn btn-sm btn-primary" do %>
+
+    <%= link_to "Finalizar", class: "form__table-button-toggle form__table-button--desktop" %>
+
+    <%= link_to "#", class: "form__table-button-toggle form__table-button--mobile" do %>
       <i class="bi bi-check-square"></i>
-      Finalizar
     <% end %>
   <% end %>
 </div>
