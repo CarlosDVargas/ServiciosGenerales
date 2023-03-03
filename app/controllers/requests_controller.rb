@@ -13,7 +13,7 @@ class RequestsController < ApplicationController
       @queries = @requests.ransack(params[:q])
       @requests = @queries.result
       @status = params[:status] if params[:status]
-      @commit = params[:commit] #Para diferenciar la vista de la lista de solicitudes de reportes.
+      @commit = params[:commit] # Para diferenciar la vista de la lista de solicitudes de reportes.
       return if params[:q].present?
 
       set_status
@@ -104,7 +104,13 @@ class RequestsController < ApplicationController
   end
 
   # In charge of updating the status of a request depending on the status obtained from the params
+  # @param [Object] request
+  # @param [nil] task
   def change_status
+    if @task.nil?
+      user_account_id = current_user_account.id
+      @task = Task.where(request: @request, user_account_id:).first
+    end
     status = @request.status
     case status
     when 'in_process'
@@ -139,7 +145,7 @@ class RequestsController < ApplicationController
 
   # Falta documentación
   def search_state
-    #byebug
+    # byebug
     if params[:session][:identifier] && params[:session][:requester_mail]
       identifier = params[:session][:identifier]
       requester_mail = params[:session][:requester_mail]
@@ -231,7 +237,11 @@ class RequestsController < ApplicationController
 
   # Takes the tasks from table <b>Task</b>
   def set_task
-    @task = Task.find(params[:task_id])
+    @task = if params[:task_id]
+              Task.find(params[:task_id])
+            else
+              Task.where(request: @request, user_account: current_user_account).first
+            end
   end
 
   # Sets the completed? attribute of the tasks of the request to false
