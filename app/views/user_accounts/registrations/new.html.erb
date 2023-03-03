@@ -4,7 +4,7 @@
   </div>
 
   <div class="container form form--mandala">
-    <h1 class="form__heading--mandala" id="form__heading">Nuevo empleado</h1>
+    <h1 class="form__heading--mandala">Nuevo <%= resource.role == "worker" ? "empleado" : "administrador" %></h1>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <div class="form__input--mandala">
@@ -28,7 +28,7 @@
       </div>
 
       <div class="form__input--mandala">
-        <label id="employee-status" class="form__input-label">Estado del empleado</label>
+        <%= f.label resource.role == "worker" ? "Estado del empleado" : "estado del administrador", class: "form__input-label" %>
         <div class="form__check-group">
           <% if resource.status == "Activo" %>
             <div class="form__input-radio">
@@ -55,17 +55,9 @@
       </div>
 
       <div class="button-group">
-        <%= f.submit "Agregar empleado", class: "form__button-submit", id: "add-button" %>
+        <%= f.submit resource.role == "worker" ? "Agregar empleado" : "Agregar administrador", class: "form__button-submit", id: "add-button" %>
         <%= link_to "Regresar", root_path, class: "form__button-back" %>
       </div>
     <% end %>
   </div>
 </main>
-
-<script>
-  if (window.location.href.indexOf("admin") > -1) {
-    document.getElementById("form__heading").innerHTML = "Nuevo administrador";
-    document.getElementById("employee-status").innerHTML = "Estado del administrador";
-    document.getElementById("add-button").value = "Agregar administrador";
-  }
-</script>
