@@ -1,19 +1,14 @@
 <%= form_with(model: task) do |f| %>
-  <div class="mt-3 mb-3 p-4 border border-2 rounded-3">
-    <table class="table table-hover ">
-      <thead>
-      <tr>
-        <th class="text-center" scope="col">Cédula</th>
-        <th class="text-center" scope="col">Nombre Completo</th>
-        <% if list_type == "remove" %>
-          <th class="text-center" scope="col"> Trabajo finalizado</th>
-        <% end %>
-        <% if @request.status != "completed" && @request.status != "closed" %>
-          <th class="text-center" scope="col"><%= list_type == "add" ? "Asignar trabajador" : "Remover trabajador" %></th>
-        <% end %>
+  <table class="form__table table table-bordered">
+    <thead>
+      <tr class="form__table-head">
+        <th>Cédula</th>
+        <th>Nombre completo</th>
+        <th>Asignar</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+
+    <tbody>
       <% if list_type == "add" %>
         <% @not_working_employees.each do |employee| %>
           <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
@@ -23,19 +18,24 @@
           <%= render "/tasks/admin_views/table_col", employee: employee, list_type: list_type %>
         <% end %>
       <% end %>
-      </tbody>
-    </table>
-    <% if @request.status != "completed" && @request.status != "closed" %>
-      <%= f.hidden_field :request_id, value: request.id %>
-      <%= button_tag(class: "btn btn-primary") do %>
+    </tbody>
+  </table>
+
+  <% if @request.status != "completed" && @request.status != "closed" %>
+    <%= f.hidden_field :request_id, value: request.id %>
+    
+    <div class="button-group">
+      <%= button_tag(class: "form__button-submit") do %>
         <% if list_type == "add" %>
-          <i class="bi bi-person-plus"></i>
+          <i class="bi bi-person-plus"></i>&nbsp;
           Asignar empleados
         <% else %>
-          <i class="bi bi-person-dash"></i>
+          <i class="bi bi-person-dash"></i>&nbsp;
           Remover empleados
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+
+      <%= link_to "Regresar", :back, class: "form__button-back", id: "d-none", style: "display: none;" %>
+    </div>
+  <% end %>
 <% end %>

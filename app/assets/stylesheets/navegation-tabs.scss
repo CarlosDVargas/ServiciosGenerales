@@ -11,8 +11,6 @@
         border: 1px solid darken(v.$light-color, 10);
 
         @include m.desktop {
-            border-bottom-left-radius: v.$border-radius-sm;
-            border-bottom-right-radius: v.$border-radius-sm;
             flex-direction: row;
             padding: 1rem 0;
             border: none;
@@ -36,6 +34,8 @@
         border: 1px solid v.$light-gray;
         display: inline-block;
         width: 100%;
+        border-bottom-left-radius: v.$border-radius-sm;
+        border-bottom-right-radius: v.$border-radius-sm;
         
         @include m.desktop {
             display: inline;
@@ -49,8 +49,6 @@
 
         &:hover:not(.navegation-tabs__link--active) {
             border: 1px solid darken(v.$light-color, 10);
-            border-top-left-radius: inherit;
-            border-top-right-radius: inherit;
         }
 
         &--active {
@@ -58,8 +56,6 @@
             border: 1px solid darken(v.$light-color, 15);
             border-bottom: none;
             background-color: darken(v.$light-color, 10);
-            border-top-left-radius: inherit;
-            border-top-right-radius: inherit;
         }
     }
 }
