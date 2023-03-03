@@ -16,6 +16,10 @@
     justify-content: space-between;
 }
 
+.text-left {
+    text-align: left !important;
+}
+
 .bg-image {
     background-image: url(../images/bg-image.jpg);
     background-size: cover;
@@ -80,13 +84,13 @@
     }
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 992px) {
     .tablet-display {
         display: none;
     }
 }
 
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 992px) and (max-width: 1600px) {
     .tablet-display {
         display: table-cell;
     }

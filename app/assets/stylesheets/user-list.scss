@@ -1,0 +1,42 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.user-list {
+    &__flex {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+
+        @include m.desktop {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        > :nth-child(2) {
+            @include m.desktop {
+                height: 4.2rem;
+                margin: 0 0 4.2rem;
+            }
+        }
+    }
+
+    &__grid {
+        @include m.grid(4, .5rem);
+
+        > :nth-child(1) {
+            grid-column: 1 / 5;
+        }
+
+        > :nth-child(2) {
+            grid-column: 1 / 4;
+            margin-bottom: 0;
+        }
+
+        > :nth-child(3) {
+            grid-column: 4 / 5;
+            height: 4.2rem;
+            margin-top: 3.8rem;
+        }
+    }
+}

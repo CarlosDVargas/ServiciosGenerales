@@ -1,36 +1,29 @@
-<div class="container">
-  <h1 class="text-center">
-    <% if @role %>
-      <% if @role == 0 || @role == 'admin' %>
-        Administradores
-      <% elsif @role == 1 || @role == 'worker' %>
-        Trabajadores
+<main class="main">
+  <div class="container form">
+    <h1 class="form__heading">Lista de <%= (@role == 'worker' || @role == 1) ? 'empleados' : 'administradores' %></h1>
+    <hr class="mb-5">
+
+    <div class="user-list__flex">
+      <%= search_form_for @query, url: search_user_accounts_path, data: { turbo: false }, class: "user-list__grid" do |f| %>
+        <h3 class="form__subheading form__subheading--table text-left">Filtrar:</h3>
+
+        <div class="form__input">
+          <%= f.label :status, 'Estado', class: "form__input-label" %>
+          <%= f.select :status_eq, options_for_select(UserAccount.all.statuses), { include_blank: "Seleccione el estado" }, class: "form__input-select" %>
+          <%= f.hidden_field :role_eq, value: @role %>
+        </div>
+
+        <%= f.submit "Buscar", class: "form__button-submit"%>
       <% end %>
-    <% end %>
-  </h1>
-  <%= search_form_for @query, url: search_user_accounts_path, data: { turbo: false } do |f| %>
-    <div class="container mb-4 mt-4">
-      <h5>Filtro:</h5>
-      <div class="row">
-        <div class="col">
-          <%= f.label :status, 'Estado' %>
-          <%= f.select :status_eq, options_for_select(UserAccount.all.statuses), { include_blank: "Seleccione el estado a buscar" }, class: "form-select" %>
-          <%= f.text_field :role_eq, value: @role, class: "d-none" %>
-        </div>
-        <div class="col">
-          <br>
-          <%= f.submit "Buscar", class: "btn btn-primary" %>
-        </div>
-      </div>
+
+      <%= link_to (@role == 'worker' || @role == 1) ? 'Agregar empleado' : 'Agregar administrador', new_user_account_registration_path(:role => "worker"), class: "form__button-submit" %>
     </div>
-  <% end %>
-</div>
-<div class="container">
-  <div id="employees">
-    <div class="row">
-      <div class="container">
-        <%= render partial: 'user_accounts/employee_list', locals: { employees: @employees } %>
-      </div>
+
+    <hr class="mb-5">
+    <h3 class="form__subheading form__subheading--table">Tabla de resultados</h3>
+    
+    <div id="employees">
+      <%= render partial: 'user_accounts/employee_list', locals: { employees: @employees } %>
     </div>
   </div>
-</div>
+</main>
