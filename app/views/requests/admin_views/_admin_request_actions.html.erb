@@ -8,11 +8,11 @@
         <i class="bi bi-pencil-square"></i>
       <% end %>
 
-      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--desktop", data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
         <i class="bi bi-x-square"></i>&nbsp;Rechazar
       <% end %>
 
-      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--mobile", data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
         <i class="bi bi-x-square"></i>
       <% end %>
 
@@ -25,11 +25,11 @@
     <i class="bi bi-pencil-square"></i>
   <% end %>
 <% when "completed" %>
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--desktop", data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
     <i class="bi bi-x-square"></i>&nbsp;Cerrar/Reabrir
   <% end %>
 
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--mobile", data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
     <i class="bi bi-x-square"></i>
   <% end %>
 <% end %>
