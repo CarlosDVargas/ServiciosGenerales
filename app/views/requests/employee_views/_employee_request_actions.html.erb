@@ -1,18 +1,25 @@
-<div class="btn-group">
-  <% case request.status
-     when "in_process" %>
-    <%= link_to "Atender", edit_task_path(request: request), class: "form__table-button-view form__table-button--desktop" %>
+<% case request.status
+    when "in_process" %>
+  <%= link_to "Atender", edit_task_path(request: request), class: "form__table-button-view form__table-button--desktop" %>
 
-    <%= link_to edit_task_path(request: request), class: "form__table-button-view form__table-button--mobile" do %>
-      <i class="bi bi-pencil-square"></i>
-    <% end %>
-
-    <%= link_to "Finalizar", change_status_request_path(request),
-                class: "form__table-button-toggle form__table-button--desktop",
-                data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)?, esta acción es irreversible" } %>
-
-    <%= link_to "#", class: "form__table-button-toggle form__table-button--mobile" do %>
-      <i class="bi bi-check-square"></i>
-    <% end %>
+  <%= link_to edit_task_path(request: request), class: "form__table-button-view form__table-button--mobile" do %>
+    <i class="bi bi-pencil-square"></i>
   <% end %>
-</div>
+
+  <%= link_to "Finalizar", change_status_request_path(request),
+              class: "form__table-button-toggle form__table-button--desktop",
+              data: { turbo_method: :get, turbo_confirm: "¿Está seguro(a)?, esta acción es irreversible" } %>
+
+  <%= link_to "#", class: "form__table-button-toggle form__table-button--mobile" do %>
+    <i class="bi bi-check-square"></i>
+  <% end %>
+
+  <% when "completed" && "closed" %>
+  <%= link_to request, class: "form__table-button-view form__table-button--desktop" do %>
+    <i class="bi bi-eye"></i>&nbsp;Ver
+  <% end %>
+
+  <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
+    <i class="bi bi-eye"></i>
+  <% end %>
+<% end %>

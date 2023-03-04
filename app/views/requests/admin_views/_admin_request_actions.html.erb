@@ -32,4 +32,13 @@
   <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
     <i class="bi bi-x-square"></i>
   <% end %>
+
+<% when "closed" %>
+<%= link_to request, class: "form__table-button-view form__table-button--desktop" do %>
+  <i class="bi bi-eye"></i>&nbsp;Ver
+<% end %>
+
+<%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
+  <i class="bi bi-eye"></i>
+<% end %>
 <% end %>
