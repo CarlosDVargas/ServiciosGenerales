@@ -1,6 +1,6 @@
 <main class="main">
   <div class="container form">
-    <h1 class="form__heading">Lista de <%= (@role == 'worker' || @role == 1) ? 'empleados' : 'administradores' %></h1>
+    <h1 class="form__heading">Lista de <%= (@role == 'worker' || @role == 1) ? 'trabajadores' : 'administradores' %></h1>
     <hr class="mb-5">
 
     <div class="user-list__flex">
@@ -16,7 +16,7 @@
         <%= f.submit "Buscar", class: "form__button-submit"%>
       <% end %>
 
-      <%= link_to (@role == 'worker' || @role == 1) ? 'Agregar empleado' : 'Agregar administrador', new_user_account_registration_path(:role => "worker"), class: "form__button-submit" %>
+      <%= link_to (@role == 'worker' || @role == 1) ? 'Agregar trabajador' : 'Agregar administrador', new_user_account_registration_path(:role => "worker"), class: "form__button-submit" %>
     </div>
 
     <hr class="mb-5">
