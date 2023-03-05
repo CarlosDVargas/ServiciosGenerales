@@ -1,32 +1,37 @@
-<div id="<%= dom_id @user_account %>">
-  <div class="container mt-3 mb-3 p-5 border border-2 rounded-3">
-    <h4 class="text-center">Información del empleado</h4>
-    <br>
-    <div>
-      <p>
-        <strong>Nombre completo:</strong>
-        <%= @user_account.name %>
-      </p>
-      <p>
-        <strong>Número de cédula:</strong>
-        <%= @user_account.id_card %>
-      </p>
-      <p>
-        <strong>Email:</strong>
-        <%= @user_account.email %>
-      </p>
-      <p>
-        <strong>Estado:</strong>
-        <%= @user_account.status == 'active' ? 'Activo' : 'Inactivo' %>
-      </p>
-      <p>
-        <strong>Sede de trabajo:</strong>
-        <%= @user_account.campus.name %>
-      </p>
-    </div>
-  </div>
-</div>
+<main class="main" id="<%= dom_id @user_account %>">
+  <div class="container form">
+    <h1 class="form__heading">Información del <%= @user_account.role == "worker" ? "trabajador" : "administrador" %></h1>
+    <hr class="mb-5">
 
-<div>
-  <%= link_to "Volver a la lista de empleados", employees_path(role: @user_account.role) %>
-</div>
+    <div class="grid-columns-2">
+      <div class="form__input">
+        <label for="name" class="form__input-label">Nombre completo</label>
+        <input type="text" id="name" class="form__input-textfield" value="<%= @user_account.name %>" disabled>
+      </div>
+
+      <div class="form__input">
+        <label for="id_card" class="form__input-label">Número de cédula</label>
+        <input type="text" id="id_card" class="form__input-textfield" value="<%= @user_account.id_card %>" disabled>
+      </div>
+    </div>
+
+    <div class="grid-columns-3">
+      <div class="form__input">
+        <label for="email" class="form__input-label">Correo electrónico</label>
+        <input type="text" id="email" class="form__input-textfield" value="<%= @user_account.email %>" disabled>
+      </div>
+
+      <div class="form__input">
+        <label for="" class="form__input-label">Sede de trabajo</label>
+        <input type="text" id="" class="form__input-textfield" value="<%= @user_account.campus.name %>" disabled>
+      </div>
+
+      <div class="form__input">
+        <label for="" class="form__input-label">Estado</label>
+        <input type="text" id="" class="form__input-textfield" value="<%= @user_account.status %>" disabled>
+      </div>
+    </div>
+
+    <%= link_to "Regresar", :back, class: "form__button-back" %>
+  </div>
+</main>

@@ -59,8 +59,8 @@
                                 <li class="navegation__item dropdown">
                                     <a class="navegation__link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trabajadores</a>
                                     <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "worker"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
                                         <%= link_to "Listar", employees_path(:role => "worker"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "worker"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
                                     </div>
                                 </li>
                                 <li class="navegation__item dropdown">
@@ -68,8 +68,8 @@
                                         Administradores
                                     </a>
                                     <div class="navegation__dropdown dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "admin"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
                                         <%= link_to "Listar", employees_path(:role => "admin"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
+                                        <%= link_to "Agregar", new_user_account_registration_path(:role => "admin"), class: "navegation__link navegation__link--dropdown dropdown-item" %>
                                     </div>
                                 </li>
                             <% end %>
