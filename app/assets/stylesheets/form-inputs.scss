@@ -62,7 +62,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin: 1rem 0 2rem;
-    gap: 1rem;
+    gap: 1.5rem;
     
     @include m.desktop {
         flex-direction: row;

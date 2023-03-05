@@ -55,7 +55,7 @@
       </div>
 
       <div class="button-group">
-        <%= f.submit resource.role == "worker" ? "Agregar trabajador" : "Agregar administrador", class: "form__button-submit", id: "add-button" %>
+        <%= f.submit resource.role == "worker" ? "Agregar trabajador" : "Agregar administrador", class: "form__button-submit" %>
         <%= link_to "Regresar", root_path, class: "form__button-back" %>
       </div>
     <% end %>
