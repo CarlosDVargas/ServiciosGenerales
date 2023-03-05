@@ -9,7 +9,7 @@
             Volver
           <% end %>
           <% if @request.feedback.nil? && @request.status == "closed" %>
-            <%= link_to new_feedback_path(:request_id => @request.id), class: "btn btn-primary" do %>
+            <%= link_to new_feedback_path(:request_id => @request.hashid), class: "btn btn-primary" do %>
               <i class="bi bi-clipboard2"></i>
               Agregar feedback
             <% end %>
