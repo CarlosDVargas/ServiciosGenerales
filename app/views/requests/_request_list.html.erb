@@ -22,21 +22,19 @@
 
           <td class="form__table-data">
             <div class="form__table-buttons">
-                <% if @commit == "Buscar" %>
-                  <%= link_to request, class: "form__table-button-view form__table-button--desktop" do %>
-                    <i class="bi bi-eye"></i>&nbsp;Ver
-                  <% end %>
+              <%= link_to request, class: "form__table-button-view form__table-button--desktop" do %>
+                <i class="bi bi-eye"></i>&nbsp;Ver
+              <% end %>
 
-                  <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
-                    <i class="bi bi-eye"></i>
-                  <% end %>
-                <% else %>
-                  <% if current_user_account.role == "admin" %>
-                    <%= render "requests/admin_views/admin_request_actions", request: request %>
-                  <% else %>
-                    <%= render "requests/employee_views/employee_request_actions", request: request %>
-                  <% end %>
-                <% end %>
+              <%= link_to request, class: "form__table-button-view form__table-button--mobile" do %>
+                <i class="bi bi-eye"></i>
+              <% end %>
+              
+              <% if current_user_account.role == "admin" %>
+                <%= render "requests/admin_views/admin_request_actions", request: request %>
+              <% else %>
+                <%= render "requests/employee_views/employee_request_actions", request: request %>
+              <% end %>
             </div>    
           </td>
         </tr>
