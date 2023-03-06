@@ -48,7 +48,7 @@
         font-weight: normal;
         font-size: v.$fs-large;
         text-align: center;
-        padding: 3rem 0 3rem;
+        padding: 3rem 0;
         margin: 0;
         
         &--mandala {
@@ -56,6 +56,16 @@
 
             @include m.desktop {
                 text-align: left;
+            }
+        }
+
+        &--info {
+            padding-top: 2rem;
+            font-size: v.$fs-normal;
+            
+            @include m.desktop {
+                text-align: left;
+                width: 50%;
             }
         }
 

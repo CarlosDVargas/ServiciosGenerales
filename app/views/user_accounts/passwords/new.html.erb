@@ -1,16 +1,25 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, data: { turbo: :false } }) do |f| %>
-  <%= render "user_accounts/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<main class="main">
+  <div class="container">
+    <%= render "user_accounts/shared/error_messages", resource: resource %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <div class="container form form--mandala">
+    <h1 class="form__heading--mandala mb-4">¿Olvidó la contraseña?</h1>
 
-<%= render "user_accounts/shared/links" %>
+    <h3 class="form__subheading form__subheading--info">
+      <i class="bi bi-info-circle"></i>&nbsp;&nbsp;Digita el correo electrónico asociado a la cuenta y le enviaremos las instrucciones para restablecer la contraseña  
+    </h3> 
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, data: { turbo: :false } }) do |f| %>
+      <div class="form__input--mandala">
+        <%= f.label :email, "Correo electrónico", class: "form__input-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form__input-textfield", placeholder: "Correo electrónico" %>
+      </div>
+
+      <div class="button-group">
+        <%= f.submit "Enviar instrucciones", class: "form__button-submit" %>
+        <%= link_to "Regresar", root_path, class: "form__button-back" %>
+      </div>
+    <% end %>
+  </div>
+</main>
