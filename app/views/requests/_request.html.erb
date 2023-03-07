@@ -13,7 +13,7 @@
       when "in_process" %> <input type="text" id="request_status" value="Solicitud en proceso" class="form__input-textfield form__input-text form__input-text--inprocess" disabled>
       <% when "completed" %> <input type="text" id="request_status" value="Solicitud finalizada" class="form__input-textfield form__input-text form__input-text--completed" disabled>
       <% when "closed" %> <input type="text" id="request_status" value="Solicitud cerrada" class="form__input-textfield form__input-text form__input-text--closed" disabled>
-      <% when "deniend" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
+      <% when "denied" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
       <% else %> <input type="text" id="request_status" value="Solicitud pendiente" class="form__input-textfield form__input-text form__input-text--pending" disabled>
     <% end %>
   </div>
@@ -118,4 +118,18 @@
   <hr class="mt-5 mb-3">
   <h3 class="form__subheading fw-bold pb-4">Bitácora de cambios</h3>   
   <%= render 'requests/admin_views/request_log' %>
+<% end %>
+
+<% if request.status == "denied" %>
+  <hr class="mt-5 mb-3">
+  <h3 class="form__subheading fw-bold pb-4">Razones de rechazo de solicitud</h3> 
+  
+  <div class="form__input">
+    <label for="reasons" class="form__input-label">Razones de rechazo</label>
+    <textarea id="reasons" rows="5" class="form__input-textarea" disabled>
+      <% @reasons.each do |reason| %>
+        &bull;&nbsp;&nbsp;<%= reason.reason %>
+      <% end %>
+    </textarea>
+  </div>
 <% end %>
