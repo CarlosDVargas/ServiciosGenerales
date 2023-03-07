@@ -1,35 +1,35 @@
 <% case request.status
    when "pending" %>
-      <%= link_to change_status_request_path(request), class: "form__table-button-toggle form__table-button--desktop" do %>
+      <%= link_to change_status_request_path(request), class: "form__button-toggle form__button--desktop" do %>
         <i class="bi bi-pencil-square"></i>&nbsp;Atender
       <% end %>
 
-      <%= link_to change_status_request_path(request), class: "form__table-button-toggle form__table-button--mobile" do %>
+      <%= link_to change_status_request_path(request), class: "form__button-toggle form__button--mobile" do %>
         <i class="bi bi-pencil-square"></i>
       <% end %>
 
-      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+      <%= link_to edit_request_path(request), class: "form__button-close form__button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
         <i class="bi bi-x-square"></i>&nbsp;Rechazar
       <% end %>
 
-      <%= link_to edit_request_path(request), class: "form__table-button-close form__table-button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+      <%= link_to edit_request_path(request), class: "form__button-close form__button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
         <i class="bi bi-x-square"></i>
       <% end %>
 
 <% when "in_process" %>
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-toggle form__table-button--desktop" do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-toggle form__button--desktop" do %>
     <i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Seguimiento/Editar
   <% end %>
     
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-toggle form__table-button--mobile" do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-toggle form__button--mobile" do %>
     <i class="bi bi-pencil-square"></i>
   <% end %>
 <% when "completed" %>
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-close form__button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
     <i class="bi bi-x-square"></i>&nbsp;Cerrar/Reabrir
   <% end %>
 
-  <%= link_to edit_task_path(:request => request.id), class: "form__table-button-close form__table-button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-close form__button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
     <i class="bi bi-x-square"></i>
   <% end %>
 <% end %>

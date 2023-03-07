@@ -1,0 +1,28 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.request-reasons {
+    &__flex,
+    &__fields {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        & > :nth-child(2) {
+            margin-bottom: 1rem;
+
+            @include m.desktop {
+                margin-bottom: 2rem;
+                & > :nth-child(1) {
+                    font-size: v.$fs-medium;
+                }
+            }
+        }
+    }
+
+    &__fields {
+        @include m.desktop {
+            width: 50%;
+        }
+    }
+}

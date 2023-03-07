@@ -6,7 +6,7 @@
     <%= render @request %>
 
     <div class="button-group">
-      <% if !current_user_account %>
+      <% if !current_user_account && @request.status == "closed" %>
         <%= link_to "Agregar retroalimentación", new_feedback_path(:request_id => @request.hashid), class: "form__button-submit" %>
       <% end %>
 

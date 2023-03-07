@@ -1,19 +1,13 @@
 <div class="nested-fields">
-  <div class="row">
-    <%= f.hidden_field :_destroy %>
-    <% f.hidden_field :user_id, value: current_user_account.id %>
-    <% f.hidden_field :request_id, value: request.id %>
-  </div>
-  <div class="row">
-    <div class="col">
-      <%= f.text_field :reason, placeholder: "Razón", class: "form-control" %>
-    </div>
-    <div class="col">
-      <small>
-        <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
-          <i class="bi bi-trash"></i>
-        <% end %>
-      </small>
+  <%= f.hidden_field :_destroy %>
+  <% f.hidden_field :user_id, value: current_user_account.id %>
+  <% f.hidden_field :request_id, value: request.id %>
+  <div class="form__input request-reasons__fields">
+    <%= f.text_field :reason, placeholder: "Ingrese la razón", class: "form__input-textfield", autofocus: true %>
+    <div>
+      <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "form__button-close" do %>
+        <i class="bi bi-trash"></i>
+      <% end %>
     </div>
   </div>
 </div>

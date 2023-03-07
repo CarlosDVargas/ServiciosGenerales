@@ -9,17 +9,24 @@ export default class extends Controller {
     }
 
     add_association(event) {
-        const random = Math.floor(Math.random() * 20);
         event.preventDefault();
+        const random = Math.floor(Math.random() * 20);
+        
         const content = this.templateTarget.innerHTML.replace(/TEMPLATE_RECORD/g, random);
         this.add_itemTarget.insertAdjacentHTML('beforebegin', content);
+        
         var input = document.getElementById("request_request_deny_reasons_attributes_" + random + "_reason");
+        
         console.log(input);
+
         if (input === null) {
             input = document.getElementById("request_reopen_reasons_attributes_" + random + "_reason");
         }
+        
         const select = document.getElementById("reasons");
+        
         console.log(select);
+
         if (select.options[select.selectedIndex].text !== "Otro") {
             input.value = select.options[select.selectedIndex].text;
             input.readOnly = true;

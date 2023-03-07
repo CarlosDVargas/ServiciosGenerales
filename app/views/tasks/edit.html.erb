@@ -1,56 +1,12 @@
 <main class="main">
   <div class="container form">
     <h1 class="form__heading"><%= (current_user_account.role == "admin") ? "Seguimiento de solicitud" : "Trabajo asignado" %></h1>
-
     <hr class="mb-3">
-    
+
     <% if current_user_account.role != "worker" %>
-      <h3 class="form__subheading fw-bold">Información de la solicitud</h3>  
-
-      <div class="grid-columns-3">
-        <div class="form__input">
-          <label for="request_id" class="form__input-label">Código de solicitud</label>
-          <input type="text" id="request_id" value="<%= @request.identifier %>" class="form__input-textfield fw-bold" disabled>
-        </div>
-
-        <div class="form__input">
-          <label for="request_status" class="form__input-label">Estado de la solicitud</label>
-          
-          <% case @request.status 
-            when "in_process" %> <input type="text" id="request_status" value="Solicitud en proceso" class="form__input-textfield form__input-text form__input-text--inprocess" disabled>
-            <% when "completed" %> <input type="text" id="request_status" value="Solicitud finalizada" class="form__input-textfield form__input-text form__input-text--completed" disabled>
-            <% when "closed" %> <input type="text" id="request_status" value="Solicitud cerrada" class="form__input-textfield form__input-text form__input-text--closed" disabled>
-            <% when "deniend" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
-            <% else %> <input type="text" id="request_status" value="Solicitud pendiente" class="form__input-textfield form__input-text form__input-text--pending" disabled>
-          <% end %>
-        </div>
-
-        <div class="form__input">
-          <label for="campus" class="form__input-label">Sede</label>
-          <input type="text" id="campus" class="form__input-textfield" value="<%= @request.campus.name %>" disabled>
-        </div>
-      </div>
-
-      <hr class="my-4">
-      <h3 class="form__subheading fw-bold pb-4">Editar asignaciones</h3>  
-
       <%= render "/tasks/admin_views/admin_view" %>
-
-      <hr class="mt-5 mb-3">
-      <h3 class="form__subheading fw-bold">Historial de observaciones</h3>  
-
-      <div class="mt-3">
-        <%= render 'tasks/shared_views/observations' %>
-      </div>
-      
-      <hr class="mt-5 mb-3">
-      <h3 class="form__subheading fw-bold pb-4">Bitácora de cambios</h3> 
-
-      <%= render 'requests/admin_views/request_log' %>
-      
-      <%= link_to "Regresar", :back, class: "form__button-back mt-4" %>
     <% else %>
-      <%= render "/tasks/employee_views/employee_view" %>   
+      <%= render "/tasks/employee_views/employee_view" %>
     <% end %>
   </div>
 </main>

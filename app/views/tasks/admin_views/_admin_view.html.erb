@@ -1,4 +1,33 @@
-<% if @request.status != "completed" && @request.status != "closed" %>
+<h3 class="form__subheading fw-bold">Información de la solicitud</h3>  
+
+<div class="grid-columns-3">
+  <div class="form__input">
+    <label for="request_id" class="form__input-label">Código de solicitud</label>
+    <input type="text" id="request_id" value="<%= @request.identifier %>" class="form__input-textfield fw-bold" disabled>
+  </div>
+
+  <div class="form__input">
+    <label for="request_status" class="form__input-label">Estado de la solicitud</label>
+    
+    <% case @request.status 
+      when "in_process" %> <input type="text" id="request_status" value="Solicitud en proceso" class="form__input-textfield form__input-text form__input-text--inprocess" disabled>
+      <% when "completed" %> <input type="text" id="request_status" value="Solicitud finalizada" class="form__input-textfield form__input-text form__input-text--completed" disabled>
+      <% when "closed" %> <input type="text" id="request_status" value="Solicitud cerrada" class="form__input-textfield form__input-text form__input-text--closed" disabled>
+      <% when "deniend" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
+      <% else %> <input type="text" id="request_status" value="Solicitud pendiente" class="form__input-textfield form__input-text form__input-text--pending" disabled>
+    <% end %>
+  </div>
+
+  <div class="form__input">
+    <label for="campus" class="form__input-label">Sede</label>
+    <input type="text" id="campus" class="form__input-textfield" value="<%= @request.campus.name %>" disabled>
+  </div>
+</div>
+
+<% if @request.status == "in_process" %>
+  <hr class="my-4">
+  <h3 class="form__subheading fw-bold pb-4">Editar asignaciones</h3>
+  
   <div id="remove-employees">
     <h3 class="form__subheading form__subheading--table text-left fw-normal">Trabajadores asignados</h3>
     <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "remove" %>
@@ -9,3 +38,30 @@
     <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>
   </div>
 <% end %>
+
+<hr class="mt-5 mb-3">
+<h3 class="form__subheading fw-bold">Historial de observaciones</h3>  
+
+<div class="mt-3">
+  <%= render 'tasks/shared_views/observations' %>
+</div>
+
+<hr class="mt-5 mb-3">
+<h3 class="form__subheading fw-bold pb-4">Bitácora de cambios</h3> 
+
+<%= render 'requests/admin_views/request_log' %>
+
+<% if @request.status == "completed" %>
+  <hr class="mt-5 mb-3">
+  <h3 class="form__subheading fw-bold">Reapertura de solicitud</h3> 
+  <%= render 'requests/admin_views/request_reasons', request: @request, type: "reopen" %>
+  <hr class="mt-5 mb-3">
+<% end %>
+
+<div class="button-group">
+  <% if @request.status == "completed" %>
+    <%= link_to "Cerrar solicitud", change_status_request_path(@request, :change_to => "close"), class: "form__button-close" %>
+  <% end %>
+
+  <%= link_to "Regresar", :back, class: "form__button-back" %>
+</div>

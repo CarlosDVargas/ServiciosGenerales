@@ -1,5 +1,5 @@
 <div class="grid-columns-2 flex-column-reverse">
-  <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro? ¡Esta acción es irreversible!' }) do |f| %>
+  <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro(a)? ¡Esta acción es irreversible!' }) do |f| %>
     <div class="form__input">
       <label for="observations" class="form__input-label">Agregar observaciones</label>
       <%= f.fields_for :observations do |observation| %>

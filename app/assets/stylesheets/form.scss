@@ -96,7 +96,8 @@
     }
 
     .form__button {
-        &-submit {
+        &-submit,
+        &-view {
             @include m.button(v.$primary-color, v.$light-color);
         }
         
@@ -106,6 +107,25 @@
 
         &-toggle {
             @include m.button(v.$warning-color, v.$light-color);
+        }
+
+        &-close {
+            @include m.button(v.$danger-color, v.$light-color);
+        }
+
+        &--mobile {
+            width: 70%;
+            margin: 0 auto;
+            @include m.desktop {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none; 
+            @include m.desktop {
+                display: inline-block;
+            }
         }
     }
 }
