@@ -23,7 +23,7 @@
 @mixin grid($columns, $spacing) {
     display: grid;
     grid-template-columns: repeat($columns, 1fr);
-    gap: $spacing;
+    column-gap: $spacing;
 }
 
 // BUTTON

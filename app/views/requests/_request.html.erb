@@ -1,97 +1,115 @@
-<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <div class="row">
-    <h3 class="text-center">
-      <% case request.status
-         when "in_process" %> Solicitud en Proceso
-      <% when "completed" %> Solicitud Finalizada
-      <% when "closed" %> Solicitud Cerrada
-      <% when "denied" %> Solicitud Rechazada
-      <% else %> Solicitud Pendiente de Revisión
-      <% end %>
-    </h3>
+<h3 class="form__subheading">Información de la solicitud</h3>  
+
+<div class="grid-columns-2">
+  <div class="form__input">
+    <label for="request_id" class="form__input-label">Código de solicitud</label>
+    <input type="text" id="request_id" value="<%= request.identifier %>" class="form__input-textfield" disabled>
   </div>
-  <div class="row">
-    <div class="container p-3">
-      <p>
-        <strong>Solicitud:</strong>
-        <%= @request.identifier %>
-      </p>
-      <p>
-        <strong>Sede:</strong>
-        <%= request.campus.name %>
-      </p>
-      <p>
-        <strong>Dirección email del solicitante:</strong>
-        <%= request.requester_mail %>
-      </p>
-      <% if (request.status != "pending" && request.status != "denied") || current_user_account %>
-        <p>
-          <strong>Nombre del solicitante:</strong>
-          <%= request.requester_name %>
-        </p>
-        <p>
-          <strong>Extensión del solicitante:</strong>
-          <%= request.requester_extension %>
-        </p>
-        <p>
-          <strong>Número telefónico de solicitante:</strong>
-          <%= request.requester_phone %>
-        </p>
-        <p>
-          <strong>Identificación del solicitante:</strong>
-          <%= request.requester_id %>
-        </p>
-        <p>
-          <strong>Tipo de solicitante:</strong>
-          <%= @dictionary.requesterTypes[request.requester_type.to_sym] %>
-        </p>
-        <% if request.requester_type == "student" %>
-          <p>
-            <strong>Carnet del solicitante:</strong>
-            <%= request.student_id %>
-          </p>
-          <p>
-            <strong>Dependencia estudiantil:</strong>
-            <%= @dictionary.studentAssociations[request.student_association.to_sym] %>
-          </p>
-        <% end %>
-        <p>
-          <strong>Edificio:</strong>
-          <%= request.request_location.work_building.name %>
-        </p>
-        <p>
-          <strong>Lugar del trabajo a realizar:</strong>
-          <%= request.request_location.name %>
-        </p>
-        <p>
-          <strong>Tipo de trabajo a realizar:</strong>
-          <% if !@dictionary.workTypes[request.work_type.to_sym].nil? %>
-            <%= @dictionary.workTypes[request.work_type.to_sym] %>
-          <% else %>
-            <%= request.work_type %>
-          <% end %>
-        </p>
-        <p>
-          <strong>Descripción del trabajo a realizar:</strong>
-          <%= request.work_description %>
-        </p>
-      <% end %>
-    </div>
+
+  <div class="form__input">
+    <label for="request_status" class="form__input-label">Estado de la solicitud</label>
+    
+    <% case request.status 
+      when "in_process" %> <input type="text" id="request_status" value="Solicitud en proceso" class="form__input-textfield form__input-text form__input-text--inprocess" disabled>
+      <% when "completed" %> <input type="text" id="request_status" value="Solicitud finalizada" class="form__input-textfield form__input-text form__input-text--completed" disabled>
+      <% when "closed" %> <input type="text" id="request_status" value="Solicitud cerrada" class="form__input-textfield form__input-text form__input-text--closed" disabled>
+      <% when "deniend" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
+      <% else %> <input type="text" id="request_status" value="Solicitud pendiente" class="form__input-textfield form__input-text form__input-text--pending" disabled>
+    <% end %>
   </div>
-  <div class="container">
+</div>
+
+<hr class="mb-3">
+<h3 class="form__subheading">Información del solicitante</h3> 
+
+<div class="<%= current_user_account ? "grid-columns-2" : "grid-columns-3" %>">
+  <div class="form__input">
+    <label for="requester_id" class="form__input-label">Cédula del solicitante</label>
+    <input type="text" id="requester_id" class="form__input-textfield" value="<%= request.requester_id %>" disabled>
   </div>
-  <% if request.status == "denied" %>
-    <div class="container">
-      <label>Razones de rechazo de solicitud:</label>
-      <div>
-        <ul>
-          <% @reasons.each do |reason| %>
-            <li>
-              <label><%= reason.reason %></label>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+
+  <div class="form__input">
+    <label for="requester_name" class="form__input-label">Nombre del solicitante</label>
+    <input type="text" id="requester_name" class="form__input-textfield" value="<%= request.requester_name %>" disabled>
+  </div>
+
+  <% if !current_user_account %>
+    <div class="form__input">
+      <label for="requester_email" class="form__input-label">Correo electrónico</label>
+      <input type="text" id="requester_email" class="form__input-textfield" value="<%= request.requester_mail %>" disabled>
     </div>
   <% end %>
 </div>
+
+<div class="<%= request.requester_type != "student" ? "grid-columns-2" : "grid-columns-3" %>">
+  <% if current_user_account %>
+    <div class="form__input">
+      <label for="requester_email" class="form__input-label">Correo electrónico</label>
+      <input type="text" id="requester_email" class="form__input-textfield" value="<%= request.requester_mail %>" disabled>
+    </div>
+
+    <% if request.requester_type != "student" %>
+      <div class="form__input">
+        <label for="requester_type" class="form__input-label">Tipo de solicitante</label>
+        <input type="text" id="requester_type" class="form__input-textfield" value="<%= @dictionary.requesterTypes[request.requester_type.to_sym] %>" disabled>
+      </div>
+    <% end %>
+
+    <div class="form__input">
+      <label for="requester_email" class="form__input-label">Número telefónico</label>
+      <input type="text" id="requester_email" class="form__input-textfield" value="<%= request.requester_phone %>" disabled>
+    </div>
+
+    <div class="form__input">
+      <label for="requester_email" class="form__input-label">Extensión telefónica</label>
+      <input type="text" id="requester_email" class="form__input-textfield" value="<%= request.requester_extension %>" disabled>
+    </div>
+
+    <% if request.requester_type == "student" %>
+      <div class="form__input">
+        <label for="requester_type" class="form__input-label">Tipo de solicitante</label>
+        <input type="text" id="requester_type" class="form__input-textfield" value="<%= @dictionary.requesterTypes[request.requester_type.to_sym] %>" disabled>
+      </div>
+
+      <div class="form__input">
+        <label for="student_id" class="form__input-label">Carné del solicitante</label>
+        <input type="text" id="student_id" class="form__input-textfield" value="<%= request.student_id %>" disabled>
+      </div>
+
+      <div class="form__input">
+        <label for="requester_email" class="form__input-label">Dependencia estudiantil</label>
+        <input type="text" id="requester_email" class="form__input-textfield" value="<%= @dictionary.studentAssociations[request.student_association.to_sym] %>" disabled>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<hr class="mb-3">
+<h3 class="form__subheading">Información del trabajo solicitado</h3> 
+
+<div class="grid-columns-2">
+  <div class="form__input">
+    <label for="campus" class="form__input-label">Sede</label>
+    <input type="text" id="campus" class="form__input-textfield" value="<%= request.campus.name %>" disabled>
+  </div>
+
+  <div class="form__input">
+    <label for="building" class="form__input-label">Edificio</label>
+    <input type="text" id="building" class="form__input-textfield" value="<%= request.request_location.work_building.name %>" disabled>
+  </div>
+
+  <div class="form__input">
+    <label for="location" class="form__input-label">Lugar del trabajo</label>
+    <input type="text" id="location" class="form__input-textfield" value="<%= request.request_location.work_building.name %>" disabled>
+  </div>
+
+  <div class="form__input">
+    <label for="work_type" class="form__input-label">Tipo de trabajo solicitado</label>
+    <input type="text" id="work_type" class="form__input-textfield" value="<%= !@dictionary.workTypes[request.work_type.to_sym].nil? ? @dictionary.workTypes[request.work_type.to_sym] : request.work_type %>" disabled>
+  </div>
+</div>
+
+<div class="form__input">
+  <label for="work_description" class="form__input-label">Descripción del trabajo</label>
+  <textarea id="work_description" class="form__input-textarea" rows="6" disabled><%= request.work_description %></textarea>
+</div>  

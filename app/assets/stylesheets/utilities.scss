@@ -64,7 +64,7 @@
 
 .grid-columns-2-tablet {
     @media (min-width: 768px) and (max-width: 992px) {
-        @include m.grid(2, 0rem);
+        @include m.grid(2, 1rem);
 
         .form__input:nth-child(3) {
             grid-column: 1 / 3;

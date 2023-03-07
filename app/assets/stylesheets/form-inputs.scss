@@ -22,7 +22,7 @@
         display: block;
         font-size: v.$fs-normal;
         padding: 1rem 1.5rem;
-        margin: 1rem 0 3rem;
+        margin: 1rem 0 2rem;
         border: 1px solid v.$light-gray;
         background-color: v.$light-color;
         border-radius: v.$border-radius-sm;
@@ -45,7 +45,7 @@
 
         &-textfield,
         &-select {
-            margin: 1rem 0 4rem;
+            margin: 1rem 0 3rem;
         }
     }
 
@@ -54,6 +54,31 @@
         flex-direction: row-reverse;
         align-items: center;
         gap: .5rem
+    }
+
+    &-text {
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &--pending {
+            color: darken(v.$primary-color, 10);
+        }
+
+        &--inprocess {
+            color: v.$warning-color;
+        }
+
+        &--completed {
+            color: v.$success-color;
+        }
+
+        &--closed {
+            color: v.$secondary-color;
+        }
+
+        &--deniend {
+            color: v.$danger-color;
+        }
     }
 }
 
