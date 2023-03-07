@@ -30,27 +30,15 @@
       <div class="form__input--mandala">
         <%= f.label resource.role == "worker" ? "Estado del trabajador" : "estado del administrador", class: "form__input-label" %>
         <div class="form__check-group">
-          <% if resource.status == "Activo" %>
-            <div class="form__input-radio">
-              <%= f.label :status, "Activo", :value => "active" %>
-              <%= f.radio_button :status, "Activo", type: "radio", :checked => true %>
-            </div>
+          <div class="form__input-radio">
+            <%= f.label :status, "Activo", :value => "active" %>
+            <%= f.radio_button :status, "Activo", type: "radio" %>
+          </div>
 
-            <div class="form__input-radio">
-              <%= f.label :status, "Inactivo", :value => "inactive" %>
-              <%= f.radio_button :status, "Inactivo", type: "radio" %>
-            </div>
-          <% else %>
-            <div class="form__input-radio">
-              <%= f.label :status, "Activo", :value => "active" %>
-              <%= f.radio_button :status, "Activo", type: "radio" %>
-            </div>
-
-            <div class="form__input-radio">
-              <%= f.label :status, "Inactivo", :value => "inactive" %>
-              <%= f.radio_button :status, "Inactivo", type: "radio", :checked => true %>
-            </div>
-          <% end %>
+          <div class="form__input-radio">
+            <%= f.label :status, "Inactivo", :value => "inactive" %>
+            <%= f.radio_button :status, "Inactivo", type: "radio", :checked => true %>
+          </div>
         </div>
       </div>
 
