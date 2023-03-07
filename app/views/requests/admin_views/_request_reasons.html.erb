@@ -1,33 +1,40 @@
 <%= form_with(model: request, local: true, data: { turbo_method: :delete, turbo_confirm: "¿Está seguro(a) que desea realizar esta acción?" }) do |f| %>
-<div data-controller="nested-form" class="form__input">
-  <%= f.label type == "deny" ? "Razones de rechazo" : "Razones de reapertura", class: "form__input-label" %>
+  <hr class="mt-5 mb-3">
+  <h3 class="form__subheading fw-bold"><%= type == "reopen" ? "Reapertura de solicitud" : "Rechazo de solicitud" %></h3> 
+  
+  <div data-controller="nested-form" class="form__input">
+    <%= f.label type == "deny" ? "Razones de rechazo" : "Razones de reapertura", class: "form__input-label" %>
 
-  <div class="request-reasons__flex">
-    <%= select_tag "reasons", options_for_select(type == "deny" ? @dictionary.denyReasons.invert.each : @dictionary.reopenReasons.invert.each), class: "form__input-select" %>
-    
-    <div>
-      <%= link_to "#", data: { action: "nested-form#add_association" }, class: "form__button-submit" do %>
-        Agregar
-      <% end %>
+    <div class="request-reasons__flex">
+      <%= select_tag "reasons", options_for_select(type == "deny" ? @dictionary.denyReasons.invert.each : @dictionary.reopenReasons.invert.each), class: "form__input-select" %>
+      
+      <div>
+        <%= link_to "#", data: { action: "nested-form#add_association" }, class: "form__button-submit" do %>
+          Agregar
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div>
 
-  <span data-nested-form-target="add_item"></span>
+    <span data-nested-form-target="add_item"></span>
 
-  <template data-nested-form-target="template">
-    <%= f.fields_for (type == "deny" ? :request_deny_reasons : :reopen_reasons), type == "deny" ? RequestDenyReason.new : ReopenReason.new, child_index: "TEMPLATE_RECORD" do |reason| %>
+    <template data-nested-form-target="template">
+      <%= f.fields_for (type == "deny" ? :request_deny_reasons : :reopen_reasons), type == "deny" ? RequestDenyReason.new : ReopenReason.new, child_index: "TEMPLATE_RECORD" do |reason| %>
+        <%= render "requests/admin_views/reason_fields", f: reason, request: request %>
+      <% end %>
+    </template>
+
+    <%= f.fields_for (type == "deny" ? :request_deny_reasons : :reopen_reasons) do |reason| %>
       <%= render "requests/admin_views/reason_fields", f: reason, request: request %>
     <% end %>
-  </template>
+  </div>
 
-  <%= f.fields_for (type == "deny" ? :request_deny_reasons : :reopen_reasons) do |reason| %>
-    <%= render "requests/admin_views/reason_fields", f: reason, request: request %>
-  <% end %>
-</div>
+  <div class="button-group mt-3">
+    <%= button_tag(class: "form__button-toggle") do %>
+      <% type == "deny" ? "Rechazar solicitud" : "Reabrir solicitud" %>
+    <% end %>
 
-<%= button_tag(class: "form__button-submit") do %>
-  <% type == "deny" ? "Rechazar solicitud" : "Reabrir solicitud" %>
-<% end %>
-
+    <% if type == "deny" %>
+      <%= link_to "Regresar", :back, class: "form__button-back" %>
+    <% end %>
+  </div>
 <% end %>

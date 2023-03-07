@@ -1,10 +1,10 @@
-<div class="container mt-3 mb-3 p-4">
-  <h3>Rechazar Solicitud:</h3>
-  <h4>Número de solicitud: <%= @request.id %></h4>
-</div>
-<div>
-  <%= render @request %>
-</div>
-<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <%= render "requests/admin_views/request_reasons", request: @request, type: "deny" %>
-</div>
+<main class="main">
+  <div class="container form">
+    <h1 class="form__heading">Rechazo de solicitud</h1>
+    <hr class="mb-3">
+
+    <%= render @request %>
+
+    <%= render "requests/admin_views/request_reasons", request: @request, type: "deny" %>
+  </div>
+</main>

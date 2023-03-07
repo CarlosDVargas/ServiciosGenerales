@@ -52,8 +52,6 @@
 <%= render 'requests/admin_views/request_log' %>
 
 <% if @request.status == "completed" %>
-  <hr class="mt-5 mb-3">
-  <h3 class="form__subheading fw-bold">Reapertura de solicitud</h3> 
   <%= render 'requests/admin_views/request_reasons', request: @request, type: "reopen" %>
   <hr class="mt-5 mb-3">
 <% end %>
