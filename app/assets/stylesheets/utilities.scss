@@ -105,3 +105,21 @@
 .fs-normal {
     font-size: 1.7rem;
 }
+
+.flex-end {
+    @include m.desktop {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
+.flex-column-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+
+    @include m.desktop {
+        display: grid;
+    }
+}

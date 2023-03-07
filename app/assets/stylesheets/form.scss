@@ -103,5 +103,9 @@
         &-back {
             @include m.button(v.$gray-color, v.$light-color);
         }
+
+        &-toggle {
+            @include m.button(v.$warning-color, v.$light-color);
+        }
     }
 }

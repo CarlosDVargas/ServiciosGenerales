@@ -1,6 +1,10 @@
-<h5 class="text-center">Observaciones:</h5>
-<div class="overflow-auto border border-1 p-1 rounded-1" style="height: 150px">
-  <% @request.task_observations.each do |o| %>
-    <p>[<%= o.created_at.strftime("%d/%m/%Y %I:%M %p") %>] - <%= o.user_account.name %>: <%= o.description %> </p>
+<label class="form__input-label">Historial de observaciones</label>
+<textarea class="form__input-textarea" rows="6" disabled>
+  <% if @request.task_observations.empty? %>
+    &bull;&nbsp;&nbsp;No hay observaciones por el momento
+  <% else %>
+    <% @request.task_observations.each do |o| %>
+      &bull;&nbsp;&nbsp;[<%= o.created_at.strftime("%d/%m/%Y %I:%M %p") %>] - <%= o.user_account.name %>: <%= o.description %>
+    <% end %>
   <% end %>
-</div>
+</textarea>

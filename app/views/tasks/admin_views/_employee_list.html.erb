@@ -4,7 +4,7 @@
       <tr class="form__table-head">
         <th>Cédula</th>
         <th>Nombre completo</th>
-        <th>Asignar</th>
+        <th><%= list_type == "add" ? "Asignar" : "Remover" %></th>
       </tr>
     </thead>
 
@@ -24,14 +24,12 @@
   <% if @request.status != "completed" && @request.status != "closed" %>
     <%= f.hidden_field :request_id, value: request.id %>
     
-    <div class="button-group">
+    <div class="button-group flex-end mt-4">
       <%= button_tag(class: "form__button-submit") do %>
         <% if list_type == "add" %>
-          <i class="bi bi-person-plus"></i>&nbsp;
-          Asignar trabajadores
+          Asignar trabajador(es)
         <% else %>
-          <i class="bi bi-person-dash"></i>&nbsp;
-          Remover trabajadores
+          Remover trabajador(es)
         <% end %>
       <% end %>
 

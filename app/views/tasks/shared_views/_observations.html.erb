@@ -1,37 +1,22 @@
-<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <div class="row">
-    <div class="col-6">
-      <div>
-        <h5 class="text-center">Agregar observaciones:</h5>
-        <p class="text-center">(Esta es una acción irreversible)</p>
-        <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro? ¡Esta acción es irreversible!' }) do |f| %>
-          <%= f.fields_for :observations do |observation| %>
-            <div class="row mb-4">
-              <div class="col">
-                <%= observation.text_area :description, class: "form-control" %>
-              </div>
-            </div>
-          <% end %>
-          <div class="row">
-            <div class="col">
-              <%= f.hidden_field :request, value: @request.id %>
-            </div>
-          </div>
-          <div class="row mt-4 mb-4">
-            <div class="position-relative">
-              <div class="position-absolute start-50 translate-middle">
-                <%= button_tag(class: "btn btn-primary") do %>
-                  <i class="bi bi-plus-circle"></i>
-                  Agregar observación
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
+<div class="grid-columns-2 flex-column-reverse">
+  <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro? ¡Esta acción es irreversible!' }) do |f| %>
+    <div class="form__input">
+      <label for="observations" class="form__input-label">Agregar observaciones</label>
+      <%= f.fields_for :observations do |observation| %>
+        <%= observation.text_area :description, class: "form__input-textarea", placeholder: "Observaciones (Acción irreversible)", rows: "6" %>
+      <% end %>
     </div>
-    <div class="col-6">
-      <%= render 'tasks/shared_views/observation_list' %>
+
+    <%= f.hidden_field :request, value: @request.id %>
+
+    <div>
+      <%= button_tag(class: "form__button-submit") do %>
+        Agregar observación
+      <% end %>
     </div>
+  <% end %>
+
+  <div class="form__input">
+    <%= render 'tasks/shared_views/observation_list' %>
   </div>
 </div>

@@ -1,12 +1,17 @@
 <div>
-  <div class="container m-3">
+  <div>
     <%= render "/requests/request", request: @request %>
   </div>
-  <div class="container m-3">
+  
+  <div class="mt-4">
+    <h3 class="form__subheading fw-bold">Historial de observaciones</h3>  
     <%= render 'tasks/shared_views/observations' %>
   </div>
-  <%= link_to change_status_request_path(@request, :task_id => @task), class: "btn btn-primary" do %>
-    <i class="bi bi-check2-square"></i>
-    Finalizar trabajo
-  <% end %>
+
+  <hr class="mt-5">
+
+  <div class="button-group">
+    <%= link_to "Finalizar trabajo", change_status_request_path(@request, :task_id => @task), class: "form__button-toggle" %>
+    <%= link_to "Regresar", :back, class: "form__button-back" %>
+  </div>
 </div>

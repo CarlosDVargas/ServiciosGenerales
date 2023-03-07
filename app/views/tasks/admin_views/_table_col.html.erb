@@ -1,15 +1,6 @@
 <tr>
   <td class="form__table-data"><%= employee.id_card %></td>
   <td class="form__table-data"><%= employee.name %></td>
-  <% if list_type == "remove" %>
-    <td class="form__table-data">
-      <% if employee.tasks.where(:request_id => @request.id).first.status != "pending" %>
-        Sí
-      <% else %>
-        No
-      <% end %>
-    </td>
-  <% end %>
   <% if @request.status != "completed" && @request.status != "closed" %>
     <td class="form__table-data">
       <%= check_box_tag "selected_employees_to_#{list_type}[]", employee.id %>

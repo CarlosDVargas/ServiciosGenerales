@@ -14,7 +14,7 @@
         <%= link_to "Atender", change_status_request_path(request), class: "form__button-submit" %>
       <% end %>
 
-      <%= link_to "Regresar", current_user_account ? current_user_account.role == "admin" ? requests_path(:status => "pending") : requests_path(:status => "in_process") : root_path, class: "form__button-back" %>
+      <%= link_to "Regresar", current_user_account ? :back : root_path, class: "form__button-back" %>
     </div>
   </div>
 </main>

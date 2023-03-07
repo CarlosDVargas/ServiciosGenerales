@@ -112,4 +112,10 @@
 <div class="form__input">
   <label for="work_description" class="form__input-label">Descripción del trabajo</label>
   <textarea id="work_description" class="form__input-textarea" rows="6" disabled><%= request.work_description %></textarea>
-</div>  
+</div>
+
+<% if !request.log_entries.empty? && current_user_account %>
+  <hr class="mt-5 mb-3">
+  <h3 class="form__subheading fw-bold pb-4">Bitácora de cambios</h3>   
+  <%= render 'requests/admin_views/request_log' %>
+<% end %>

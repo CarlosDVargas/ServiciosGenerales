@@ -1,11 +1,8 @@
-<div class="container mt-3 mb-3 p-4 border border-2 rounded-3">
-  <div class="col">
-    <h5 class="text-center"> Historial:</h5>
-    <div class="overflow-auto border border-1 p-1 rounded-1" style="height: 100px">
-      <% @request.log_entries.each do |log| %>
-        <p>[<%= log.created_at.strftime("%d/%m/%Y %I:%M:%S %p") %>] - <%= log.user_account.name %>
-          : <%= log.entry_message %> </p>
-      <% end %>
-    </div>
-  </div>
+<div class="form__input">
+  <label class="form__input-label">Bitácora</label>
+  <textarea class="form__input-textarea" rows="6" disabled>
+    <% @request.log_entries.each do |log| %>
+      &bull;&nbsp;&nbsp;[<%= log.created_at.strftime("%d/%m/%Y %I:%M:%S %p") %>] - <%= log.user_account.name %> : <%= log.entry_message %>
+    <% end %>
+  </textarea>
 </div>
