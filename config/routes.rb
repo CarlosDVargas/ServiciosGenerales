@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :log_entries, only: [:index]
   
-  resources :feedbacks, only: %i[new create]
+  resources :feedbacks, only: %i[new create show]
+
   root "pages#home"
 
   devise_for :user_accounts, controllers: {

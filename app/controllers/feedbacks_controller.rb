@@ -6,7 +6,8 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks or /feedbacks.json
   def index
-    @feedbacks = Feedback.all if ask_for_user_logged_in
+    @feedbacks = Feedback.all if current_user_account.admin?
+    @feedbacks = Feedback.where(request_id: current_user_account.requests.ids) unless current_user_account.admin?
   end
 
   # GET /feedbacks/1 or /feedbacks/1.json
