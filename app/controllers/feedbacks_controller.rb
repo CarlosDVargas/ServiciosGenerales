@@ -68,7 +68,8 @@ class FeedbacksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_feedback
-    @feedback = Feedback.find(params[:id])
+    #byebug
+    @feedback = params[:request_id] ? Feedback.where(request_id: params[:request_id]) : Feedback.find(params[:id])
   end
 
   # Set request to use

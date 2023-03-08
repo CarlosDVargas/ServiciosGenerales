@@ -35,6 +35,7 @@ class RequestsController < ApplicationController
       return
     end
     @reasons = RequestDenyReason.where(request_id: @request.id) if @request.status == 'denied'
+    @feedback = Feedback.find_by(request_id: @request.id)
   end
 
   # GET /requests/new

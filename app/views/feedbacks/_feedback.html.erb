@@ -1,17 +1,24 @@
 <div id="<%= dom_id feedback %>">
-  <p>
-    <strong>Observations:</strong>
-    <%= feedback.observations %>
-  </p>
+  <div class="form__input--mandala">
+    <label class="form__input-label">Código de solicitud</label>
+    <input type="text" class="form__input-textfield" value="<%= feedback.request.identifier %>" disabled>
+  </div>
 
-  <p>
-    <strong>Satisfaction:</strong>
-    <%= feedback.satisfaction %>
-  </p>
+  <div class="form__input--mandala">
+    <label class="form__input-label">Observaciones</label>
+    <textarea rows="5" class="form__input-textarea" disabled><%= feedback.observations %></textarea>
+  </div>
 
-  <p>
-    <strong>Request:</strong>
-    <%= feedback.request_id %>
-  </p>
+  <div class="form__input--mandala">
+    <label class="form__input-label">Nivel de satisfacción</label>
+    <% case feedback.satisfaction 
+      when 5 %> <input type="text" class="form__input-textfield" value="Muy positivo" disabled>
+      <% when 4 %> <input type="text" class="form__input-textfield" value="Positivo" disabled>
+      <% when 3 %> <input type="text" class="form__input-textfield" value="Neutral" disabled>
+      <% when 2 %> <input type="text" class="form__input-textfield" value="Negativo" disabled>
+      <% else %> <input type="text" class="form__input-textfield" value="Muy negativo" disabled>
+    <% end %>
+  </div>
 
+  <%= link_to "Regresar", :back, class: "form__button-back mt-4" %>
 </div>
