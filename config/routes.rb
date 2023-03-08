@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :log_entries, only: [:index]
-  
+
   resources :feedbacks, only: %i[new create show]
 
   root "pages#home"
