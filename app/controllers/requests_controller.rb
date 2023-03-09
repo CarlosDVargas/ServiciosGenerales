@@ -238,7 +238,18 @@ class RequestsController < ApplicationController
 
   # Take the requests from given set: <b>set</b> depending the status: <b>status</b> of the request
   def find_requests(set, status)
-    set.where(status:)
+    if current_user_account.role == 'worker'
+      case status
+      when 'in_process'
+        current_user_account.requests_by_tasks_status('pending')
+      when 'completed'
+        current_user_account.requests_by_tasks_status('completed')
+      else
+        set.where(status:)
+      end
+    else
+      set.where(status:)
+    end
   end
 
   # Takes the tasks from table <b>Task</b>

@@ -1,4 +1,4 @@
-<% case request.status
+<% case @status
     when "in_process" %>
   <%= link_to edit_task_path(request: request), class: "form__button-toggle form__button--desktop" do %>
     <i class="bi bi-pencil-square"></i>&nbsp;Atender
