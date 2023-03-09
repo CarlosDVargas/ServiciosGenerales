@@ -22,7 +22,7 @@ class DeviseCreateUserAccounts < ActiveRecord::Migration[7.0]
       # t.string   :last_sign_in_ip
 
       ## Confirmable
-      t.string   :confirmation_token
+      t.string :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
       # t.string   :unconfirmed_email # Only if using reconfirmable
@@ -41,7 +41,7 @@ class DeviseCreateUserAccounts < ActiveRecord::Migration[7.0]
 
     add_index :user_accounts, :email, unique: true
     add_index :user_accounts, :reset_password_token, unique: true
-    add_index :user_accounts, :confirmation_token,   unique: true
+    add_index :user_accounts, :confirmation_token, unique: true
     # add_index :user_accounts, :unlock_token,         unique: true
   end
 end
