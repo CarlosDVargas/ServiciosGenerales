@@ -96,6 +96,11 @@ class RequestsController < ApplicationController
         reasons = create_reasons(reasons, type)
         workers = @request.employees_currently_working
         workers.each do |worker|
+          task = Task.where(request: @request, user_account: worker).first
+          if task && type != 'deny'
+            task.update(status: 'pending')
+            task.save
+          end
           UserMailer.request_reopened(@request, worker, reasons).deliver_later if type != 'deny'
         end
         format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
@@ -268,6 +273,9 @@ class RequestsController < ApplicationController
   end
 
   # Creates the deny reasons or reopen reasons of a request
+  # @param [Object] reasons
+  # @param [Object] type
+  # @return [Array]
   def create_reasons(reasons, type)
     valid_reasons = []
     reasons.each do |reason|
