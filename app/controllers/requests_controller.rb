@@ -307,7 +307,7 @@ class RequestsController < ApplicationController
 
   # Reload the requests listing view, and informs the user that the request was successfully updated
   def reload_index
-    redirect_to requests_path, notice: 'Se actualizó el estado de la solicitud'
+    redirect_to requests_path(:status => "pending"), notice: 'Se actualizó el estado de la solicitud'
   end
 
   def reports
