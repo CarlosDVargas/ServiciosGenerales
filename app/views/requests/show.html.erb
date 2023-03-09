@@ -18,6 +18,10 @@
         <%= link_to "Atender", change_status_request_path(@request), class: "form__button-submit" %>
       <% end %>
 
+      <% if @request.status == "in_process" && current_user_account.worker? %>
+        <%= link_to "Atender", edit_task_path(request: @request), class: "form__button-submit" %>
+      <% end %>
+
       <%= link_to "Regresar", current_user_account ? :back : root_path, class: "form__button-back" %>
     </div>
   </div>
