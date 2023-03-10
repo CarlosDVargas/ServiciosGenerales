@@ -89,3 +89,5 @@ gem "ransack", "~> 3.2"
 gem "yard", "~> 0.9.28"
 
 gem "hashid-rails", "~> 1.4"
+
+gem "rails_12factor", "~> 0.0.3"
