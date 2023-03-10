@@ -243,7 +243,7 @@ class RequestsController < ApplicationController
       when 'in_process'
         current_user_account.requests_by_tasks_status('pending')
       when 'completed'
-        current_user_account.requests_by_tasks_status('completed')
+        current_user_account.requests_by_tasks_status('completed', 'closed')
       else
         set.where(status:)
       end
