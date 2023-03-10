@@ -103,7 +103,7 @@ class RequestsController < ApplicationController
           end
           UserMailer.request_reopened(@request, worker, reasons).deliver_later if type != 'deny'
         end
-        format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
+        format.html { redirect_to requests_url(:status => "pending"), notice: 'Se actualizó el estado de la solicitud' }
         format.json { head :no_content }
       end
     end
