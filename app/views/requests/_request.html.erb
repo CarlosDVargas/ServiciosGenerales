@@ -114,7 +114,7 @@
   <textarea id="work_description" class="form__input-textarea" rows="6" disabled><%= request.work_description %></textarea>
 </div>
 
-<% if !@edit %>
+<% if !@edit && !(request.task_observations).empty? %>
   <hr class="mt-5 mb-3">
   <h3 class="form__subheading fw-bold pb-4">Historial de observaciones</h3>
      
