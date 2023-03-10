@@ -18,6 +18,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/edit
   def edit
+    @edit = params[:action] == "edit" ? true : false
+
     if current_user_account
       set_task
     else
