@@ -45,6 +45,7 @@ class TasksController < ApplicationController
         UserMailer.request_assigned(@request, worker).deliver_later
       else
         task.active = true
+        task.status = 'pending'
         task.save
         UserMailer.request_reassigned(@request, worker).deliver_later
       end
@@ -56,7 +57,7 @@ class TasksController < ApplicationController
       @request.update(status: 'in_process')
       @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
                                    entry_message: "#{user.name} cambió el estado de la solicitud a en proceso")
-      redirect_to requests_path
+      redirect_to requests_path(:status => "pending")
     end
   end
 
@@ -74,6 +75,7 @@ class TasksController < ApplicationController
       @employees&.each do |user_account_id|
         task = Task.find_by(user_account_id:, request_id: @request.id)
         task.active = false
+        task.status = 'completed'
         task.save
         worker = UserAccount.find(user_account_id)
         UserMailer.request_removed(@request, worker).deliver_later

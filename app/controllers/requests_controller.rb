@@ -96,6 +96,11 @@ class RequestsController < ApplicationController
         reasons = create_reasons(reasons, type)
         workers = @request.employees_currently_working
         workers.each do |worker|
+          task = Task.where(request: @request, user_account: worker).first
+          if task && type != 'deny'
+            task.update(status: 'pending')
+            task.save
+          end
           UserMailer.request_reopened(@request, worker, reasons).deliver_later if type != 'deny'
         end
         format.html { redirect_to requests_url, notice: 'Se actualizó el estado de la solicitud' }
@@ -233,7 +238,18 @@ class RequestsController < ApplicationController
 
   # Take the requests from given set: <b>set</b> depending the status: <b>status</b> of the request
   def find_requests(set, status)
-    set.where(status:)
+    if current_user_account.role == 'worker'
+      case status
+      when 'in_process'
+        current_user_account.requests_by_tasks_status('pending')
+      when 'completed'
+        current_user_account.requests_by_tasks_status('completed')
+      else
+        set.where(status:)
+      end
+    else
+      set.where(status:)
+    end
   end
 
   # Takes the tasks from table <b>Task</b>
@@ -268,6 +284,9 @@ class RequestsController < ApplicationController
   end
 
   # Creates the deny reasons or reopen reasons of a request
+  # @param [Object] reasons
+  # @param [Object] type
+  # @return [Array]
   def create_reasons(reasons, type)
     valid_reasons = []
     reasons.each do |reason|
@@ -307,7 +326,7 @@ class RequestsController < ApplicationController
 
   # Reload the requests listing view, and informs the user that the request was successfully updated
   def reload_index
-    redirect_to requests_path, notice: 'Se actualizó el estado de la solicitud'
+    redirect_to requests_path(:status => "pending"), notice: 'Se actualizó el estado de la solicitud'
   end
 
   def reports
