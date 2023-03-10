@@ -5,6 +5,11 @@
       <th>Fecha</th>
       <th class="tablet-display">Edificio</th>
       <th class="desktop-display">Sitio</th>
+      
+      <% if @commit %>
+        <th class="desktop-display">Estado</th>
+      <% end %>
+
       <th class="desktop-display">Solicitante</th>
       <th>Acciones</th>
     </tr>
@@ -18,6 +23,19 @@
           <td class="form__table-data"><%= request.created_at.strftime("%d/%m/%Y") %></td>
           <td class="form__table-data tablet-display"><%= request.request_location.work_building.name %></td>
           <td class="form__table-data desktop-display"><%= request.request_location.name %></td>
+          
+          <% if @commit %>
+            <td class="form__table-data desktop-display">
+              <% case request.status 
+                when "pending" %> Pendiente
+                <% when "in_process" %> En proceso
+                <% when "completed" %> Finalizada
+                <% when "closed" %> Cerrada
+                <% else %> Denegada
+              <% end %>
+            </td>
+          <% end %>
+
           <td class="form__table-data desktop-display"><%= request.requester_name %></td>
 
           <td class="form__table-data">
@@ -30,7 +48,7 @@
                 <i class="bi bi-eye"></i>
               <% end %>
               
-              <% if current_user_account.role == "admin" %>
+              <% if current_user_account.role == "admin" && !@commit %>
                 <%= render "requests/admin_views/admin_request_actions", request: request %>
               <% else %>
                 <%= render "requests/employee_views/employee_request_actions", request: request %>
