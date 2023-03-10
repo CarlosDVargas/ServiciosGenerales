@@ -103,7 +103,7 @@ class RequestsController < ApplicationController
           end
           UserMailer.request_reopened(@request, worker, reasons).deliver_later if type != 'deny'
         end
-        format.html { redirect_to requests_url(:status => "pending"), notice: 'Se actualizó el estado de la solicitud' }
+        format.html { redirect_to (current_user_account.worker? ? requests_url(:status => "in_process") : requests_url(:status => "pending")), notice: 'Se actualizó el estado de la solicitud' }
         format.json { head :no_content }
       end
     end
@@ -326,7 +326,7 @@ class RequestsController < ApplicationController
 
   # Reload the requests listing view, and informs the user that the request was successfully updated
   def reload_index
-    redirect_to requests_path(:status => "pending"), notice: 'Se actualizó el estado de la solicitud'
+    redirect_to (current_user_account.worker? ? requests_path(:status => "in_process") : requests_path(:status => "pending")), notice: 'Se actualizó el estado de la solicitud'
   end
 
   def reports

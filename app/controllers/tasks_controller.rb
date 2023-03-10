@@ -59,7 +59,7 @@ class TasksController < ApplicationController
       @request.update(status: 'in_process')
       @log_entry = LogEntry.create(user_account: current_user_account, request: @request,
                                    entry_message: "#{user.name} cambió el estado de la solicitud a en proceso")
-      redirect_to requests_path(:status => "pending")
+      redirect_to (current_user_account.worker? ? requests_path(:status => "in_process") : requests_path(:status => "pending"))
     end
   end
 
