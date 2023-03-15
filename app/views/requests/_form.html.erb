@@ -22,7 +22,8 @@
 
       <div class="form__input">
         <%= form.label "Sede", class: "form__input-label" %>
-        <%= form.select :campus_id, @campuses_list.all.collect{|c| [c.name, c.id]}, {}, class: "form__input-select" %>
+        <%= form.hidden_field :campus_id, value: @campuses_list.first.id %>
+        <input type="text" class="form__input-textfield" value="<%= @campuses_list.first.name %>" disabled>
       </div>
     </div>  
 
