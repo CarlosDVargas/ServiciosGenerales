@@ -25,21 +25,28 @@ header {
 
         @include m.desktop {
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: flex-start;
+        }
+    }
+
+    &__logo:first-of-type {
+        @include m.desktop {
+            width: 65%;
         }
     }
 
     &__logo:last-of-type {
-        margin: 1.5rem 0;
+        margin: 2rem 0;
         width: 80%;
 
         @include m.tablet {
-            width: 40%;
+            width: 60%;
         }
 
         @include m.desktop {
-            margin: .5rem 1rem 0 1rem;
-            width: unset;
+            margin: 1rem 2rem;
+            width: 350px;
+            height: 50px;
         }
     }
 
