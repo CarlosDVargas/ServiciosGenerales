@@ -1,7 +1,6 @@
 <div>
-  <div>
-    <%= render "/requests/request", request: @request %>
-  </div>
+  <%= render "requests/shared_views/request-summary", request: @request %>
+  <hr class="mb-3">
   
   <div class="mt-4">
     <h3 class="form__subheading fw-bold">Historial de observaciones</h3>  

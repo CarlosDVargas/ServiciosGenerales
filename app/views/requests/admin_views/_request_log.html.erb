@@ -1,7 +1,7 @@
 <div class="form__input">
   <label class="form__input-label">Bitácora</label>
   <textarea class="form__input-textarea" rows="6" disabled>
-    <% @request.log_entries.each do |log| %>
+    <% ((@request.log_entries).sort_by(&:created_at).reverse).each do |log| %>
       &bull;&nbsp;&nbsp;[<%= log.created_at.strftime("%d/%m/%Y %I:%M:%S %p") %>] - <%= log.user_account.name %> : <%= log.entry_message %>
     <% end %>
   </textarea>

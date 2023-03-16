@@ -3,12 +3,10 @@
     <h1 class="form__heading">Atender solicitud</h1>
     <hr class="mb-3">
 
-    <h3 class="form__subheading--mandala my-5">
-      Solicitud
-      <%= link_to @request, class: "fw-normal" do %>
-        <%= @request.identifier %>&nbsp;<i class="bi bi-info-circle fw-bold" style="font-size: 1.8rem"></i>
-      <% end %>
-    </h3>
+    <%= render "requests/shared_views/request-summary", request: @request %>
+    <hr class="mb-3">
+
+    <h3 class="form__subheading fw-bold">Asignar trabajadores</h3>  
 
     <div id="add-employees">
       <%= render "/tasks/admin_views/employee_list", task: @task, request: @request, list_type: "add" %>

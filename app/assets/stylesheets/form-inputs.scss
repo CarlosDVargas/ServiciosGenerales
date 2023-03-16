@@ -38,6 +38,7 @@
 
     &-textarea {
         resize: none;
+        padding: 1rem;
     }
 
     @include m.desktop {

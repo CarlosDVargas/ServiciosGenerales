@@ -6,6 +6,7 @@ class TaskObservationsController < ApplicationController
   # GET /observations or /observations.json
   def index
     @observations = TaskObservation.all
+    @observations = @observations.sort_by(&:created_at).reverse
   end
 
   # GET /observations/1 or /observations/1.json

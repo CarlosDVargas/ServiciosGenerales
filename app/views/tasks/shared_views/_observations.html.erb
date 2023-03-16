@@ -1,4 +1,8 @@
-<div class="grid-columns-2 flex-column-reverse">
+<div class="grid-columns-2">
+  <div class="form__input">
+    <%= render 'tasks/shared_views/observation_list' %>
+  </div>
+
   <%= form_with(model: @task, local: true, data: { turbo_confirm: '¿Está seguro(a)? ¡Esta acción es irreversible!' }) do |f| %>
     <div class="form__input">
       <label for="observations" class="form__input-label">Agregar observaciones</label>
@@ -9,14 +13,10 @@
 
     <%= f.hidden_field :request, value: @request.id %>
 
-    <div>
+    <div class="flex-end">
       <%= button_tag(class: "form__button-submit") do %>
         Agregar observación
       <% end %>
     </div>
   <% end %>
-
-  <div class="form__input">
-    <%= render 'tasks/shared_views/observation_list' %>
-  </div>
 </div>

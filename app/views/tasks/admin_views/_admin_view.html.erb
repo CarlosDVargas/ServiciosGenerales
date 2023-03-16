@@ -1,28 +1,4 @@
-<h3 class="form__subheading fw-bold">Información de la solicitud</h3>  
-
-<div class="grid-columns-3">
-  <div class="form__input">
-    <label for="request_id" class="form__input-label">Código de solicitud</label>
-    <input type="text" id="request_id" value="<%= @request.identifier %>" class="form__input-textfield fw-bold" disabled>
-  </div>
-
-  <div class="form__input">
-    <label for="request_status" class="form__input-label">Estado de la solicitud</label>
-    
-    <% case @request.status 
-      when "in_process" %> <input type="text" id="request_status" value="Solicitud en proceso" class="form__input-textfield form__input-text form__input-text--inprocess" disabled>
-      <% when "completed" %> <input type="text" id="request_status" value="Solicitud finalizada" class="form__input-textfield form__input-text form__input-text--completed" disabled>
-      <% when "closed" %> <input type="text" id="request_status" value="Solicitud cerrada" class="form__input-textfield form__input-text form__input-text--closed" disabled>
-      <% when "deniend" %> <input type="text" id="request_status" value="Solicitud rechazada" class="form__input-textfield form__input-text form__input-text--denied" disabled>
-      <% else %> <input type="text" id="request_status" value="Solicitud pendiente" class="form__input-textfield form__input-text form__input-text--pending" disabled>
-    <% end %>
-  </div>
-
-  <div class="form__input">
-    <label for="campus" class="form__input-label">Sede</label>
-    <input type="text" id="campus" class="form__input-textfield" value="<%= @request.campus.name %>" disabled>
-  </div>
-</div>
+<%= render 'requests/shared_views/request-summary', request: @request %>
 
 <% if @request.status == "in_process" %>
   <hr class="my-4">

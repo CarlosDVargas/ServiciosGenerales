@@ -24,7 +24,7 @@
   <% if @request.status != "completed" && @request.status != "closed" %>
     <%= f.hidden_field :request_id, value: request.id %>
     
-    <div class="button-group flex-end mt-4">
+    <div class="button-group flex-end mt-5">
       <%= button_tag(class: "form__button-submit") do %>
         <% if list_type == "add" %>
           Asignar trabajador(es)

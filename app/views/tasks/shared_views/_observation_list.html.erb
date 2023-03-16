@@ -3,7 +3,7 @@
   <% if @request.task_observations.empty? %>
     &bull;&nbsp;&nbsp;No hay observaciones por el momento
   <% else %>
-    <% @request.task_observations.each do |o| %>
+    <% ((@request.task_observations).sort_by(&:created_at).reverse).each do |o| %>
       &bull;&nbsp;&nbsp;[<%= o.created_at.strftime("%d/%m/%Y %I:%M %p") %>] - <%= o.user_account.name %>: <%= o.description %>
     <% end %>
   <% end %>
