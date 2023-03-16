@@ -234,6 +234,13 @@ class RequestsController < ApplicationController
                     find_requests(requests, 'pending')
                   end
     end
+
+    @requests = case @status
+                when 'pending'
+                  @requests
+                else
+                  @requests.sort_by(&:created_at).reverse
+                end
   end
 
   # Take the requests from given set: <b>set</b> depending the status: <b>status</b> of the request
