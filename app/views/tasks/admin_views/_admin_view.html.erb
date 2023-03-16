@@ -33,9 +33,5 @@
 <% end %>
 
 <div class="button-group">
-  <% if @request.status == "completed" %>
-    <%= link_to "Cerrar solicitud", change_status_request_path(@request, :change_to => "close"), class: "form__button-close" %>
-  <% end %>
-
   <%= link_to "Regresar", :back, class: "form__button-back" %>
 </div>

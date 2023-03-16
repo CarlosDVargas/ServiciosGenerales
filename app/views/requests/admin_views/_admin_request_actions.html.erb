@@ -25,11 +25,19 @@
     <i class="bi bi-pencil-square"></i>
   <% end %>
 <% when "completed" %>
-  <%= link_to edit_task_path(:request => request.id), class: "form__button-close form__button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
-    <i class="bi bi-x-square"></i>&nbsp;Cerrar/Reabrir
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-toggle form__button--desktop", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+    <i class="bi bi-arrow-clockwise"></i>&nbsp;Reabrir
   <% end %>
 
-  <%= link_to edit_task_path(:request => request.id), class: "form__button-close form__button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+  <%= link_to edit_task_path(:request => request.id), class: "form__button-toggle form__button--mobile", data: { confirm: "¿Está seguro(a)? Esta acción es irreversible" } do %>
+    <i class="bi bi-arrow-clockwise"></i>
+  <% end %>
+
+  <%= link_to change_status_request_path(request, :change_to => "close"), class: "form__button-close form__button--desktop", method: :post, data: { confirm: "¿Está seguro(a) que desea cerrar esta solicitud?" } do %>
+    <i class="bi bi-x-square"></i>&nbsp;Cerrar
+  <% end %>
+
+  <%= link_to change_status_request_path(request, :change_to => "close"), class: "form__button-close form__button--mobile", method: :post, data: { confirm: "¿Está seguro(a) que desea cerrar esta solicitud?" } do %>
     <i class="bi bi-x-square"></i>
   <% end %>
 <% end %>
