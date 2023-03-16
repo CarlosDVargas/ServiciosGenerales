@@ -236,7 +236,7 @@ class RequestsController < ApplicationController
     end
 
     @requests = case @status
-                when 'pending'
+                when current_user_account.worker? ? 'in_process' : 'pending' 
                   @requests
                 else
                   @requests.sort_by(&:created_at).reverse
